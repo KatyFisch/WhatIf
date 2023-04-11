@@ -1,0 +1,295 @@
+\documentclass[8pt]{extarticle}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\usepackage[a4paper,left=2.3cm,right=1.2cm,top=2cm,bottom=2cm]{geometry} 
+\usepackage{blindtext}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage{titletoc}
+\usepackage{titlesec}
+\usepackage{wrapfig}
+\usepackage{tikz}
+\usepackage{amsmath} 
+\usepackage{multicol}
+\usepackage{amsfonts} 
+\usepackage{comment}
+\usepackage{booktabs}
+\usepackage{bbm}
+\usepackage{wrapfig}
+\usepackage{verbatimbox}
+\usepackage{enumitem}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{bigints}
+\onehalfspacing
+\usepackage[hidelinks]{hyperref}
+\usepackage[all]{nowidow} %funktioniert nicht....
+\clubpenalty=9996
+\widowpenalty=9999
+\brokenpenalty=4991
+\predisplaypenalty=10000
+\postdisplaypenalty=1549
+\displaywidowpenalty=1602
+\usepackage[round]{natbib} 
+\usepackage{enumitem}
+
+\usepackage{titlesec}
+\newcommand{\sectionbreak}{\clearpage}
+
+\allowdisplaybreaks
+
+\setlength\parindent{0pt}
+
+\newcommand{\zerodisplayskips}{%
+  \setlength{\abovedisplayskip}{2pt}%
+  \setlength{\belowdisplayskip}{2pt}%
+  \setlength{\abovedisplayshortskip}{2pt}%
+  \setlength{\belowdisplayshortskip}{2pt}}
+\appto{\normalsize}{\zerodisplayskips}
+\appto{\small}{\zerodisplayskips}
+\appto{\footnotesize}{\zerodisplayskips}
+
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+
+
+%Hier sind die unterschiedlichen Ausführlichkeitsgrade definiert
+\includecomment{Extensiv} 
+\includecomment{Proof} 
+\includecomment{Annahmen}
+\includecomment{Mathspez}
+\includecomment{Mathfolg}
+\includecomment{Rechreg}
+\mdfdefinestyle{MyFrame}{%
+    linecolor=black!20!,
+    outerlinewidth=0.2pt,
+    roundcorner=5pt,
+    innertopmargin=0.5\baselineskip,
+    innerbottommargin=0.5\baselineskip,
+    innerrightmargin=10pt,
+    innerleftmargin=10pt,
+    backgroundcolor=white}
+\specialcomment{Proof}{\begin{mdframed}[style=MyFrame,nobreak=true] Proof: \ \\}{\end{mdframed}}
+\specialcomment{Rechreg}{\noindent \textit{Calculation Rules:} \begin{itemize}[nosep,label=$\star$] }{\end{itemize}}
+\renewcommand\ThisComment[1]{% Fix for Umlauts in comments
+  \immediate\write\CommentStream{\unexpanded{#1}}%
+}
+
+% Hier die Ausführlichkeit bestimmen:
+%\excludecomment{Extensiv} 
+%\excludecomment{Proof} 
+%\excludecomment{Annahmen}
+%\excludecomment{Mathspez}
+%\excludecomment{Mathfolg}
+
+% Inhaltsverzeichnis mit zwei Spalten
+\usepackage[toc]{multitoc}
+\renewcommand*{\multicolumntoc}{2}
+
+
+
+
+%Überschriftengrößen anpassen, so dass Paragraph kleiner ist als Subsubsection
+\titleformat{\section}
+  {\normalfont\fontsize{16}{15}\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\fontsize{14}{15}\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalfont\fontsize{12}{15}\bfseries}{\thesubsubsection}{1em}{}
+
+
+\begin{document}
+
+\topskip0pt
+\vspace*{18em}
+
+\hrule
+\begin{center}
+{\fontsize{30}{60}\selectfont \textbf{Causal Inference}} \\ \
+
+{\fontsize{20}{60}\selectfont a summary}
+\end{center}
+\hrule
+
+\tableofcontents
+
+
+
+
+% weitere Anpassungen im Hauptteil des Dokuments
+\raggedright %linksbündig
+\setlength{\parindent}{15pt} %Einzuglänge festsetzen
+\setlength{\columnseprule}{0.3pt} %Liniendicke zwischen zwei Multicols
+
+
+
+
+
+
+%-------------------------------------------------------------------------------
+
+% SECTION: GENERAL
+
+%-------------------------------------------------------------------------------
+
+\section{General}
+
+\begin{multicols}{2}
+
+\paragraph{\large Causal Roadmap} \citep{petersen2014causal} 
+systematic approach linking causality to statistical procedures
+
+\noindent \textbf{1. Specifying Knowledge.} structural causal model (unifying counterfactual language, structural equations, \& causal graphs): a set of possible data-generating processes, expresses background knowledge and its limits
+
+\noindent \textbf{2. Linking Data.} specifying measured variables and sampling specifics (latter can be incorporated into the model)
+
+\noindent \textbf{3. Specifying Target.} define hypothetical experiment: decide
+\noindent\begin{enumerate}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
+\setlength{\itemsep}{0pt}%
+\setlength{\parskip}{0pt}
+\item variables to intervene on: one (point treatment), multiple (longitudinal, censoring/missing, (in)direct effects)
+\item intervention scheme: static, dynamic, stochastic
+\item counterfactual summary of interest: absolute or relative, marginal structural models, interaction, effect modification
+\item population of interest: whole, subset, different population
+\end{enumerate}
+
+\noindent \textbf{4. Assessing Identifiability.} are knowledge and data sufficient to derive estimand and if not, what else is needed?
+
+\noindent \textbf{5. Select Estimand.} current best answer: knowledge-based assumptions $+$ which minimal convenience-based asspumptions (transparency) gets as close as possible
+
+\noindent \textbf{6. Estimate.} choose estimator by statistical properties, nothing causal here
+
+\noindent \textbf{7. Interpret.} hierarchy: statistical, counterfactual, feasible intervention, randomized trial
+
+
+
+\paragraph{Notation} chapter 1.1
+
+\paragraph{average causal effect} chapter 1.2 and 1.3 and 1.4 and 1.5
+
+\paragraph{randomized experiments (target trial)} 2.1 and 2.2; 3.6
+
+\paragraph{standardization} 2.3
+
+\paragraph{\large IP Weighting} 2.4 (adjust for surrogate confounders)
+
+
+
+
+
+\paragraph{identifiability conditions} most of 3
+
+\paragraph{effect modification} chapter 4
+
+\paragraph{interaction} chapter 5
+
+\paragraph{causal diagrams} chapter 6, include swigs from 7.5 and that one technical point
+
+\paragraph{confounding} chapter 7
+
+\paragraph{selection bias} chapter 8
+
+\paragraph{measurement bias} chapter 9
+
+\paragraph{random variabilty} chapter 10
+
+
+\end{multicols}
+
+
+
+%-------------------------------------------------------------------------------
+
+% SECTION: MODELS
+
+%-------------------------------------------------------------------------------
+
+\section{Models}
+\begin{multicols}{2}
+
+\paragraph{\large Modeling} data are a sample from the target population \vspace{0.4em}
+
+\noindent \hspace{0.9em}\begin{tabular}{l l l}
+\textbf{\it estimand:} & quantity  of interest, & e.\,g. $\mathrm{E}\left[Y|A=a\right]$ \\
+\textbf{\it estimator:} & function to use, & e.\,g. $\widehat{\mathrm{E}}\left[Y|A=a\right]$ \\
+\textbf{\it estimate:} & apply function to data, & e.\,g. $4.1$ 
+\end{tabular} \vspace{0.5em}
+
+\noindent \textbf{model}: a priori restriction of joint distribution/dose-response curve;  \textit{assumption:} no model misspecification (usually wrong)
+
+\noindent \textbf{non-parametric estimator:} no restriction (saturated model) $=$ \textit{Fisher consistent estimator} (entire population data $\rightarrow$ true value)
+
+\noindent \textbf{parsimonious model:} few parameters estimate many quantities
+
+\noindent \textbf{bias-variance trade-off:} \newline wiggliness $\uparrow$ $\rightarrow$ misspecification bias $\downarrow$, CI width $\uparrow$
+
+
+\paragraph{\large IP Weighting}  
+
+
+/ marginal structural models
+
+(comparison at 13.4) (maybe censoring as own paragraph)
+
+
+
+\paragraph{standardization / parametric g-formula} chapter 13
+
+\paragraph{g-estimation} chapter 14
+
+\paragraph{Outcome regression} chapter 15
+
+\paragraph{instrumental variable estimation} chapter 16
+
+\paragraph{causal survival analysis} chapter 17
+
+\paragraph{variable selection} beginning of chapter 18
+
+\paragraph{machine learning in CI} end of chapter 18
+
+
+
+
+\end{multicols}
+
+%-------------------------------------------------------------------------------
+
+% SECTION: LONGITUDINAL
+
+%-------------------------------------------------------------------------------
+
+\section{Longitudinal Data}
+\begin{multicols}{2}
+
+\paragraph{time-varying treatments} beginning chapter 19
+
+\paragraph{identifiability} middle chapter 19
+
+\paragraph{treatment-confounder feedback} end chapter 19 and chapter 20
+
+\paragraph{g-formula} chapter 21.1
+
+\paragraph{IP weighting} chapter 21.2
+
+\paragraph{doubly robust estimators} chapter 21.3
+
+\paragraph{g-estimation} chapter 21.4
+
+\paragraph{censoring} chapter 21.5
+
+\paragraph{target trial} chapter 22 (does that even really fit in here, maybe push to 3rd paragraph in without models)
+
+
+
+\end{multicols}
+
+
+\def\bibpreamble{\textit{If no citation is given, the source is \citep{hernan2023causal}} \vspace{1.5em}}
+
+\bibliographystyle{apalike} % We choose the "plain" reference style
+\bibliography{cite} % Entries are in the refs.bib file
+
+
+
+\end{document}
