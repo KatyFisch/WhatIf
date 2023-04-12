@@ -170,15 +170,52 @@ systematic approach linking causality to statistical procedures
 
 \paragraph{randomized experiments (target trial)} 2.1 and 2.2; 3.6
 
-\paragraph{standardization} 2.3
+\paragraph{\large Standardization} adjust for (surrogate) confounders $L$
+$$\mathrm{E}\left[Y|A=a\right] = \int \mathrm{E}\left[Y|L=l, A=a\right]dF_L\left[l\right]$$
+weighted average of stratum-specific risks; unknowns can be estimated non-parametrically or modeled
 
-\paragraph{\large IP Weighting} 2.4 (adjust for surrogate confounders)
+\noindent \textbf{no need to estimate $\boldsymbol{f_L\left[l\right]}$} as empirical distribution can be used: estimate outcome model $\rightarrow$ predict counterfactuals $\rightarrow$ average the results ($\rightarrow$ CI by bootstrapping)
 
+\noindent \textbf{for discrete $\boldsymbol{ L}$}  $\mathrm{E}\left[Y|A=a\right] = \sum_l \mathrm{E}\left[Y|L=l, A=a\right]\mathrm{Pr}\left[L=l\right]$
+
+\paragraph{\large IP Weighting} adjust for (surrogate) confounders $L$
+$$\mathrm{E}\left[Y|A=a\right] = \mathrm{E}\left[\frac{I(A=a)Y}{f\left[A|L\right]}\right]; W^A=\frac{1}{f\left[A|L\right]}; SW^A = \frac{f(A)}{f\left[A|L\right]}$$
+
+\noindent unknowns can be estimated non-parametrically or modeled
+\noindent \textbf{pseudo-population:} everyone is treated \& untreated ($L\not\to A$)
+
+\noindent \textbf{FRCISTG} \textit{(fully randomized causally interpreted structured graph)}: probability tree for $L \rightarrow A \rightarrow Y$, can be used to calculate/visualize simulation of values for $A$ 
+
+\noindent \textbf{for discrete $\boldsymbol{A, L}$} $f\left[a|l\right] = \mathrm{Pr}\left[A=a,L=l\right]$
+
+\noindent \textbf{estimators:} Horvitz-Thompson; Hajek (modified version) %todo p.152 
+
+\noindent \textbf{stabilized weights $\boldsymbol{SW^A}$} should have an average of 1 (check!) $\rightarrow$ pseudo-population same size $\rightarrow$ CI width $\downarrow$
+
+\paragraph{\large Standardization and IP Weighting}
+
+are equivalent, \textit{\textbf{but}} if modeled, different ``no misspecification'' assumptions:
+
+standardization: outcome model
+
+IP weighting: treatment model
+
+\noindent \textbf{doubly robust estimators:} reduce model misspecification bias, consistent if either model is correct; \textbf{\textit{e.\,g.:}} \vspace{-0.9em}
+
+1. fit outcome regression with variable $R = \begin{cases} +W^A & \text{if } A{=}1 \\ -W^A & \text{if } A{=}0 \end{cases}$ \vspace{-0.9em}
+
+2. calculate counterfactual results
 
 
 
 
 \paragraph{identifiability conditions} most of 3
+
+positivity: p. 155, p. 162
+
+additional conditions: chapter 13.5
+
+exchangeability: p 172f
 
 \paragraph{effect modification} chapter 4
 
@@ -193,6 +230,7 @@ systematic approach linking causality to statistical procedures
 \paragraph{measurement bias} chapter 9
 
 \paragraph{random variabilty} chapter 10
+
 
 
 \end{multicols}
@@ -225,18 +263,107 @@ systematic approach linking causality to statistical procedures
 \noindent \textbf{bias-variance trade-off:} \newline wiggliness $\uparrow$ $\rightarrow$ misspecification bias $\downarrow$, CI width $\uparrow$
 
 
-\paragraph{\large IP Weighting}  
+\paragraph{\large Marginal Structural Models} association is causation in the IP weighted pseudo-population 
+$$\text{associational model } \mathrm{E}\left[Y|A\right] = \text{ causal model } \mathrm{E}\left[Y^a\right]$$
+
+\noindent \textit{step 1:} estimate/model $f\left[A|L\right]$ (and $f\left[A\right]$) $\rightarrow$ get $(S)W^A$
+
+\noindent \textit{step 2:} estimate regression parameters for pseudo-population
+
+\noindent \textbf{effect modification} variables $V$ can be included (e.\,g. $\beta_0+\beta_1 a+\beta_2 V a + \beta_3 V$; technically not marginal anymore), $SW^A(V) = \frac{f\left[A|V\right]}{f\left[A|L\right]}$ more efficient than $SW^A$
+ 
+
+\paragraph{\large Censoring} measuring joint effect of $A$ and $C$
+$$\mathrm{E}\left[Y^{a, c=0}\right] \text{ is of interest}$$
+
+\noindent \textbf{standardization} $\mathrm{E}\left[Y|A=a\right] = \int \mathrm{E}\left[Y|L{=}l, A{=}a, C{=}0\right]dF_L\left[l\right]$\vspace{0.2em}
+
+\noindent \textbf{IP weights}\vspace{-1.30em}
+
+\hspace{3.5em}\begin{tabular}{l l l}
+$W^{A,C}=W^A \times W^C$  &(uses $n$) & or \\
+$SW^{A,C}=SW^A \times SW^C$ &(uses $n^{c=0}$) & 
+\end{tabular}\vspace{0.3em}
 
 
-/ marginal structural models
 
-(comparison at 13.4) (maybe censoring as own paragraph)
+\paragraph{\large G-Methods} \textit{g}eneralized treatment contrasts
+adjust for (surrogate) confounders $L$
+\begin{itemize}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
+\setlength{\itemsep}{0pt}%
+\setlength{\parskip}{0pt}
+\item \textbf{standardization}
+\item \textbf{IP weighting}
+\item \textbf{g-estimation:} not needed unless longitudinal
+\end{itemize}
+
+
+\paragraph{\large G-Estimation} additive structural nested models
+$$\mathrm{logit} \, \mathrm{Pr}\left[A=1|Y^{a=0}, L\right] = \alpha_0 + \alpha_1Y^{a=0} + \alpha_2L$$
+because of exchangeability $\alpha_1$ should be zero
+$$Y^{a=0} =Y^a - \psi_1 a$$
+holds because ...
 
 
 
-\paragraph{standardization / parametric g-formula} chapter 13
 
-\paragraph{g-estimation} chapter 14
+
+
+
+e.g. average causal effect in certain strata E(Y1|L) - E(Y0|L) 
+
+model P(A|Y(a=0), L) = a0 + a1Y(a=0) + a2L, if exchangability holds a1=0 [Y(a=0) unknown]
+
+model is only nested when treatment is time-varying, if no time-varying, snm equal to semiparametric marginal structural models (fp 14.1)
+
+
+E(Y1|L) - E(Y0|L) = E(Y1 - Y0|L) therefore  P(Ya -Y(a=0)| A=a, L) = a1a  + a2aL
+
+semi-parametric as they are agnostic about a0 and effect of L alone, therefore fewer assumptions, more robust
+
+g-estimation can only handle confounding, not selection bias, therefore IP weights for censoring
+
+
+multiplicative structural nested model (tp 14.1)
+
+rank preservation (implausible): ranking Y in both counterfactual worlds gives same order (effect is basically the same for all; either additive or multiplicative)
+
+additive conditional rp: Yai -Y0i = w1a + w2aLi for all individuals i
+
+g-estimation is easier to understand for rank-preserving models
+
+
+suppose goal: E(Ya -Y(a=0)| A=a, L) = b1 a
+
+assume rank-preserving Yai -Y0i = w1a  is correct
+
+Y0 = Ya -w1a (rewritten)
+
+Y0 = Y - w1A = H
+
+put in formula from above
+
+P(A|Y(a=0), L) = a0 + a1 H + a2L 
+
+find which w1 makes a1 be zero
+
+95\% CI: all w1 for which w1=0? had result of greater than 0.05
+
+we do not require rank preservation
+
+if there is unmeasured confounding (a1 not zero) we can use the correct a1 and still use g-estimation. If we are not sure about a1, we can try some values (sensitivity analysis)
+
+effect modification can be added into formula
+
+for linear mean models: closed form, otherwise search
+
+doubly robust estimators exist
+
+
+
+
+
+
 
 \paragraph{Outcome regression} chapter 15
 
@@ -246,7 +373,11 @@ systematic approach linking causality to statistical procedures
 
 \paragraph{variable selection} beginning of chapter 18
 
+
 \paragraph{machine learning in CI} end of chapter 18
+
+
+
 
 
 
