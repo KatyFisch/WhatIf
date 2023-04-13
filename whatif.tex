@@ -170,7 +170,7 @@ systematic approach linking causality to statistical procedures
 
 \paragraph{randomized experiments (target trial)} 2.1 and 2.2; 3.6
 
-\paragraph{\large Standardization} adjust for (surrogate) confounders $L$
+\paragraph{\large Standardization} plug-in (or parametric) g-formula
 $$\mathrm{E}\left[Y|A=a\right] = \int \mathrm{E}\left[Y|L=l, A=a\right]dF_L\left[l\right]$$
 weighted average of stratum-specific risks; unknowns can be estimated non-parametrically or modeled
 
@@ -285,9 +285,11 @@ $W^{A,C}=W^A \times W^C$  &(uses $n$) & or \\
 $SW^{A,C}=SW^A \times SW^C$ &(uses $n^{c=0}$) & 
 \end{tabular}\vspace{0.3em}
 
+\noindent \textbf{g-estimation} can only adjust for confounding, not selection bias $\rightarrow$ use IP weights
 
 
-\paragraph{\large G-Methods} \textit{g}eneralized treatment contrasts
+
+\paragraph{\large G-Methods} \textit{g}eneralized treatment contrasts:
 adjust for (surrogate) confounders $L$
 \begin{itemize}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
 \setlength{\itemsep}{0pt}%
@@ -298,66 +300,46 @@ adjust for (surrogate) confounders $L$
 \end{itemize}
 
 
-\paragraph{\large G-Estimation} additive structural nested models
+\paragraph{\large G-Estimation} (additive) structural nested models %todo: verbesserung von allem, ich habs noch nicht ganz verstanden
+\begin{align*}
+\mathrm{logit} \, \mathrm{Pr}\left[A=1|H(\psi^\dagger), L\right] &= \alpha_0 + \alpha_1H(\psi^\dagger) + \alpha_2L \\
+H(\psi^\dagger) &= Y - \psi_\dagger A
+\end{align*}
+find $\psi^\dagger$ which renders $\alpha_1=0$; 95\,\%-CI: all $\psi^\dagger$ for which $p>0.05$
+closed-form solution for linear models
+
+
+\noindent \textbf{derivation:} $H(\psi^\dagger) = Y^{a=0}$
 $$\mathrm{logit} \, \mathrm{Pr}\left[A=1|Y^{a=0}, L\right] = \alpha_0 + \alpha_1Y^{a=0} + \alpha_2L$$
-because of exchangeability $\alpha_1$ should be zero
+$Y^{a=0}$ unknown, but because of exchangeability $\alpha_1$ should be zero
 $$Y^{a=0} =Y^a - \psi_1 a$$
-holds because ...
+equivalent to $Y^{a=0} =Y^{a=1} - \psi_1$, but using no counterfactuals
+
+
+
+\noindent \textbf{structural nested mean model}
+\begin{align*}
+\text{additive: }\,\,\, & \mathrm{E}\left[Y^a-Y^{a=0}|A=a, L\right] &= \beta_1 a \,(+ \beta_2 a L) \\
+\text{multiplicative: }\,\,\, & \log \left( \frac{\mathrm{E}\left[Y^a|A=a, L\right]}{\mathrm{E}\left[Y^{a=0}|A=a, L\right]} \right) &= \beta_1 a \,(+ \beta_2 a L)
+\end{align*} 
+multiplicative is preferred if $Y$ always positive, but does not extend to longitudinal case
+
+\noindent semi-parametric: agnostic about $\beta_0$ and effect of $L$ $\rightarrow$ robust $\uparrow$
+
+\noindent \textbf{no time-varying:} no nesting; model equals marginal structural models with missing $\beta_0, \beta_3$ (unspecified ``no treatment'')
+
+\noindent \textbf{sensitivity analysis:} unmeasured confounding ($\alpha_1 \neq 0$) can be examined: do procedure  for different values of $\alpha_1$ $\rightarrow$ plot $\alpha_1$ vs.\ $\psi^\dagger$ $\rightarrow$ how sensitive is  estimate to unmeasured confounding?
+
+\noindent \textbf{effect modification:} add $V$ in both g-estimation equations %todo
+
+
+\noindent \textbf{doubly robust estimators} exist%todo
 
 
 
 
 
 
-
-e.g. average causal effect in certain strata E(Y1|L) - E(Y0|L) 
-
-model P(A|Y(a=0), L) = a0 + a1Y(a=0) + a2L, if exchangability holds a1=0 [Y(a=0) unknown]
-
-model is only nested when treatment is time-varying, if no time-varying, snm equal to semiparametric marginal structural models (fp 14.1)
-
-
-E(Y1|L) - E(Y0|L) = E(Y1 - Y0|L) therefore  P(Ya -Y(a=0)| A=a, L) = a1a  + a2aL
-
-semi-parametric as they are agnostic about a0 and effect of L alone, therefore fewer assumptions, more robust
-
-g-estimation can only handle confounding, not selection bias, therefore IP weights for censoring
-
-
-multiplicative structural nested model (tp 14.1)
-
-rank preservation (implausible): ranking Y in both counterfactual worlds gives same order (effect is basically the same for all; either additive or multiplicative)
-
-additive conditional rp: Yai -Y0i = w1a + w2aLi for all individuals i
-
-g-estimation is easier to understand for rank-preserving models
-
-
-suppose goal: E(Ya -Y(a=0)| A=a, L) = b1 a
-
-assume rank-preserving Yai -Y0i = w1a  is correct
-
-Y0 = Ya -w1a (rewritten)
-
-Y0 = Y - w1A = H
-
-put in formula from above
-
-P(A|Y(a=0), L) = a0 + a1 H + a2L 
-
-find which w1 makes a1 be zero
-
-95\% CI: all w1 for which w1=0? had result of greater than 0.05
-
-we do not require rank preservation
-
-if there is unmeasured confounding (a1 not zero) we can use the correct a1 and still use g-estimation. If we are not sure about a1, we can try some values (sensitivity analysis)
-
-effect modification can be added into formula
-
-for linear mean models: closed form, otherwise search
-
-doubly robust estimators exist
 
 
 
@@ -371,11 +353,36 @@ doubly robust estimators exist
 
 \paragraph{causal survival analysis} chapter 17
 
-\paragraph{variable selection} beginning of chapter 18
+\paragraph{\large Variable Selection} can induce bias if $L$ includes: 
+
+\hspace{-0.2em}\vspace{-1em}
+\begin{tabular}{l l }
+ (decendant of) collider:& \textit{selection bias under the null}\\
+ noncollider effect of $A$:& \textit{selection bias under the alternative}\\
+ mediator:& \textit{overadjustment for mediators}
+\end{tabular}
+
+\noindent temporal ordering is not enough to conclude anything
+
+\noindent \textbf{bias amplification:} e.g. by adjusting for an instrument $Z$ (can also reduce bias)
 
 
-\paragraph{machine learning in CI} end of chapter 18
 
+
+
+\paragraph{\large Machine Learning} $L$ is high-dimensional
+
+\noindent use lasso or ML for IP weighting/standardization
+
+\noindent \textbf{\textit{but:}} ML does not guarantee elimination of confounding and has largely unknown statistical properties
+
+\noindent $\rightarrow$ \textbf{doubly robust estimator:} consistent if bias  $< \frac{1}{\sqrt{n}}$
+
+\noindent \textit{sample splitting:} train estimators on training sample, use resulting estimators for doubly robust method on estimation sample (CIs on estimation sample are valid, but $n$ halved)
+
+\noindent \textit{cross-fitting:} do again the other way round, average the two estimates, get CI via bootstrapping
+
+\noindent \textbf{problems:} unclear choice of algorithm, is bias small enough?
 
 
 
@@ -393,7 +400,24 @@ doubly robust estimators exist
 \section{Longitudinal Data}
 \begin{multicols}{2}
 
-\paragraph{time-varying treatments} beginning chapter 19
+\paragraph{\large Time-Varying Treatments} compare 2 treatments
+
+\noindent treatment history up to $k$: $\bar{A}_k=(A_0, A_1, ..., A_k)$
+
+\noindent shorthand: always (never) treated $\bar{A} = \bar{1}$ $\left(\bar{0}\right)$
+
+\textbf{static strategy:} $g=\left[g_0(\bar{a}_{-1}), ..., g_K(\bar{a}_{K-1})\right]$
+
+\textbf{dynamic strategy:} $g=\left[g_0(\bar{l}_0), ..., g_K(\bar{l}_K)\right]$
+
+\textbf{stochastic strategy:} non-deterministic $g$
+
+\noindent optimal strategy is where $\mathrm{E}\left[Y^g\right]$ is maximized (if high is good)
+
+
+
+
+
 
 \paragraph{identifiability} middle chapter 19
 
