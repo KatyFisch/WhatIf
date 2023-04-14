@@ -51,8 +51,7 @@
 
 \newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
 \def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
-
-
+\newcommand{\indep}{\perp \!\!\! \perp}
 
 %Hier sind die unterschiedlichen Ausführlichkeitsgrade definiert
 \includecomment{Extensiv} 
@@ -170,7 +169,7 @@ systematic approach linking causality to statistical procedures
 
 \paragraph{randomized experiments (target trial)} 2.1 and 2.2; 3.6
 
-\paragraph{\large Standardization} plug-in (or parametric) g-formula
+\paragraph{\large Standardization} plug-in (or parametric if so) g-formula
 $$\mathrm{E}\left[Y|A=a\right] = \int \mathrm{E}\left[Y|L=l, A=a\right]dF_L\left[l\right]$$
 weighted average of stratum-specific risks; unknowns can be estimated non-parametrically or modeled
 
@@ -204,7 +203,7 @@ IP weighting: treatment model
 
 1. fit outcome regression with variable $R = \begin{cases} +W^A & \text{if } A{=}1 \\ -W^A & \text{if } A{=}0 \end{cases}$ \vspace{-0.9em}
 
-2. calculate counterfactual results
+2. standardize by averaging
 
 
 
@@ -217,11 +216,22 @@ additional conditions: chapter 13.5
 
 exchangeability: p 172f
 
+
+positivity: $f_L(l)\neq 0 \Rightarrow f_{A|L}(a|l)>0 \,\, \forall a,l$
+
+
+consistency:  if $A=a$, then $Y^a=Y$ for each individual
+
+
+
+
 \paragraph{effect modification} chapter 4
 
 \paragraph{interaction} chapter 5
 
 \paragraph{causal diagrams} chapter 6, include swigs from 7.5 and that one technical point
+
+more on SWIGS p 242ff
 
 \paragraph{confounding} chapter 7
 
@@ -404,7 +414,7 @@ multiplicative is preferred if $Y$ always positive, but does not extend to longi
 
 \noindent treatment history up to $k$: $\bar{A}_k=(A_0, A_1, ..., A_k)$
 
-\noindent shorthand: always (never) treated $\bar{A} = \bar{1}$ $\left(\bar{0}\right)$
+\noindent shorthand: always treated $\bar{A} = \bar{1}$, never treated $\bar{A} = \left(\bar{0}\right)$
 
 \textbf{static strategy:} $g=\left[g_0(\bar{a}_{-1}), ..., g_K(\bar{a}_{K-1})\right]$
 
@@ -419,19 +429,90 @@ multiplicative is preferred if $Y$ always positive, but does not extend to longi
 
 
 
-\paragraph{identifiability} middle chapter 19
+\paragraph{\large Sequential Identifiability} sequential versions of
 
-\paragraph{treatment-confounder feedback} end chapter 19 and chapter 20
+ \textbf{exchangability:}
+$Y^g \indep A_k| \bar{A}_{k-1} \,\,\, \forall g, k=0,1,...,K$
 
-\paragraph{g-formula} chapter 21.1
+\textit{conditional exchangeability:}
+$$\left(Y^g, L^g_{k+1}\right) \indep A_k| \bar{A}_{k-1} {=} g\left(\bar{L}_k\right), \bar{L}^k \,\,\, \forall g, k=0,1,...,K$$
 
-\paragraph{IP weighting} chapter 21.2
+ \textbf{positivity:} $f_{\bar{A}_{k-1},\bar{L}_k}(\bar{a}_{k-1},\bar{l}_k)\neq 0 \,\, \Rightarrow$
+$$ f_{A_k|\bar{A}_{k-1},\bar{L}_k}(a_k|\bar{a}_{k-1},\bar{l}_k)>0 \,\, \forall \left(\bar{a}_{k-1},\bar{l}_k\right)$$
 
-\paragraph{doubly robust estimators} chapter 21.3
+ \textbf{consistency:} 
+\begin{align*}
+Y^{\bar{a}} = Y^{\bar{a}^*} & \, \text{ if } {\bar{a}} = {\bar{a}^*};  & \,
+Y^{\bar{a}} = Y & \, \text{ if } {\bar{A}} = {\bar{a}};  \\
+\bar{L}^{\bar{a}}_k = \bar{L}^{\bar{a}^*}_k & \, \text{ if } {\bar{a}_{k-1}} = {\bar{a}^*_{k-1}}; & \,
+\bar{L}^{\bar{a}}_k = \bar{L}_k & \, \text{ if } {\bar{A}_{k-1}} = {\bar{a}_{k-1}}
+\end{align*}
+
+
+\noindent \textbf{generalized backdoor criterion} (static strategy):\,all backdoors into $A_k$ (except through future treatments) are blocked $\forall k$ 
+
+
+\noindent \textbf{static sequential exchangeability for $\boldsymbol{Y^{\bar{a}}}$}
+$$Y^{\bar{a}} \indep A_k| \bar{A}_{k-1}, \bar{L}_k \,\,\,\,\, \text{ for } k=0,1,...,K$$
+use SWIGs to visually check d-separation
+
+\noindent \textbf{time-varying confounding} $\mathrm{E}\left[Y^{\bar{a}}|L_0\right] \neq \mathrm{E}\left[Y|A=\bar{a}, L_0\right]$
+
+
+\paragraph{\large Treatment-Confounder Feedback} $A_0 \rightarrow L_1 \rightarrow A_1$: an unmeasured $U$ influencing $L_1$ and $Y$ turns $L_1$ into a collider;
+
+\noindent traditional adjustment (e.\,g. stratification) biased: use g-methods
+
+\noindent \textbf{g-null test} sequential exchangeability \& sharp null true $\Rightarrow$ $Y^g = Y \,\, \forall g$ $\,\,\,\,\Rightarrow \,\,\,\,$ $Y \indep A_0|L_0$ \& $Y \indep A_1|A_0, L_0, L_1$;
+therefore: \newline if last two independences don't hold, one assumption is violated
+
+\noindent \textbf{g-null theorem:} $\mathrm{E}\left[Y^g\right] = \mathrm{E}\left[Y\right]$, if the two independences hold \newline($\Rightarrow$ sharp null: only if strong faithfulness (no effect cancelling))
+
+
+
+\paragraph{\large Standardization} over all possible $\bar{l}$-histories
+
+\noindent simulates joint distribution of counterfactuals $\left(Y^{\bar{a}}, \bar{L}^{\bar{a}}\right)$ for $\bar{a}$
+\begin{align*}
+& \text{discrete: } \mathrm{E}\left[Y^{\bar{a}}\right] = \sum_{\bar{l}} \mathrm{E}\left[Y|\bar{A}=\bar{a}, \bar{L}=\bar{l} \right] \prod_{k=0}^K f \left(l_k|\bar{a}_{k-1}, \bar{l}_{k-1}\right)  \\ &
+\text{continuous: } \int f(y|\bar{a}, \bar{l}) \prod_{k=0}^K dF\left(l_k|\bar{a}_{k-1}, \bar{l}_{k-1}\right)
+\end{align*}
+
+\noindent for \textit{stochastic strategies} multiply with $\prod_{k=0}^K f^{int} \left(a_k|\bar{a}_{k-1}, \bar{l}_{k}\right) $
+\noindent \textbf{g-null paradox} %todo p. 265
+
+
+\paragraph{\large IP Weighting} 
+
+$$ W^{\bar{A}} = \prod_{k=0}^K \frac{1}{f\left(A_k|\bar{A}_{k-1}, \bar{L}_k\right)}$$
+
+
+$$ SW^{\bar{A}} = \prod_{k=0}^K \frac{f\left(A_k|\bar{A}_{k-1}\right)}{f\left(A_k|\bar{A}_{k-1}, \bar{L}_k\right)}$$
+
+\paragraph{\large Doubly Robust Estimator} reduce misspecification bias
+
+1. IP weights at each time $m$: $W^{\bar{A}_m} = \prod_{k=0}^m\frac{1}{f\left(A_k|\bar{A}_{k-1}, \bar{L}_k\right)}$
+
+2. fit outcome regression with variable $R = \begin{cases} +W^A & \text{if } A{=}1 \\ -W^A & \text{if } A{=}0 \end{cases}$ \vspace{-0.9em}
+
+3. calculate standardized mean outcome
+
+\noindent valid, if treatment or outcome model correct, or treatment correct until k and outcome otherwise ($k+1$ robustness)
+
+
+
+
+
+
+
+
+
+
 
 \paragraph{g-estimation} chapter 21.4
 
 \paragraph{censoring} chapter 21.5
+
 
 \paragraph{target trial} chapter 22 (does that even really fit in here, maybe push to 3rd paragraph in without models)
 
