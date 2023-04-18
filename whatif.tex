@@ -69,7 +69,7 @@
     innerrightmargin=10pt,
     innerleftmargin=10pt,
     backgroundcolor=white}
-\specialcomment{Proof}{\begin{mdframed}[style=MyFrame,nobreak=true] Proof: \ \\}{\end{mdframed}}
+\specialcomment{Proof}{\begin{mdframed}[style=MyFrame,nobreak=true]  }{\end{mdframed}}
 \specialcomment{Rechreg}{\noindent \textit{Calculation Rules:} \begin{itemize}[nosep,label=$\star$] }{\end{itemize}}
 \renewcommand\ThisComment[1]{% Fix for Umlauts in comments
   \immediate\write\CommentStream{\unexpanded{#1}}%
@@ -162,48 +162,49 @@ systematic approach linking causality to statistical procedures
 \noindent \textbf{7. Interpret.} hierarchy: statistical, counterfactual, feasible intervention, randomized trial
 
 
+\paragraph{\large Average Causal Effect} $\mathrm{E}\left[Y^{a=1}\right] \neq \mathrm{E}\left[Y^{a=0}\right]$
+\begin{align*}
+\mathrm{E}\left[Y^{a}\right]   &=  \sum_yyp_{Y^a}(y)  &\text{(discrete)}\\
+   &=  \int yf_{Y^a}(y)dy &\text{(continuous)}
+\end{align*}
 
-\paragraph{Notation} chapter 1.1
+\noindent individual causal effect $Y_i^{a=1} \neq Y_i^{a=0}$ generally unidentifiable
 
-\paragraph{average causal effect} chapter 1.2 and 1.3 and 1.4 and 1.5
+\noindent \textit{null hypothesis:} no average causal effect
 
-\paragraph{randomized experiments (target trial)} 2.1 and 2.2; 3.6
+\noindent \textit{sharp null hypothesis:} no causal effect for any individual
 
-\paragraph{\large Standardization} plug-in (or parametric if so) g-formula
-$$\mathrm{E}\left[Y|A=a\right] = \int \mathrm{E}\left[Y|L=l, A=a\right]dF_L\left[l\right]$$
-weighted average of stratum-specific risks; unknowns can be estimated non-parametrically or modeled
+\noindent \textbf{notation} $A,Y$: random variables (differ for individuals);
+$a,y$: particular values; counterfactual $Y^{a=1}$: $Y$ under treatment $a=1$
 
-\noindent \textbf{no need to estimate $\boldsymbol{f_L\left[l\right]}$} as empirical distribution can be used: estimate outcome model $\rightarrow$ predict counterfactuals $\rightarrow$ average the results ($\rightarrow$ CI by bootstrapping)
+\noindent  \textbf{stable unit treatment value assumption (SUTVA)} $Y_i^a$ is well-defined: no interference between individuals, no multiple versions of treatment (weaker: treatment variation irrelevance)
 
-\noindent \textbf{for discrete $\boldsymbol{ L}$}  $\mathrm{E}\left[Y|A=a\right] = \sum_l \mathrm{E}\left[Y|L=l, A=a\right]\mathrm{Pr}\left[L=l\right]$
+\noindent  \textbf{causal effect measures} typically based on means
 
-\paragraph{\large IP Weighting} adjust for (surrogate) confounders $L$
-$$\mathrm{E}\left[Y|A=a\right] = \mathrm{E}\left[\frac{I(A=a)Y}{f\left[A|L\right]}\right]; W^A=\frac{1}{f\left[A|L\right]}; SW^A = \frac{f(A)}{f\left[A|L\right]}$$
+\textit{risk difference:}  $\mathrm{Pr}\left[Y^{a=1}=1\right] - \mathrm{Pr}\left[Y^{a=0}=1\right]$
 
-\noindent unknowns can be estimated non-parametrically or modeled
-\noindent \textbf{pseudo-population:} everyone is treated \& untreated ($L\not\to A$)
+\textit{risk ratio:} $\frac{\mathrm{Pr}\left[Y^{a=1}=1\right]}{ \mathrm{Pr}\left[Y^{a=0}=1\right]}$
 
-\noindent \textbf{FRCISTG} \textit{(fully randomized causally interpreted structured graph)}: probability tree for $L \rightarrow A \rightarrow Y$, can be used to calculate/visualize simulation of values for $A$ 
+\textit{odds ratio:} $\frac{\mathrm{Pr}\left[Y^{a=1}=1\right]/\mathrm{Pr}\left[Y^{a=1}=0\right]}{ \mathrm{Pr}\left[Y^{a=0}=1\right]/\mathrm{Pr}\left[Y^{a=0}=0\right]}$
 
-\noindent \textbf{for discrete $\boldsymbol{A, L}$} $f\left[a|l\right] = \mathrm{Pr}\left[A=a,L=l\right]$
+\noindent \textit{number needed to treat (NNT)} to save 1 life: $-1/$risk difference
 
-\noindent \textbf{estimators:} Horvitz-Thompson; Hajek (modified version) %todo p.152 
+\noindent \textbf{sources of random error}: sampling variability (use consistent estimators), nondeterministic counterfactuals
 
-\noindent \textbf{stabilized weights $\boldsymbol{SW^A}$} should have an average of 1 (check!) $\rightarrow$ pseudo-population same size $\rightarrow$ CI width $\downarrow$
+\noindent\textbf{association} compares $E\left[Y|A=1\right]$ and $E\left[Y|A=0\right]$, \textbf{causation} compares $E\left[Y^{a=1}\right]$ and $E\left[Y^{a=0}\right]$ (whole population)
 
-\paragraph{\large Standardization and IP Weighting}
 
-are equivalent, \textit{\textbf{but}} if modeled, different ``no misspecification'' assumptions:
 
-standardization: outcome model
 
-IP weighting: treatment model
 
-\noindent \textbf{doubly robust estimators:} reduce model misspecification bias, consistent if either model is correct; \textbf{\textit{e.\,g.:}} \vspace{-0.9em}
 
-1. fit outcome regression with variable $R = \begin{cases} +W^A & \text{if } A{=}1 \\ -W^A & \text{if } A{=}0 \end{cases}$ \vspace{-0.9em}
 
-2. standardize by averaging
+
+
+\paragraph{randomized experiments (target trial)} 2.1 and 2.2; 3.6; maybe 22
+
+
+
 
 
 
@@ -221,6 +222,8 @@ positivity: $f_L(l)\neq 0 \Rightarrow f_{A|L}(a|l)>0 \,\, \forall a,l$
 
 
 consistency:  if $A=a$, then $Y^a=Y$ for each individual
+
+$Y=Y^A$
 
 
 
@@ -254,14 +257,15 @@ more on SWIGS p 242ff
 %-------------------------------------------------------------------------------
 
 \section{Models}
+
 \begin{multicols}{2}
 
 \paragraph{\large Modeling} data are a sample from the target population \vspace{0.4em}
 
 \noindent \hspace{0.9em}\begin{tabular}{l l l}
-\textbf{\it estimand:} & quantity  of interest, & e.\,g. $\mathrm{E}\left[Y|A=a\right]$ \\
-\textbf{\it estimator:} & function to use, & e.\,g. $\widehat{\mathrm{E}}\left[Y|A=a\right]$ \\
-\textbf{\it estimate:} & apply function to data, & e.\,g. $4.1$ 
+\textbf{\it estimand:} & quantity  of interest, & e.\,g.\ $\mathrm{E}\left[Y|A=a\right]$ \\
+\textbf{\it estimator:} & function to use, & e.\,g.\ $\widehat{\mathrm{E}}\left[Y|A=a\right]$ \\
+\textbf{\it estimate:} & apply function to data, & e.\,g.\ $4.1$ 
 \end{tabular} \vspace{0.5em}
 
 \noindent \textbf{model}: a priori restriction of joint distribution/dose-response curve;  \textit{assumption:} no model misspecification (usually wrong)
@@ -272,78 +276,19 @@ more on SWIGS p 242ff
 
 \noindent \textbf{bias-variance trade-off:} \newline wiggliness $\uparrow$ $\rightarrow$ misspecification bias $\downarrow$, CI width $\uparrow$
 
+\end{multicols}
 
-\paragraph{\large Marginal Structural Models} association is causation in the IP weighted pseudo-population 
-$$\text{associational model } \mathrm{E}\left[Y|A\right] = \text{ causal model } \mathrm{E}\left[Y^a\right]$$
+\subsection{Traditional Methods}
 
-\noindent \textit{step 1:} estimate/model $f\left[A|L\right]$ (and $f\left[A\right]$) $\rightarrow$ get $(S)W^A$
-
-\noindent \textit{step 2:} estimate regression parameters for pseudo-population
-
-\noindent \textbf{effect modification} variables $V$ can be included (e.\,g. $\beta_0+\beta_1 a+\beta_2 V a + \beta_3 V$; technically not marginal anymore), $SW^A(V) = \frac{f\left[A|V\right]}{f\left[A|L\right]}$ more efficient than $SW^A$
- 
-
-\paragraph{\large Censoring} measuring joint effect of $A$ and $C$
-$$\mathrm{E}\left[Y^{a, c=0}\right] \text{ is of interest}$$
-
-\noindent \textbf{standardization} $\mathrm{E}\left[Y|A=a\right] = \int \mathrm{E}\left[Y|L{=}l, A{=}a, C{=}0\right]dF_L\left[l\right]$\vspace{0.2em}
-
-\noindent \textbf{IP weights}\vspace{-1.30em}
-
-\hspace{3.5em}\begin{tabular}{l l l}
-$W^{A,C}=W^A \times W^C$  &(uses $n$) & or \\
-$SW^{A,C}=SW^A \times SW^C$ &(uses $n^{c=0}$) & 
-\end{tabular}\vspace{0.3em}
-
-\noindent \textbf{g-estimation} can only adjust for confounding, not selection bias $\rightarrow$ use IP weights
+\begin{multicols}{2}
 
 
 
-\paragraph{\large G-Methods} \textit{g}eneralized treatment contrasts:
-adjust for (surrogate) confounders $L$
-\begin{itemize}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
-\setlength{\itemsep}{0pt}%
-\setlength{\parskip}{0pt}
-\item \textbf{standardization}
-\item \textbf{IP weighting}
-\item \textbf{g-estimation:} not needed unless longitudinal
-\end{itemize}
-
-
-\paragraph{\large G-Estimation} (additive) structural nested models %todo: verbesserung von allem, ich habs noch nicht ganz verstanden
-\begin{align*}
-\mathrm{logit} \, \mathrm{Pr}\left[A=1|H(\psi^\dagger), L\right] &= \alpha_0 + \alpha_1H(\psi^\dagger) + \alpha_2L \\
-H(\psi^\dagger) &= Y - \psi_\dagger A
-\end{align*}
-find $\psi^\dagger$ which renders $\alpha_1=0$; 95\,\%-CI: all $\psi^\dagger$ for which $p>0.05$
-closed-form solution for linear models
-
-
-\noindent \textbf{derivation:} $H(\psi^\dagger) = Y^{a=0}$
-$$\mathrm{logit} \, \mathrm{Pr}\left[A=1|Y^{a=0}, L\right] = \alpha_0 + \alpha_1Y^{a=0} + \alpha_2L$$
-$Y^{a=0}$ unknown, but because of exchangeability $\alpha_1$ should be zero
-$$Y^{a=0} =Y^a - \psi_1 a$$
-equivalent to $Y^{a=0} =Y^{a=1} - \psi_1$, but using no counterfactuals
 
 
 
-\noindent \textbf{structural nested mean model}
-\begin{align*}
-\text{additive: }\,\,\, & \mathrm{E}\left[Y^a-Y^{a=0}|A=a, L\right] &= \beta_1 a \,(+ \beta_2 a L) \\
-\text{multiplicative: }\,\,\, & \log \left( \frac{\mathrm{E}\left[Y^a|A=a, L\right]}{\mathrm{E}\left[Y^{a=0}|A=a, L\right]} \right) &= \beta_1 a \,(+ \beta_2 a L)
-\end{align*} 
-multiplicative is preferred if $Y$ always positive, but does not extend to longitudinal case
-
-\noindent semi-parametric: agnostic about $\beta_0$ and effect of $L$ $\rightarrow$ robust $\uparrow$
-
-\noindent \textbf{no time-varying:} no nesting; model equals marginal structural models with missing $\beta_0, \beta_3$ (unspecified ``no treatment'')
-
-\noindent \textbf{sensitivity analysis:} unmeasured confounding ($\alpha_1 \neq 0$) can be examined: do procedure  for different values of $\alpha_1$ $\rightarrow$ plot $\alpha_1$ vs.\ $\psi^\dagger$ $\rightarrow$ how sensitive is  estimate to unmeasured confounding?
-
-\noindent \textbf{effect modification:} add $V$ in both g-estimation equations %todo
 
 
-\noindent \textbf{doubly robust estimators} exist%todo
 
 
 
@@ -393,6 +338,256 @@ multiplicative is preferred if $Y$ always positive, but does not extend to longi
 \noindent \textit{cross-fitting:} do again the other way round, average the two estimates, get CI via bootstrapping
 
 \noindent \textbf{problems:} unclear choice of algorithm, is bias small enough?
+
+
+
+
+
+
+\end{multicols}
+
+
+%-------------------------------------------------------------------------------
+
+% SECTION: G-METHODS
+
+%-------------------------------------------------------------------------------
+
+\subsection{G-Methods}
+\begin{multicols}{2}
+
+
+\paragraph{\large G-Methods} \textit{g}eneralized treatment contrasts:
+adjust for (surrogate) confounders $L$
+
+
+
+
+\begin{itemize}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
+\setlength{\itemsep}{0pt}%
+\setlength{\parskip}{0pt}
+\item \textbf{standardization} two types of g-formula
+\item \textbf{IP weighting} also g-formula
+\item \textbf{g-estimation:} not needed unless longitudinal
+\end{itemize}
+
+\paragraph{\large Standardization} plug-in (or parametric if so) g-formula
+$$\mathrm{E}\left[Y^{a}\right] = \overbrace{\mathrm{E}\left[\mathrm{E}\left[Y|A{=}a,L{=}l\right]\right]}^{\text{conditional expectation}} =  \overbrace{ \textstyle{\int} \mathrm{E}\left[Y|L=l, A=a\right]f_L\left[l\right]dl}^{\text{joint density estimator}} $$
+weighted average of stratum-specific risks; unknowns can be estimated non-parametrically or modeled
+
+\noindent \textbf{no need to estimate $\boldsymbol{f_L\left[l\right]}$/integrate} as empirical distribution can be used: estimate outcome model $\rightarrow$ predict counterfactuals on whole dataset $\rightarrow$ average the results ($\rightarrow$ CI by bootstrapping)
+
+\noindent \textbf{for discrete $\boldsymbol{ L}$}  $\mathrm{E}\left[Y|A=a\right] = \sum_l \mathrm{E}\left[Y|L=l, A=a\right]\mathrm{Pr}\left[L=l\right]$
+
+\vspace{0.2em}
+\noindent \colorbox{lightgray!20!white}{\begin{minipage}{28em}
+
+\textbf{\textcolor{darkgray}{time-varying}} standardize over all possible $\bar{l}$-histories
+
+\noindent simulates joint distribution of counterfactuals $\left(Y^{\bar{a}}, \bar{L}^{\bar{a}}\right)$ for $\bar{a}$
+\textbf{joint density estimator (jde)}
+\begin{align*}
+& \text{discrete: } \mathrm{E}\left[Y^{\bar{a}}\right] = \sum_{\bar{l}} \mathrm{E}\left[Y|\bar{A}=\bar{a}, \bar{L}=\bar{l} \right] \prod_{k=0}^K f \left(l_k|\bar{a}_{k-1}, \bar{l}_{k-1}\right)  \\ &
+\text{continuous: } \int f(y|\bar{a}, \bar{l}) \prod_{k=0}^K f\left(l_k|\bar{a}_{k-1}, \bar{l}_{k-1}\right)dl
+\end{align*}
+
+\noindent for \textit{stochastic strategies} multiply with $\prod_{k=0}^K f^{int} \left(a_k|\bar{a}_{k-1}, \bar{l}_{k}\right) $
+
+modelling: %todo
+
+\textbf{iterated conditional expectation (ice)} 
+$$\mathrm{E}\left[ Y_T^{\bar{a}}\right] = \mathrm{E} \left[ \mathrm{E} \left[\mathrm{E} \left[ ... \mathrm{E} \left[Y_T| \bar{A}_{T{-}1} {=} \bar{a}_{T{-}1}, \bar{L}_T \right]  ...|\bar{A}_0 {=} a_0, L_1 \right] |L_0 \right]\right]$$
+
+modelling: %todo
+
+\noindent \textbf{g-null paradox} %todo p. 265
+
+\end{minipage}}
+
+\begin{Proof} 
+Proof: for $L_0 \rightarrow A_0 \rightarrow Y_0 \rightarrow L_1 \rightarrow A_1 \rightarrow Y_1$, $\bar{a} =(a_0,a_1)$
+\begin{alignat*}{4} 
+\mathrm{E}\left[Y_1^{\bar{a}}\right] & \overset{\text{CE}}{=} && \mathrm{E}\left[\mathrm{E}\left[   Y_1^{\bar{a}}|A_0{=}a_0, L_0   \right]\right]  \\ 
+\text{(ice)}\,\,\, &\overset{\text{CE*}}{=} && \mathrm{E}\left[\mathrm{E}\left[  \mathrm{E}\left[Y_1|\bar{L}, \bar{A}{=}\bar{a}, Y_0 \right]| A_0{=}a_0, L_0   \right]\right]  \\ 
+&\overset{\text{LTP}}{=} && \mathrm{E}\left[ \sum\nolimits_{l_1} \mathrm{E}\left[Y_1|A_0{=}a_0, \bar{L}, Y_0\right] \mathrm{Pr}\left[l_1|a_0,l_0, y_0\right]         \right] \\
+&\overset{\text{LTP}}{=} && \sum\nolimits_{l_0}\left[ \sum\nolimits_{l_1} \mathrm{E}\left[Y_1|A_0{=}a_0, \bar{L}, Y_0\right] \mathrm{Pr}\left[l_1|a_0,l_0, y_0\right]         \right] \mathrm{Pr}\left[l_0\right] \\
+\text{(ide)}\,\,\, &\overset{\text{sum}}{=} &&  \sum\nolimits_{\bar{l}} \mathrm{E}\left[Y_1|A_0{=}a_0, \bar{L}, Y_0\right] \mathrm{Pr}\left[l_1|a_0,l_0\right]          \mathrm{Pr}\left[l_0\right] 
+\end{alignat*}
+CE: conditional expectation; *: exchangeability; \newline LTP: law of total probability
+\end{Proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\paragraph{\large Marginal Structural Models} association is causation in the IP weighted pseudo-population 
+$$\text{associational model } \mathrm{E}\left[Y|A\right] = \text{ causal model } \mathrm{E}\left[Y^a\right]$$
+
+\noindent \textit{step 1:} estimate/model $f\left[A|L\right]$ (and $f\left[A\right]$) $\rightarrow$ get $(S)W^A$
+
+\noindent \textit{step 2:} estimate regression parameters for pseudo-population
+
+\noindent \textbf{effect modification} variables $V$ can be included (e.\,g.\ $\beta_0+\beta_1 a+\beta_2 V a + \beta_3 V$; technically not marginal anymore), $SW^A(V) = \frac{f\left[A|V\right]}{f\left[A|L\right]}$ more efficient than $SW^A$
+ 
+
+\paragraph{\large Censoring} measuring joint effect of $A$ and $C$
+$$\mathrm{E}\left[Y^{a, c=0}\right] \text{ is of interest}$$
+
+\noindent \textbf{standardization} $\mathrm{E}\left[Y|A=a\right] = \int \mathrm{E}\left[Y|L{=}l, A{=}a, C{=}0\right]dF_L\left[l\right]$\vspace{0.2em}
+
+\noindent \textbf{IP weights}\vspace{-1.30em}
+
+\hspace{3.5em}\begin{tabular}{l l l}
+$W^{A,C}=W^A \times W^C$  &(uses $n$) & or \\
+$SW^{A,C}=SW^A \times SW^C$ &(uses $n^{c=0}$) & 
+\end{tabular}\vspace{0.3em}
+
+\noindent \textbf{g-estimation} can only adjust for confounding, not selection bias $\rightarrow$ use IP weights
+
+
+
+
+
+
+\paragraph{\large G-Estimation} (additive) structural nested models %todo: verbesserung von allem, ich habs noch nicht ganz verstanden
+\begin{align*}
+\mathrm{logit} \, \mathrm{Pr}\left[A=1|H(\psi^\dagger), L\right] &= \alpha_0 + \alpha_1H(\psi^\dagger) + \alpha_2L \\
+H(\psi^\dagger) &= Y - \psi_\dagger A
+\end{align*}
+find $\psi^\dagger$ which renders $\alpha_1=0$; 95\,\%-CI: all $\psi^\dagger$ for which $p>0.05$
+closed-form solution for linear models
+
+
+\noindent \textbf{derivation:} $H(\psi^\dagger) = Y^{a=0}$
+$$\mathrm{logit} \, \mathrm{Pr}\left[A=1|Y^{a=0}, L\right] = \alpha_0 + \alpha_1Y^{a=0} + \alpha_2L$$
+$Y^{a=0}$ unknown, but because of exchangeability $\alpha_1$ should be zero
+$$Y^{a=0} =Y^a - \psi_1 a$$
+equivalent to $Y^{a=0} =Y^{a=1} - \psi_1$, but using no counterfactuals
+
+
+
+\noindent \textbf{structural nested mean model}
+\begin{align*}
+\text{additive: }\,\,\, & \mathrm{E}\left[Y^a-Y^{a=0}|A=a, L\right] &= \beta_1 a \,(+ \beta_2 a L) \\
+\text{multiplicative: }\,\,\, & \log \left( \frac{\mathrm{E}\left[Y^a|A=a, L\right]}{\mathrm{E}\left[Y^{a=0}|A=a, L\right]} \right) &= \beta_1 a \,(+ \beta_2 a L)
+\end{align*} 
+multiplicative is preferred if $Y$ always positive, but does not extend to longitudinal case
+
+\noindent semi-parametric: agnostic about $\beta_0$ and effect of $L$ $\rightarrow$ robust $\uparrow$
+
+\noindent \textbf{no time-varying:} no nesting; model equals marginal structural models with missing $\beta_0, \beta_3$ (unspecified ``no treatment'')
+
+\noindent \textbf{sensitivity analysis:} unmeasured confounding ($\alpha_1 \neq 0$) can be examined: do procedure  for different values of $\alpha_1$ $\rightarrow$ plot $\alpha_1$ vs.\ $\psi^\dagger$ $\rightarrow$ how sensitive is  estimate to unmeasured confounding?
+
+\noindent \textbf{effect modification:} add $V$ in both g-estimation equations %todo
+
+
+\noindent \textbf{doubly robust estimators} exist%todo
+
+
+\paragraph{\large IP Weighting} \textit{i}nverse \textit{p}robability of treatment (g-formula)
+$$\mathrm{E}\left[Y^{a}\right] = \mathrm{E}\left[\frac{I(A=a)Y}{f\left[A|L\right]}\right]; W^A=\frac{1}{f\left[A|L\right]}; SW^A = \frac{f(A)}{f\left[A|L\right]}$$
+
+\noindent unknowns can be estimated non-parametrically or modeled
+\noindent \textbf{pseudo-population:} everyone is treated \& untreated ($L\not\to A$)
+
+\noindent \textbf{FRCISTG} \textit{(fully randomized causally interpreted structured graph)}: probability tree for $L \rightarrow A \rightarrow Y$, can be used to calculate/visualize simulation of values for $A$ 
+
+\noindent \textbf{for discrete $\boldsymbol{A, L}$} $f\left[a|l\right] = \mathrm{Pr}\left[A=a,L=l\right]$
+
+\noindent \textbf{estimators:} Horvitz-Thompson; Hajek (modified version) %todo p.152 
+
+\noindent \textbf{stabilized weights $\boldsymbol{SW^A}$} should have an average of 1 (check!) $\rightarrow$ pseudo-population same size $\rightarrow$ CI width $\downarrow$
+
+\paragraph{\large Standardization and IP Weighting}
+
+are equivalent, \textit{\textbf{but}} if modeled, different ``no misspecification'' assumptions:
+
+standardization: outcome model
+
+IP weighting: treatment model
+
+\noindent \textbf{doubly robust estimators:} reduce model misspecification bias, consistent if either model is correct; \textbf{\textit{e.\,g.:}} \vspace{-0.9em}
+
+1. fit outcome regression with variable $R = \begin{cases} +W^A & \text{if } A{=}1 \\ -W^A & \text{if } A{=}0 \end{cases}$ \vspace{-0.9em}
+
+2. standardize by averaging
+
+
+
+\subsubsection{Time-varying A}
+
+
+
+
+
+
+
+\paragraph{\large IP Weighting} 
+
+$$ W^{\bar{A}} = \prod_{k=0}^K \frac{1}{f\left(A_k|\bar{A}_{k-1}, \bar{L}_k\right)}$$
+
+
+$$ SW^{\bar{A}} = \prod_{k=0}^K \frac{f\left(A_k|\bar{A}_{k-1}\right)}{f\left(A_k|\bar{A}_{k-1}, \bar{L}_k\right)}$$
+
+\paragraph{\large Doubly Robust Estimator} sequential estimation
+\begin{enumerate}[leftmargin=*, itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
+\setlength{\itemsep}{0pt}%
+\setlength{\parskip}{0pt}
+\item 
+estimate $\hat{f}\left(A_m|\bar{A}_{m-1}, \bar{L}_m\right)$ (e.\,g.\ logistic model), use it to \newline
+calculate at each time $m$: $\widehat{W}^{\bar{A}_m} = \prod_{k=0}^m\frac{1}{\hat{f}\left(A_k|\bar{A}_{k-1}, \bar{L}_k\right)}$ and modified IP weights at $m$: $\widehat{W}^{\bar{A}_{m-1, a_m}} = \frac{\widehat{W}^{\bar{A}_{m-1}}}{\hat{f}\left(a_m|\bar{A}_{m-1}, \bar{L}_m\right)} $
+\item with $\widehat{T}_{K+1}:=Y$, recursively for $m=K, K-1, ..., 0$:\newline
+ (a) fit outcome regression on $\widehat{T}_{m+1}$ with variable  $\widehat{W}^{\bar{A}_m}$\newline
+ (b) calculate $\widehat{T}_{m}$ using the outcome model with $\widehat{W}^{\bar{A}_{m-1, a_m}}$
+\item calculate standardized mean outcome $\widehat{\mathrm{E}}\left[Y^{\bar{a}}\right] = \mathrm{E}\left[\widehat{T}_0\right]$
+\end{enumerate}
+
+\noindent \textbf{valid, if} treatment or outcome model correct, or treatment correct until k and outcome otherwise ($k+1$ robustness)
+
+
+\paragraph{\large G-Estimation} nested equations: for each time $k$
+
+\noindent \textbf{strutural nested mean models} separate effect of each $a_k$
+$$\mathrm{E}\left[Y^{\bar{a}_{k-1}, a_k, \underline{0}_{k+1}} - Y^{\bar{a}_{k-1}, \underline{0}_{k+1}}|\bar{L}^{\bar{a}_{k-1}}=\bar{l}_k, \bar{A}_{k-1} = \bar{a}_{k-1}\right] = $$
+$$  a_k\gamma_k\left(\bar{a}_{k-1}, \bar{l}_k,\beta\right)$$
+\noindent 
+
+\noindent \textbf{calculations}
+$$H_k\left(\psi^\dagger\right) = Y - \sum_{j=k}^K A_j \gamma_j\left(\bar{A}_{j-1}, \bar{L}_j, \psi^\dagger\right)$$
+\noindent function $\gamma_j$ can be, e.\,g.\ constant ($\psi_1$), time-varying only ($\psi_1+\psi_2k$), or dependent on treatment/covariate history
+
+$$\mathrm{logit}\,\mathrm{Pr}\left[A_k=1|H_k\left(\psi^\dagger\right), \bar{L}_k,\bar{A}_{k-1}\right]=$$
+$$\alpha_0 +\alpha_1H_k\left(\psi^\dagger\right)+\alpha_2 w_k\left(\bar{L}_k,\bar{A}_{k-1}\right)
+$$
+find $\alpha_1$ that is closest to zero
+
+closed form estimator exists for the linear case
+
+
+
+\paragraph{\large Censoring} $\bar{C}$: monotonic type of missing data 
+
+\noindent \textbf{standardization}: $\int f(y|\bar{a}, \bar{c}{=}\bar{0}, \bar{l}) \prod_{k=0}^K dF\left(l_k|\bar{a}_{k-1}, c_{k-1} {=} 0, \bar{l}_{k-1}\right)$
+
+\noindent \textbf{IP weighting}:
+\noindent $$\textcolor{gray}{S}W^{\bar{C}}= \prod_{k=1}^{K+1}\frac{1\textcolor{gray}{\cdot \mathrm{Pr}\left(C_k=0|\bar{A}_{k-1}, C_{k-1}=0\right)}}{\mathrm{Pr}\left(C_k=0|\bar{A}_{k-1}, C_{k-1}=0, \bar{L}_k\right)} $$
+
+
+
+
 
 
 
@@ -461,7 +656,7 @@ use SWIGs to visually check d-separation
 
 \paragraph{\large Treatment-Confounder Feedback} $A_0 \rightarrow L_1 \rightarrow A_1$: an unmeasured $U$ influencing $L_1$ and $Y$ turns $L_1$ into a collider;
 
-\noindent traditional adjustment (e.\,g. stratification) biased: use g-methods
+\noindent traditional adjustment (e.\,g.\ stratification) biased: use g-methods
 
 \noindent \textbf{g-null test} sequential exchangeability \& sharp null true $\Rightarrow$ $Y^g = Y \,\, \forall g$ $\,\,\,\,\Rightarrow \,\,\,\,$ $Y \indep A_0|L_0$ \& $Y \indep A_1|A_0, L_0, L_1$;
 therefore: \newline if last two independences don't hold, one assumption is violated
@@ -470,48 +665,6 @@ therefore: \newline if last two independences don't hold, one assumption is viol
 
 
 
-\paragraph{\large Standardization} over all possible $\bar{l}$-histories
-
-\noindent simulates joint distribution of counterfactuals $\left(Y^{\bar{a}}, \bar{L}^{\bar{a}}\right)$ for $\bar{a}$
-\begin{align*}
-& \text{discrete: } \mathrm{E}\left[Y^{\bar{a}}\right] = \sum_{\bar{l}} \mathrm{E}\left[Y|\bar{A}=\bar{a}, \bar{L}=\bar{l} \right] \prod_{k=0}^K f \left(l_k|\bar{a}_{k-1}, \bar{l}_{k-1}\right)  \\ &
-\text{continuous: } \int f(y|\bar{a}, \bar{l}) \prod_{k=0}^K dF\left(l_k|\bar{a}_{k-1}, \bar{l}_{k-1}\right)
-\end{align*}
-
-\noindent for \textit{stochastic strategies} multiply with $\prod_{k=0}^K f^{int} \left(a_k|\bar{a}_{k-1}, \bar{l}_{k}\right) $
-\noindent \textbf{g-null paradox} %todo p. 265
-
-
-\paragraph{\large IP Weighting} 
-
-$$ W^{\bar{A}} = \prod_{k=0}^K \frac{1}{f\left(A_k|\bar{A}_{k-1}, \bar{L}_k\right)}$$
-
-
-$$ SW^{\bar{A}} = \prod_{k=0}^K \frac{f\left(A_k|\bar{A}_{k-1}\right)}{f\left(A_k|\bar{A}_{k-1}, \bar{L}_k\right)}$$
-
-\paragraph{\large Doubly Robust Estimator} reduce misspecification bias
-
-1. IP weights at each time $m$: $W^{\bar{A}_m} = \prod_{k=0}^m\frac{1}{f\left(A_k|\bar{A}_{k-1}, \bar{L}_k\right)}$
-
-2. fit outcome regression with variable $R = \begin{cases} +W^A & \text{if } A{=}1 \\ -W^A & \text{if } A{=}0 \end{cases}$ \vspace{-0.9em}
-
-3. calculate standardized mean outcome
-
-\noindent valid, if treatment or outcome model correct, or treatment correct until k and outcome otherwise ($k+1$ robustness)
-
-
-
-
-
-
-
-
-
-
-
-\paragraph{g-estimation} chapter 21.4
-
-\paragraph{censoring} chapter 21.5
 
 
 \paragraph{target trial} chapter 22 (does that even really fit in here, maybe push to 3rd paragraph in without models)
