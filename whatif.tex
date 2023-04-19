@@ -201,10 +201,44 @@ $a,y$: particular values; counterfactual $Y^{a=1}$: $Y$ under treatment $a=1$
 
 
 
-\paragraph{randomized experiments (target trial)} 2.1 and 2.2; 3.6; maybe 22
+\paragraph{\large Target Trial} emulating an ideal randomized experiment
+
+\noindent explicitly formulate target trial \& show how it is emulated $\rightarrow$ \newline less vague causal question, helps spot issues
+
+\noindent \textbf{missing data problem} unknown counterfactuals
+
+\noindent \textit{randomized experiments:} missing completely at random $\rightarrow$ exchangeability (= exogeneity as treatment is exogenous)
+
+\noindent \textit{ideal randomized experiment:} no censoring, double-blind, well-defined treatment, \& adherence $\rightarrow$ association is causation
+
+\noindent \textit{pragmatic trial:} no placebo/blindness, realistic monitoring
 
 
+\noindent \textbf{PICO} (population, intervention, comparator, outcome): some components of target trial
 
+\noindent \textbf{three types of causal effects:}
+
+\textit{intention-to-treat effect} (effect of treatment assignment)
+
+\textit{per-protocol effect} (usually dynamic when toxicity arises)
+
+\textit{other intervention effect} (strategy changed during follow-up)
+
+
+\noindent \textbf{controlled direct effects:} effect of A on Y not through B
+
+\textit{natural direct effect}  $A$ on $Y$ if $B^{a=0}$ (cross-world quantity)
+
+\textit{principal stratum effect} $A$ on $Y$ for subset with $B^{a=0} = B^{a=1}$
+
+\noindent \textbf{crossover experiment:} sequential treatment \& outcome $t{=}0,1$
+\newline
+individual causal effect $Y_{it}^{a_t=1} - Y_{it}^{a_t=0}$ only identifiable if: no carryover effect, effect $\indep$ time, outcome $\indep$ time
+
+\noindent \textbf{time zero} if eligibility at multiple $t$ (observational data):
+earliest, random $t$, all $t$ (adjust variance with bootstrapping)
+
+\noindent \textbf{grace periods:} usually treatment starts $x$ months after first eligible, if death before: randomly assign strategy/copy into both
 
 
 
@@ -215,7 +249,7 @@ positivity: p. 155, p. 162
 
 additional conditions: chapter 13.5
 
-exchangeability: p 172f
+exchangeability: p 172f, p16-19
 
 
 positivity: $f_L(l)\neq 0 \Rightarrow f_{A|L}(a|l)>0 \,\, \forall a,l$
@@ -224,6 +258,8 @@ positivity: $f_L(l)\neq 0 \Rightarrow f_{A|L}(a|l)>0 \,\, \forall a,l$
 consistency:  if $A=a$, then $Y^a=Y$ for each individual
 
 $Y=Y^A$
+
+technical point 3.2
 
 
 
@@ -306,7 +342,7 @@ more on SWIGS p 242ff
 
 \paragraph{instrumental variable estimation} chapter 16
 
-\paragraph{causal survival analysis} chapter 17
+\paragraph{causal survival analysis} chapter 17 (and technical point 22.3)
 
 \paragraph{\large Variable Selection} can induce bias if $L$ includes: 
 
@@ -411,10 +447,11 @@ Proof: for $L_0 \rightarrow A_0 \rightarrow Y_0 \rightarrow L_1 \rightarrow A_1 
 \text{(ice)}\,\,\, &\overset{\text{CE*}}{=} && \mathrm{E}\left[\mathrm{E}\left[  \mathrm{E}\left[Y_1|\bar{L}, \bar{A}{=}\bar{a}, Y_0 \right]| A_0{=}a_0, L_0   \right]\right]  \\ 
 &\overset{\text{LTP}}{=} && \mathrm{E}\left[ \sum\nolimits_{l_1} \mathrm{E}\left[Y_1|A_0{=}a_0, \bar{L}, Y_0\right] \mathrm{Pr}\left[l_1|a_0,l_0, y_0\right]         \right] \\
 &\overset{\text{LTP}}{=} && \sum\nolimits_{l_0}\left[ \sum\nolimits_{l_1} \mathrm{E}\left[Y_1|A_0{=}a_0, \bar{L}, Y_0\right] \mathrm{Pr}\left[l_1|a_0,l_0, y_0\right]         \right] \mathrm{Pr}\left[l_0\right] \\
-\text{(ide)}\,\,\, &\overset{\text{sum}}{=} &&  \sum\nolimits_{\bar{l}} \mathrm{E}\left[Y_1|A_0{=}a_0, \bar{L}, Y_0\right] \mathrm{Pr}\left[l_1|a_0,l_0\right]          \mathrm{Pr}\left[l_0\right] 
+\text{(jde)}\,\,\, &\overset{\text{sum}}{=} &&  \sum\nolimits_{\bar{l}} \mathrm{E}\left[Y_1|A_0{=}a_0, \bar{L}, Y_0\right] \mathrm{Pr}\left[l_1|a_0,l_0\right]          \mathrm{Pr}\left[l_0\right] 
 \end{alignat*}
 CE: conditional expectation; *: exchangeability; \newline LTP: law of total probability
 \end{Proof}
+
 
 
 
