@@ -32,6 +32,7 @@
 \displaywidowpenalty=1602
 \usepackage[round]{natbib} 
 \usepackage{enumitem}
+\usepackage{tcolorbox}
 
 \usepackage{titlesec}
 \newcommand{\sectionbreak}{\clearpage}
@@ -69,7 +70,7 @@
     innerrightmargin=10pt,
     innerleftmargin=10pt,
     backgroundcolor=white}
-\specialcomment{Proof}{\begin{mdframed}[style=MyFrame,nobreak=true]  }{\end{mdframed}}
+\specialcomment{Proof}{\begin{mdframed}[style=MyFrame,nobreak=false]  }{\end{mdframed}}
 \specialcomment{Rechreg}{\noindent \textit{Calculation Rules:} \begin{itemize}[nosep,label=$\star$] }{\end{itemize}}
 \renewcommand\ThisComment[1]{% Fix for Umlauts in comments
   \immediate\write\CommentStream{\unexpanded{#1}}%
@@ -243,7 +244,33 @@ earliest, random $t$, all $t$ (adjust variance with bootstrapping)
 
 
 
-\paragraph{identifiability conditions} most of 3
+\paragraph{\large Identifiability Conditions} hold in ideal experiments
+
+\noindent \textbf{consistency} counterfactuals correspond to data $Y=Y^A$:
+ if $A=a$, then $Y^a=Y$ for each individual
+ 
+ 
+components: precise definition of $Y^a$ via specifying $a$ (no different verions of treatment, sufficiently well-defined interventions may not even be possible (effect of DNA before it was discovered), relies on expert consensus); linkage of counterfactuals to data (intervention $a$ must be seen in data) 
+ 
+ 
+
+\noindent \textbf{positivity} $\mathrm{Pr}\left[A=a|L=l\right] >0 \,\,\, \forall \, l \text{ with } \mathrm{Pr}\left[L=l\right]>0$
+
+positivity can sometimes be empirically verified
+
+
+\noindent \textbf{exchangeability} $Y^a \indep A$
+
+(conditionally) randomized = conditionally exchangeable $Y^a \indep A|L$
+
+
+no guarantee: without randomization unmeasured confounders $U$ may exist
+
+
+
+
+
+most of 3
 
 positivity: p. 155, p. 162
 
@@ -255,11 +282,7 @@ exchangeability: p 172f, p16-19
 positivity: $f_L(l)\neq 0 \Rightarrow f_{A|L}(a|l)>0 \,\, \forall a,l$
 
 
-consistency:  if $A=a$, then $Y^a=Y$ for each individual
-
-$Y=Y^A$
-
-technical point 3.2
+consistency:  technical point 3.2
 
 
 
@@ -418,7 +441,12 @@ weighted average of stratum-specific risks; unknowns can be estimated non-parame
 \vspace{0.2em}
 \noindent \colorbox{lightgray!20!white}{\begin{minipage}{28em}
 
+
+
+
 \textbf{\textcolor{darkgray}{time-varying}} standardize over all possible $\bar{l}$-histories
+
+
 
 \noindent simulates joint distribution of counterfactuals $\left(Y^{\bar{a}}, \bar{L}^{\bar{a}}\right)$ for $\bar{a}$
 \textbf{joint density estimator (jde)}
@@ -429,28 +457,73 @@ weighted average of stratum-specific risks; unknowns can be estimated non-parame
 
 \noindent for \textit{stochastic strategies} multiply with $\prod_{k=0}^K f^{int} \left(a_k|\bar{a}_{k-1}, \bar{l}_{k}\right) $
 
-modelling: %todo
+
+
+\end{minipage}}
+
+\noindent \colorbox{lightgray!20!white}{
+\begin{minipage}{28em}
+
+\begin{mdframed}[linecolor=black!20!,
+    outerlinewidth=0.2pt,
+    innertopmargin=0.5\baselineskip,
+    innerbottommargin=0.5\baselineskip,
+    backgroundcolor=lightgray!20!white, innerleftmargin=2pt, innerrightmargin=2pt]
+\textbf{estimation} \citep{young2011comparative, schomaker_using_2019}
+
+\begin{enumerate}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt, leftmargin=1.5em]
+\setlength{\itemsep}{0pt}%
+\setlength{\parskip}{0pt}
+\item model $f \left(l_k|\bar{a}_{k-1}, \bar{l}_{k-1}\right)$ and $\mathrm{E}\left[Y|\bar{A}=\bar{a}, \bar{L}=\bar{l} \right]$
+\item simulate data forward in time: \newline
+at $k=0$: use empirical distribution of $L_0$ (observed data) \newline
+at $k>0$: set $\bar{A} = \bar{a}$, \textit{draw} from models estimated in 1.
+\item calculate mean of $\hat{Y}_{K,i}^{\bar{a}}$ (bootstrap for CI)
+\end{enumerate}
+
+
+
+\end{mdframed}
+
 
 \textbf{iterated conditional expectation (ice)} 
 $$\mathrm{E}\left[ Y_T^{\bar{a}}\right] = \mathrm{E} \left[ \mathrm{E} \left[\mathrm{E} \left[ ... \mathrm{E} \left[Y_T| \bar{A}_{T{-}1} {=} \bar{a}_{T{-}1}, \bar{L}_T \right]  ...|\bar{A}_0 {=} a_0, L_1 \right] |L_0 \right]\right]$$
 
-modelling: %todo
+\begin{mdframed}[linecolor=black!20!,
+    outerlinewidth=0.2pt,
+    innertopmargin=0.5\baselineskip,
+    innerbottommargin=0.5\baselineskip,
+    backgroundcolor=lightgray!20!white, innerleftmargin=2pt, innerrightmargin=2pt]
+\textbf{estimation} \citep{schomaker_using_2019}
 
-\noindent \textbf{g-null paradox} %todo p. 265
+\begin{enumerate}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt, leftmargin=1.5em]
+\setlength{\itemsep}{0pt}%
+\setlength{\parskip}{0pt}
+\item model inside out: $Q_{T} {=} \mathrm{E} \left[Y_T| \bar{A}_{T{-}1}, \bar{L}_T \right]$ to $Q_0 {=} \mathrm{E} \left[Q_1| \bar{L}_0 \right]$, predict $Q_t$ with $\bar{A} = \bar{a}$ in each step
+\item calculate mean of $\hat{Q}_{0,i}^{\bar{a}}$ (bootstrap for CI)
+\end{enumerate}
+
+
+
+\end{mdframed}
+
+\noindent \textbf{g-null paradox} even if the sharp null holds, model misspecification can lead to it being falsely rejected
 
 \end{minipage}}
 
-\begin{Proof} 
+
+
+\begin{mdframed}[style=MyFrame,nobreak=false, innerleftmargin=2pt, innerrightmargin=2pt]
 Proof: for $L_0 \rightarrow A_0 \rightarrow Y_0 \rightarrow L_1 \rightarrow A_1 \rightarrow Y_1$, $\bar{a} =(a_0,a_1)$
 \begin{alignat*}{4} 
 \mathrm{E}\left[Y_1^{\bar{a}}\right] & \overset{\text{CE}}{=} && \mathrm{E}\left[\mathrm{E}\left[   Y_1^{\bar{a}}|A_0{=}a_0, L_0   \right]\right]  \\ 
 \text{(ice)}\,\,\, &\overset{\text{CE*}}{=} && \mathrm{E}\left[\mathrm{E}\left[  \mathrm{E}\left[Y_1|\bar{L}, \bar{A}{=}\bar{a}, Y_0 \right]| A_0{=}a_0, L_0   \right]\right]  \\ 
 &\overset{\text{LTP}}{=} && \mathrm{E}\left[ \sum\nolimits_{l_1} \mathrm{E}\left[Y_1|A_0{=}a_0, \bar{L}, Y_0\right] \mathrm{Pr}\left[l_1|a_0,l_0, y_0\right]         \right] \\
-&\overset{\text{LTP}}{=} && \sum\nolimits_{l_0}\left[ \sum\nolimits_{l_1} \mathrm{E}\left[Y_1|A_0{=}a_0, \bar{L}, Y_0\right] \mathrm{Pr}\left[l_1|a_0,l_0, y_0\right]         \right] \mathrm{Pr}\left[l_0\right] \\
+&\overset{\text{LTP}}{=} && \sum\nolimits_{l_0}\!\!\!\left[ \sum\nolimits_{l_1} \!\!\!\mathrm{E}\left[Y_1|A_0{=}a_0, \bar{L}, Y_0\right] \mathrm{Pr}\left[l_1|a_0,l_0, y_0\right]         \right] \mathrm{Pr}\left[l_0\right] \\
 \text{(jde)}\,\,\, &\overset{\text{sum}}{=} &&  \sum\nolimits_{\bar{l}} \mathrm{E}\left[Y_1|A_0{=}a_0, \bar{L}, Y_0\right] \mathrm{Pr}\left[l_1|a_0,l_0\right]          \mathrm{Pr}\left[l_0\right] 
 \end{alignat*}
 CE: conditional expectation; *: exchangeability; \newline LTP: law of total probability
-\end{Proof}
+\end{mdframed}
 
 
 
@@ -702,16 +775,10 @@ therefore: \newline if last two independences don't hold, one assumption is viol
 
 
 
-
-
-\paragraph{target trial} chapter 22 (does that even really fit in here, maybe push to 3rd paragraph in without models)
-
-
-
 \end{multicols}
 
 
-\def\bibpreamble{\textit{If no citation is given, the source is \citep{hernan2023causal}} \vspace{1.5em}}
+\def\bibpreamble{\textit{If no citation is given, the information is taken from the book \citep{hernan2020causal}} \vspace{1.5em}}
 
 \bibliographystyle{apalike} % We choose the "plain" reference style
 \bibliography{cite} % Entries are in the refs.bib file
