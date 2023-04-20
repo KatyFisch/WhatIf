@@ -246,43 +246,41 @@ earliest, random $t$, all $t$ (adjust variance with bootstrapping)
 
 \paragraph{\large Identifiability Conditions} hold in ideal experiments
 
-\noindent \textbf{consistency} counterfactuals correspond to data $Y=Y^A$:
+\noindent \textbf{consistency} counterfactuals correspond to data $Y=Y^A$: \newline
  if $A=a$, then $Y^a=Y$ for each individual
  
- 
-components: precise definition of $Y^a$ via specifying $a$ (no different verions of treatment, sufficiently well-defined interventions may not even be possible (effect of DNA before it was discovered), relies on expert consensus); linkage of counterfactuals to data (intervention $a$ must be seen in data) 
- 
- 
+\begin{itemize}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt, leftmargin=1.5em]
+\setlength{\itemsep}{0pt}%
+\setlength{\parskip}{0pt}
+\item precise definition of $Y^a$ via specifying $a$ (sufficiently well-defined $a$ maybe impossible (effect of DNA before it was discovered), relies on expert consensus)
+\item linkage of counterfactuals to data ($a$ must be seen in data) 
+\end{itemize}
 
-\noindent \textbf{positivity} $\mathrm{Pr}\left[A=a|L=l\right] >0 \,\,\, \forall \, l \text{ with } \mathrm{Pr}\left[L=l\right]>0$
+\noindent \textbf{positivity} $\mathrm{Pr}\left[A=a|L=l\right] >0 \,\,\, \forall \, l \text{ with } \mathrm{Pr}\left[L=l\right]>0$; $$f_L(l)\neq 0 \Rightarrow f_{A|L}(a|l)>0 \,\, \forall a,l$$
 
-positivity can sometimes be empirically verified
+\begin{itemize}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt, leftmargin=1.5em]
+\setlength{\itemsep}{0pt}%
+\setlength{\parskip}{0pt}
+\item structural violations (inference not on full population)
+\item random variability (smooth over with parametric models)
+\end{itemize}
+\noindent can sometimes be empirically verified (if all is seen in data)
 
+\noindent \textbf{exchangeability} unverifiable without randomization
+\begin{itemize}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt, leftmargin=1.5em]
+\setlength{\itemsep}{0pt}%
+\setlength{\parskip}{0pt}
+\item \textit{marginal:} $Y^a \indep A$ $\widehat{=}$ randomized experiment, \newline counterfactuals are missing completely at random (MCAR)
 
-\noindent \textbf{exchangeability} $Y^a \indep A$
+\item \textit{conditional:} $Y^a {\indep} A|L$ $\widehat{=}$ conditionally randomized, counterfactuals are missing at random (MAR)
+\end{itemize}
+alternative definition: $ \mathrm{Pr}\left[A=1|Y^{a=0}, L\right] = \mathrm{Pr}\left[A=1|L\right]$
 
-(conditionally) randomized = conditionally exchangeable $Y^a \indep A|L$
+\noindent \textbf{additional conditions:}
 
+\noindent \textit{correct measurement} mismeasurement of $A, Y, L$ results in bias
 
-no guarantee: without randomization unmeasured confounders $U$ may exist
-
-
-
-
-
-most of 3
-
-positivity: p. 155, p. 162
-
-additional conditions: chapter 13.5
-
-exchangeability: p 172f, p16-19
-
-
-positivity: $f_L(l)\neq 0 \Rightarrow f_{A|L}(a|l)>0 \,\, \forall a,l$
-
-
-consistency:  technical point 3.2
+\noindent \textit{correct model specification} models $\overset{\text{may}}{\rightarrow}$ misspecification bias
 
 
 
@@ -344,7 +342,9 @@ more on SWIGS p 242ff
 
 
 
+\paragraph{\large Stratification}  calculate risk for each stratum of $L$
 
+\noindent only feasible, if enough data per stratum
 
 
 
