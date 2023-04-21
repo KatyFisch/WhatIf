@@ -285,7 +285,44 @@ alternative definition: $ \mathrm{Pr}\left[A=1|Y^{a=0}, L\right] = \mathrm{Pr}\l
 
 
 
-\paragraph{effect modification} chapter 4
+\paragraph{\large Effect Modification} $A$ on $Y$ varies across levels of $V$
+
+\noindent null average causal effect $\neq$ null causal effect per subgroup
+
+\noindent \textbf{population characteristics:} causal effect measure is actually ``effect in a population with a particular mix of effect modifiers''
+
+\noindent \textbf{transportability:} extrapolation of effect to another population (issues: effect modification, versions of treatment, interference)
+
+ \noindent effects conditional on $V$ may be more transportable
+
+
+
+
+
+\noindent \textbf{types:} additive/multiplicative scale,
+qualitative (effect in opposite directions)/quantitative, surrogate/causal 
+
+
+\noindent \textbf{calculation:} 
+\begin{itemize}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt, leftmargin=1.5em]
+\setlength{\itemsep}{0pt}%
+\setlength{\parskip}{0pt}
+\item \textit{stratify} by $V$ then standardize/IP weight for $L$, 
+\item $L$ as \textit{matching} factor (ensures positivity, difficult if high-dimensional $L$)
+\end{itemize}
+
+
+
+
+
+\noindent \textbf{collapsibility:}  causal risk difference and ratio are weighted averages of stratum-specific risks, can not be done for odds ratio
+
+
+
+
+
+
+
 
 \paragraph{interaction} chapter 5
 
@@ -333,40 +370,6 @@ more on SWIGS p 242ff
 
 \noindent \textbf{bias-variance trade-off:} \newline wiggliness $\uparrow$ $\rightarrow$ misspecification bias $\downarrow$, CI width $\uparrow$
 
-\end{multicols}
-
-\subsection{Traditional Methods}
-
-\begin{multicols}{2}
-
-
-
-
-\paragraph{\large Stratification}  calculate risk for each stratum of $L$
-
-\noindent only feasible, if enough data per stratum
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\paragraph{Outcome regression} chapter 15
-
-\paragraph{instrumental variable estimation} chapter 16
-
-\paragraph{causal survival analysis} chapter 17 (and technical point 22.3)
-
 \paragraph{\large Variable Selection} can induce bias if $L$ includes: 
 
 \hspace{-0.2em}\vspace{-1em}
@@ -397,6 +400,66 @@ more on SWIGS p 242ff
 \noindent \textit{cross-fitting:} do again the other way round, average the two estimates, get CI via bootstrapping
 
 \noindent \textbf{problems:} unclear choice of algorithm, is bias small enough?
+
+
+
+\paragraph{\large Super Learning} \citep{van2007super, van2011targeted}
+
+\noindent \textbf{oracle selector:} select best estimator of set of learners $Z_i$
+
+\noindent \textbf{discrete super learner:} select algorithm with smallest cross-validated error (converges to oracle for large sample size)
+
+\noindent \textbf{super learner:} improves asymptotically on discrete version
+
+$\mathrm{logit} (Y=1|Z) = \sum_i \alpha_i Z_i, $ with $0<\alpha_i<1$ and $\sum\alpha_i=1$
+
+\noindent   can be cross-validated itself to check for overfitting (unlikely)
+
+
+
+
+
+
+
+
+
+
+
+
+\end{multicols}
+
+\subsection{Traditional Methods}
+
+\begin{multicols}{2}
+
+
+
+
+\paragraph{\large Stratification}  calculate risk for each stratum of $L$
+
+\noindent only feasible if enough data per stratum
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\paragraph{Outcome regression} chapter 15
+
+\paragraph{instrumental variable estimation} chapter 16
+
+\paragraph{causal survival analysis} chapter 17 (and technical point 22.3)
+
 
 
 
@@ -458,12 +521,6 @@ weighted average of stratum-specific risks; unknowns can be estimated non-parame
 \noindent for \textit{stochastic strategies} multiply with $\prod_{k=0}^K f^{int} \left(a_k|\bar{a}_{k-1}, \bar{l}_{k}\right) $
 
 
-
-\end{minipage}}
-
-\noindent \colorbox{lightgray!20!white}{
-\begin{minipage}{28em}
-
 \begin{mdframed}[linecolor=black!20!,
     outerlinewidth=0.2pt,
     innertopmargin=0.5\baselineskip,
@@ -489,6 +546,12 @@ at $k>0$: set $\bar{A} = \bar{a}$, \textit{draw} from models estimated in 1.
 \textbf{iterated conditional expectation (ice)} 
 $$\mathrm{E}\left[ Y_T^{\bar{a}}\right] = \mathrm{E} \left[ \mathrm{E} \left[\mathrm{E} \left[ ... \mathrm{E} \left[Y_T| \bar{A}_{T{-}1} {=} \bar{a}_{T{-}1}, \bar{L}_T \right]  ...|\bar{A}_0 {=} a_0, L_1 \right] |L_0 \right]\right]$$
 
+\end{minipage}}
+
+\noindent \colorbox{lightgray!20!white}{
+\begin{minipage}{28em}
+
+
 \begin{mdframed}[linecolor=black!20!,
     outerlinewidth=0.2pt,
     innertopmargin=0.5\baselineskip,
@@ -513,8 +576,8 @@ $$\mathrm{E}\left[ Y_T^{\bar{a}}\right] = \mathrm{E} \left[ \mathrm{E} \left[\ma
 
 
 
-\begin{mdframed}[style=MyFrame,nobreak=false, innerleftmargin=2pt, innerrightmargin=2pt]
-Proof: for $L_0 \rightarrow A_0 \rightarrow Y_0 \rightarrow L_1 \rightarrow A_1 \rightarrow Y_1$, $\bar{a} =(a_0,a_1)$
+\begin{mdframed}[style=MyFrame,nobreak=true, innerleftmargin=2pt, innerrightmargin=2pt]
+Proof: for $L_0 \rightarrow A_0 \rightarrow Y_0 \rightarrow L_1 \rightarrow A_1 \rightarrow Y_1$, $\bar{a} =(a_0,a_1)$ 
 \begin{alignat*}{4} 
 \mathrm{E}\left[Y_1^{\bar{a}}\right] & \overset{\text{CE}}{=} && \mathrm{E}\left[\mathrm{E}\left[   Y_1^{\bar{a}}|A_0{=}a_0, L_0   \right]\right]  \\ 
 \text{(ice)}\,\,\, &\overset{\text{CE*}}{=} && \mathrm{E}\left[\mathrm{E}\left[  \mathrm{E}\left[Y_1|\bar{L}, \bar{A}{=}\bar{a}, Y_0 \right]| A_0{=}a_0, L_0   \right]\right]  \\ 
