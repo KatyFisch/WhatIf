@@ -293,11 +293,7 @@ alternative definition: $ \mathrm{Pr}\left[A=1|Y^{a=0}, L\right] = \mathrm{Pr}\l
 
 \noindent \textbf{transportability:} extrapolation of effect to another population (issues: effect modification, versions of treatment, interference)
 
- \noindent effects conditional on $V$ may be more transportable
-
-
-
-
+\noindent effects conditional on $V$ may be more transportable
 
 \noindent \textbf{types:} additive/multiplicative scale,
 qualitative (effect in opposite directions)/quantitative, surrogate/causal 
@@ -311,20 +307,45 @@ qualitative (effect in opposite directions)/quantitative, surrogate/causal
 \item $L$ as \textit{matching} factor (ensures positivity, difficult if high-dimensional $L$)
 \end{itemize}
 
-
-
-
-
 \noindent \textbf{collapsibility:}  causal risk difference and ratio are weighted averages of stratum-specific risks, can not be done for odds ratio
 
 
 
+\paragraph{\large Interaction} effects of joint interventions $A$ and $E$
+$$\mathrm{Pr}\left[Y^{1,1}=1\right] - \mathrm{Pr}\left[Y^{0,1}=1\right] \neq \mathrm{Pr}\left[Y^{1,0}=1\right] - \mathrm{Pr}\left[Y^{0,0}=1\right]$$
+above definition for additive scale
+
+
+sufficient component-cause framework
+
+effects of simultaneous treatment: joint interventions $A$ and $E$
+
+A and E have equal status
+
+different than effect modification: $V$ is not an intervention variable
+
+exchangeability for both $A$ and $E$ needed
+
+
+interaction is superadditive/-multiplicative if positive (sub- if negative)
+
+when treatment $E$ is randomly assigned: same as effec modification
+
+monotonic effect: same direction for each individual (or no effect)
+
+
+\paragraph{\large sufficient component-cause framework}
+
+response type (helped, immune, hurt, doomed) turns to 16 types for binary $A$ and $E$
+
+(minimal) sufficient cause: 
+
+(minimal) $U_1$ together with $A=1$ ensure $Y=1$
+
+(minimal) $U_2$ together with $A=0$ ensure $Y=1$
 
 
 
-
-
-\paragraph{interaction} chapter 5
 
 \paragraph{causal diagrams} chapter 6, include swigs from 7.5 and that one technical point
 
@@ -412,6 +433,7 @@ more on SWIGS p 242ff
 \noindent \textbf{super learner:} improves asymptotically on discrete version
 
 $\mathrm{logit} (Y=1|Z) = \sum_i \alpha_i Z_i, $ with $0<\alpha_i<1$ and $\sum\alpha_i=1$
+weights $\alpha_i$ are determined inside the cross-validation; for the prediction, $Z_i$ trained on the full data set are used
 
 \noindent   can be cross-validated itself to check for overfitting (unlikely)
 
@@ -747,7 +769,7 @@ $$\alpha_0 +\alpha_1H_k\left(\psi^\dagger\right)+\alpha_2 w_k\left(\bar{L}_k,\ba
 $$
 find $\alpha_1$ that is closest to zero
 
-closed form estimator exists for the linear case
+a closed form estimator exists for the linear case
 
 
 
@@ -766,6 +788,102 @@ closed form estimator exists for the linear case
 
 
 
+
+\end{multicols}
+
+
+
+\subsection{Advanced Methods}
+
+\begin{multicols}{2}
+
+
+\paragraph{\large TMLE} \textit{t}argeted \textit{m}inimum \textit{l}oss-based \textit{e}stimation
+$$O=(W, A, Y) \sim P_0$$
+
+\noindent target $\Psi((P_0) = \psi_0$, \textit{typically: $\mathrm{E}_{W,0}\left[\mathrm{E}_0(Y|A{=}1,W) - \mathrm{E}_0(Y|A{=}0,W)\right]$}
+
+\noindent \textbf{first step:} outcome model $\bar{Q}^0_n(A,W)$ estimating $\bar{Q}_0$ (part of $P_0$)
+\begin{itemize}[leftmargin=*, itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
+\setlength{\itemsep}{0pt}%
+\setlength{\parskip}{0pt}
+\item  super learning is often used here, but leads to a biased estimate
+\item not all of $f(Y|A,W)$ needs to be estimated, just the relevant portion, \textit{typically average  outcome $\mathrm{E}_0(Y|A,W)$}  $\rightarrow$ efficiency $\uparrow$
+\end{itemize}
+get predicted values for A=1 and A=0
+
+\noindent \textbf{second step:} update $\bar{Q}^0_n(A,W)$ to $\bar{Q}^1_n(A,W)$ using treatment model $g_n$ estimating $g_0 = P_0(A|W)$ 
+\begin{itemize}[leftmargin=*, itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
+\setlength{\itemsep}{0pt}%
+\setlength{\parskip}{0pt}
+\item goal: bias reduction, get optimal bias-variance trade-off
+\item super learning is used here as well
+\item removes all asymptotic bias, if consistent estimator is used here
+\item 
+\end{itemize}
+get predicted values $g_n(1|W_i)$ and $g_n(0|W_i)$
+
+calculate clever covariate $H^*_n(A,W) = \left(\frac{I(A=1)}{g_n(1|W)} - \frac{I(A=0)}{g_n(0|W)}\right)$ for each $i$: $H^*_n(A,W) = \left(\frac{I(A=1)}{g_n(1|W)} - \frac{I(A=0)}{g_n(0|W)}\right)$
+
+updating: logistic regression $\mathrm{logit} \bar{Q}_n^1(A,W) = \overbrace{\mathrm{logit} \bar{Q}_n^0(A,W)}^{\text{offset}}+ \epsilon_n H_n^*(A,W)$ (converges after first update)
+
+$Q^*_n = (\bar{Q}^1_n, Q^0_{W,n})$
+
+\noindent \textbf{third step:} TMLE is a substitution estimator $\psi_n^{TMLE} = \frac{1}{n}\sum_{i=1}^n \left[\bar{Q}^1_n(1,W_i) -  \bar{Q}^1_n(0,W_i)\right] $
+
+
+
+\noindent \textbf{advantages:} doubly robust (consistent if either outcome or treatment model is correctly specified), asymptotically efficient (if both are correct), substition estimator (more robust to outliers and sparsity)
+
+
+
+
+\ \\
+\noindent --------------------------------------
+
+$\mathcal{L}(O) = \overbrace{\mathrm{Pr}(Y|A, W)}^{Q_Y}\overbrace{\mathrm{Pr}(A|W)}^{g}\overbrace{\mathrm{Pr}(W)}^{Q_W}$
+
+
+
+Second step: update model, incorporate infor on treatment assignment mechanisms to improve $\psi_0$
+ML estimation regress residuals $Y = \bar{Q}^0_n + \epsilon H(A,W)$
+$H(A,W)$ depends on target parameter and loss function but is a function of the propensitiy score
+update initial fit $\bar{Q}^*_n = \bar{Q}^0_n + \hat{\epsilon}H(A,W)$
+
+
+valid inference, good finite sample performance, 
+
+
+$H(A,W)$ comes from the influence curve, targeting ensures mean of efficient influence curve $D^*(P)$  is zero
+
+TMLE solves $P_nD^*(P^*_n)=0$
+
+
+$$D^*(P) = \overbrace{\left[\frac{A}{g(1,W)} - \frac{1-A}{g(0,W)}\right] \left[Y-\bar{Q}(A,W)\right]}^{a} + \overbrace{\bar{Q}(1,W) - \bar{Q}(0,W) -\psi}^{b}   $$
+
+g is propensity score
+
+
+TMLE is a substitution estimator $\psi_n^{TMLE} = \frac{1}{2}\sum_{i=1}^n \bar{Q}^*_n(1,W_i) - \frac{1}{2}\sum_{i=1}^n \bar{Q}^*_n(0,W_i)$ therefore mean of b is zero
+
+targeting step makes sure a also has mean zero
+
+$Y=\epsilon H(A,W) + offset(\bar{Q}^0_n)$
+
+
+
+MLE solves $\sum_{i=1}^n H(A_i, W_i)\left[Y_i-\bar{Q}^*_n(A_i,W_i)\right]=0$ where $\bar{Q}^*_n(A_i,W_i) = \hat{\epsilon}H(A,W) + \bar{Q}^0_n$
+ therefore obvious choice: $H(A,W) = \frac{A}{g(1,W)} - \frac{1-A}{g(0,W)}$
+ 
+ 
+ influence curve based inference: 
+ asymptotic linearity $\sqrt{n}\left(\psi_n^{TMLE} - \psi_0\right) \overset{D}{\rightarrow} \mathrm{N}(0,\sigma^2)$
+ 
+ 95\% CI: $\psi_n \pm 1.96 \hat{\sigma}/\sqrt{n}$ with $\hat{\sigma}^2=\frac{1}{2}\sum_{i=1}^n \hat{D}^{*^2}(P^*_n)(O_i)$
+ 
+ test statistic for null hypothesis $H_0$: $\psi_0=0$ $$T=\frac{\psi_n}{\sqrt{\hat{\sigma}^2/n}}$$
+ 
+ p-values calculated as $2\Phi(-abs(T))$
 
 \end{multicols}
 
