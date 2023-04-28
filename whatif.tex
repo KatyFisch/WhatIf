@@ -337,20 +337,81 @@ $A$ and $E$ have equal status and could also be considered a combined treatment 
 \textit{sufficient cause interaction:} $A$ and $E$ appear together in a minimal sufficient cause
 
 
+\paragraph{\large NPSEM} \textit{n}on\textit{p}aramentric \textit{s}tructural \textit{e}quation \textit{m}odel
+$$V_m = f_m(pa_m, \epsilon_m)$$
+
+\noindent counterfactuals are obtained recursively, e.\,g.\  $V_3^{v_1} = V_3^{v_1, V_2^{v_1}}$
+
+\noindent implies any variable can be intervened on
+
+\noindent aka finest causally interpreted structural treee graph (FCISTG)
+
+\noindent \textbf{additional assumption} $\cap$ FCISTG $\Rightarrow$ causal Markov condition:
+\begin{itemize}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt, leftmargin=1.5em]
+\setlength{\itemsep}{0pt}%
+\setlength{\parskip}{0pt}
+\item independent errors (NPSEM-IE): all $\epsilon_m$ mutually independent
+\item fully randomized (FFRCISTG):  $V_m^{\bar{v}_{m-1}} \indep V_j^{\bar{v}_{j-1}}$ if $\bar{v}_{j-1}$ subvector of $\bar{v}_{m-1}$
+\end{itemize}
+
+\noindent NPSEM-IE $\Rightarrow$ FFRCISTG (assume DAGs represent latter)
+
+
+\paragraph{\large Causal DAG} draw assumptions before conclusions
+
+
+\noindent \textit{rules:}
+arrow means direct causal effect for at least one $i$, absence means sharp null holds, all common causes are on the graph
+
+
+\noindent \textit{neglects:} direction of cause (harmful/protective), interactions
+
+\noindent \textit{convention:} time flows from left to right
+
+
+\noindent \textbf{causal Markov assumption:} any variable ($v$) $|$ its direct causes ($pa_j$) $\indep$ its non-descendants ($\lnot v_j$) $\Leftrightarrow$ Markov factorization $$f(v) = \textstyle\prod_{j=1}^Mf(v_j|pa_j)$$
+\noindent \textbf{d-separation} (d for directional): a pathway in a DAG is ...
+\begin{itemize}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt, leftmargin=1.5em]
+\setlength{\itemsep}{0pt}%
+\setlength{\parskip}{0pt}
+\item blocked if collider or conditioned on non-collider
+\item opened if conditioned on collider or descendent of collider
+\end{itemize}
+2 variables are d-separated if all connecting paths are blocked
+
+\noindent under causal Markov: d-separation $\Rightarrow$ independence
+
+\noindent under faithfulness: independence $\Rightarrow$ d-separation
+
+\noindent \textbf{faithfulness:} effects don't cancel out perfectly
+
+\noindent \textit{discovery:} process of learning the causal structure; requires faithfulness, but even with it is often impossible
 
 
 
-\paragraph{causal diagrams} chapter 6, include swigs from 7.5 and that one technical point
+
+
+
+
+\paragraph{\large SWIGs} \textit{s}ingle \textit{w}orld \textit{i}ntervention \textit{g}raphs
+
+include swigs from 7.5 and that one technical point (?)
 
 more on SWIGS p 242ff
 
-\paragraph{confounding} chapter 7
 
-\paragraph{selection bias} chapter 8
+
+\paragraph{confounding} bias due to common causes of $A$, $Y$ not in $L$
+
+chapter 7
+
+\paragraph{selection bias} bias via conditioning on common effects
+
+chapter 8
 
 \paragraph{measurement bias} chapter 9
 
-\vspace{50em}
+\vspace{80em}
 
 \paragraph{random variabilty} chapter 10
 
