@@ -427,7 +427,7 @@ $$\sum_m \mathrm{Pr}\left[M=m|A=a\right] \sum_{a'} \mathrm{Pr}\left[Y=1|M=m, A=a
 
 \paragraph{\large Selection Bias} bias due to common effect of $A$ \& $Y$ \textbf{\textit{in}} $L$
 
- \noindent $=$ conditioning on collider (can't be  fixed by randomization)
+ \noindent $=$ conditioning on collider (can't be fixed by randomization)
 
 
 \noindent \textbf{examples:} informative censoring, nonresponse bias, healthy worker bias, volunteer bias; often M-bias ($A {\leftarrow} U_1 {\to} L {\leftarrow} U_2 {\to} Y$)
@@ -443,19 +443,35 @@ if $Y=0$ is conditionally independent, then $Y=1$ can't be as $\mathrm{Pr}\left[
 $\rightarrow$ conditioning on a collider could be unbiased if restricted to certain levels ($Y=0$)
 
 
+\paragraph{\large Measurement Bias} aka information bias 
+
+\noindent measurements $X^*$ of variables $X$ can be included in DAG
+
+\noindent \textbf{independent} errors $U$ if $f(U_A, U_Y) = f(U_A)f(U_Y)$
+
+\noindent \textbf{nondifferential} $A$:  if $f(U_A|Y)=f(U_A)$; $Y$: $f(U_Y|A)=f(U_Y)$
+
+\noindent mismeasurement $\to$ bias, if: $A\to Y$ \textit{or} dependent \textit{or} differantial
+
+\noindent \textbf{reverse causation bias} caused by e.\,g.\ recall bias: independent but differential $A$ (caused by $Y \to U_A$)
+
+
+\noindent \textbf{misclassified treatment:} assignment $Z$ does not determine $A$
+
+\noindent \textit{exclusion restriction:} ensure  $Z\not\to Y$, e.\,g.\ via double-blinding
+
+
+
+\begin{itemize}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt, leftmargin=1.5em]
+\setlength{\itemsep}{0pt}%
+\setlength{\parskip}{0pt}
+\item \textit{\textbf{per-protocol effect:}} either as-treated ($\to$ confounded) or restricted to protocol adhering individuals ($\to$ selection bias)
+\item \textit{\textbf{intention-to-treat effect}} ($\to$ measurement bias): advantages: $Z$ is randomized, preserves null (if exclusion restriction holds), $=$ underpowered $\alpha$-level test of the null (only if monotonicity; underpowered may be problematic if treatment safety is tested)
+\end{itemize}
 
 
 
 
-
-
-
-
-
-
-\paragraph{measurement bias} chapter 9
-
-\vspace{30em}
 
 \paragraph{random variabilty} chapter 10
 
