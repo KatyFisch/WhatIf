@@ -473,7 +473,33 @@ $\rightarrow$ conditioning on a collider could be unbiased if restricted to cert
 
 
 
-\paragraph{random variabilty} chapter 10
+\paragraph{\large Random Variabilty}  quantify uncertainty due to small $n$
+
+\noindent \textbf{CI}: e.\,g.\ Wald CI $=\hat{\theta} \pm 1.96 \times se(\hat{\theta})$, \textit{calibrated} if it contains 95\,\% of estimands ($>$: \textit{conservative}, $<$: \textit{anticonservative})
+
+\noindent \textit{large sample} CI: converge to 95\,\% vs.\ \textit{small-sample:} always valid
+
+
+
+\noindent \textit{honest:}\ $\exists n$ where coverage $\geq 95\,\%$,
+\textit{valid:}\ large-sample \& honest
+
+\noindent \textbf{inference:} either
+restrict inference to sample (randomization- based inference) or inference on super-population
+
+
+\noindent \textbf{super-population:} generally a fiction, but $\to$ simple statistical properties (where does the variability of the distribution come from: 
+assumption population is sampled from super-population)
+
+\noindent \textbf{conditionality principle:} inference should be performed conditional on ancillary statistics (e.g. L-A association) as $$\mathcal{L}(Y)=f(Y|A, L)f(A|L)f(L)$$
+
+\noindent\textit{exactly ancillary} $A,L$: $f(Y|A, L)$ depends on parameter of interest, but $f(A,L)$ does not share parameters with $f(Y|A, L)$
+
+
+\noindent\textit{approximately ancillary:} %todo p. 132
+also condition on approximate ancillaries (continuity principle) 
+
+\noindent \textbf{curse of dimensionality:} difficult to do conditionality principle
 
 
 
@@ -915,12 +941,42 @@ a closed form estimator exists for the linear case
 
 
 
-\subsection{Advanced Methods}
+\subsection{Doubly Robust Methods}
 
 \begin{multicols}{2}
 
+\paragraph{\large  Advantages} \citep{van2011targeted}
 
-\paragraph{\large TMLE} \textit{t}argeted \textit{m}inimum \textit{l}oss-based \textit{e}stimation
+\noindent \textbf{consistent} \textit{if either $\bar{Q}_0$ or $g_n$ are consistent (doubly robust)}:
+$$\forall \epsilon>0, P \in \mathcal{M}: \mathrm{Pr}_P\left[|\hat{\theta}_n-\theta(P)|>\epsilon\right] \to 0 \text{ as } n\to\infty$$
+
+\noindent \textbf{collaboratively doubly robust:} $g_n$ only needs predictors of $Y$, as it does not try to fit $g_0$ well, but improve the fit of $\bar{Q}^*_n$
+
+\noindent \textbf{asymptotic unbiasedness}
+\textit{if either $\bar{Q}_0$ or $g_0$ are consistent}, super learning makes $\bar{Q}_0$ and $g_n$ max.\ asymptotically unbiased
+
+\noindent \textbf{asymptotic efficiency} \textit{if both $\bar{Q}_0$ and $g_n$ are consistent}: achieves Cramer-Rao bound of minimum possible asymptotic variance (requires asymptotic unbiasedness)
+
+\noindent \textbf{asymptotic linearity} \textit{if either  $\bar{Q}_0$ or $g_n$ are consistent}: \newline means estimator behaves like empirical mean
+\begin{itemize}[leftmargin=*, itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
+\setlength{\itemsep}{0pt}%
+\setlength{\parskip}{0pt}
+\item bias converges to zero at rate smaller than $1/\sqrt{n}$
+\item for large $n$ estimator is approximately normally distributed
+\end{itemize}
+
+\paragraph{\large Influence Curve} \citep{van2011targeted}
+
+influence curve IC(O): how robust is estimator toward extreme values
+
+$mean IC(P_0) = 0$ and its finite variance is the asymptotic variance of the standard estimator  
+
+%todo  p.114
+
+
+\paragraph{\large TMLE} \citep{van2011targeted}
+
+\textit{t}argeted \textit{m}aximum \textit{l}ikelihood \textit{e}stimation
 $$O=(W, A, Y) \sim P_0$$
 
 \noindent target $\Psi(P_0) = \Psi(\bar{Q}_0, Q_{W,0}) = \psi_0$, 
@@ -954,7 +1010,9 @@ $$O=(W, A, Y) \sim P_0$$
 
 
 
-\noindent \textbf{advantages:} doubly robust (consistent if either outcome or treatment model is correctly specified), asymptotically efficient (if both are correct), substition estimator (more robust to outliers and sparsity)
+\noindent \textbf{advantages:} loss-based (does not only solve efficient influence curve estimating equation, but also uses a loss and working model preserving global constraints), well-defined (as a loss-based learner), substition estimator (respects global constraints $\to$ more robust to outliers and sparsity)
+
+
 
 \noindent \textbf{closed form inference based on the influence curve:}
 \begin{align*}IC_n^*(O_i) &= \overbrace{\left[\frac{\mathbbm{1}(A_i=1)}{g_n(1,W_i)} - \frac{\mathbbm{1}(A_i=0)}{g_n(0,W_i)}\right] \left[Y-\bar{Q}^1_n(A_i,W_i)\right]}^{a} \\ 
@@ -968,24 +1026,32 @@ TMLE sets the mean of the IC, $\overline{IC}_n$, to zero ($b$ has already mean z
 
 \noindent \textit{95\% CI:} $\psi_{TMLE,n} \pm z_{0.975}\frac{\sigma_n}{\sqrt{n}}$; p-value: $2\left[1-\Phi\left(\left|\frac{\psi_{TMLE,n}}{\sigma_n/\sqrt{n}}\right|\right)\right]$
 
+\paragraph{\large TMLE advanced} \citep{van2011targeted}
+
+\textit{t}argeted \textit{m}inimum \textit{l}oss-based \textit{e}stimation
 
 
+\noindent target parameter $\Psi: \mathcal{M} \to \mathbb{R}$, with $\mathcal{M}$ the statistical model used
 
+1. compute its pathwise derivative at $P$ and corresponding canonical gradient $D^*(P)$ (efficient influence curve: a function of $O$ with mean zero under $P$)
 
+2. define loss function $L()$ s.t. $P\to E_0L(P)$ is minimized at true $P_0$ (or just relevant $Q$)
+
+3. for a $P$ in model $\mathcal{M}$ define a parametric working model $\left\{P(\epsilon):\epsilon\right\}$ s.t. $P(\epsilon=0)=P$ and a ``score'' $\frac{d}{d\epsilon}L(P(\epsilon))$:  score (or linear combination of its components) equals $D^*(P)$ at $P$ (or just relevant $Q$)
+
+4. with initial estimate $P_n^0$, compute $\epsilon_n^0=\arg\min_\epsilon \sum_{i=1}^n L(P_n^0(\epsilon))(O_i)$, calculate first iteration $P^1_n=P_n^0(\epsilon_n^0)$, repeat until $\epsilon^k_n=0$ (or just relevant $Q$)
+
+5. get TMLE estimate $\psi_0$ as the substitution estimator pluggint $P^*_n$ into $\Psi$
+
+6. TMLE olves the efficient influence curve equation $0=\sum_{i=1}^n D^*(P^*_n)(O_i)$ $\to$ esymptotic linearity and efficiency
+
+%todo read chapter 5
 
 
 \ \\
-\noindent-----------------------------------------------------------------------------------------
+\noindent----------------------------------------------------------------------------------
 
 
-
-
-
-
-\ \\
-\noindent --------------------------------------
-
-\vspace{30 em}
 
 $\mathcal{L}(O) = \overbrace{\mathrm{Pr}(Y|A, W)}^{Q_Y}\overbrace{\mathrm{Pr}(A|W)}^{g}\overbrace{\mathrm{Pr}(W)}^{Q_W}$
 
@@ -1016,6 +1082,12 @@ MLE solves $\sum_{i=1}^n H(A_i, W_i)\left[Y_i-\bar{Q}^*_n(A_i,W_i)\right]=0$ whe
  
  influence curve based inference: 
  asymptotic linearity $\sqrt{n}\left(\psi_n^{TMLE} - \psi_0\right) \overset{D}{\rightarrow} \mathrm{N}(0,\sigma^2)$
+ 
+ \paragraph{\large AIPTW} \textit{a}ugmented \textit{i}nverse \textit{p}robability of \textit{t}reatment \textit{w}eighting
+ 
+ %todo pages 105-106
+ 
+ disadvantages \citep{van2011targeted}: ignores global constraints $\to$ often unstable under sparsity, sometimes not well-defined
  
 
 
