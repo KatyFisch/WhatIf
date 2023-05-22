@@ -496,8 +496,8 @@ assumption population is sampled from super-population)
 \noindent\textit{exactly ancillary} $A,L$: $f(Y|A, L)$ depends on parameter of interest, but $f(A,L)$ does not share parameters with $f(Y|A, L)$
 
 
-\noindent\textit{approximately ancillary:} %todo p. 132
-also condition on approximate ancillaries (continuity principle) 
+\noindent\textit{approximately ancillary:}  ... does not share \textit{\textbf{all}} parameters ... 
+continuity principle: also condition on approximate ancillaries
 
 \noindent \textbf{curse of dimensionality:} difficult to do conditionality principle
 
@@ -604,6 +604,62 @@ weights $\alpha_i$ are determined inside the cross-validation; for the predictio
 \noindent only feasible if enough data per stratum
 
 
+\paragraph{\large Outcome Regression} often assume no effect modification
+$$\mathrm{E}\left[Y^{a,c=0}|L\right] = \beta_0 + \beta_1 a + \beta_2 aL +\beta_3 L = \mathrm{E}\left[Y|A, C=0, L\right]$$
+
+\noindent faux marginal structural model as no IP weighting/$SW^A(L)=1$
+
+\noindent for ATE only $\beta_1,\beta_2$ of interest, the rest are \textit{nuisance parameters}
+
+\paragraph{\large Propensity Score Methods}
+$\mathrm{Pr}\left[A=1|L\right] =: \pi(L)$ 
+ 
+\noindent  $\Rightarrow A\indep L|\pi(L)$ (definition of a  balancing score); can be modelled  
+
+
+\begin{itemize}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt, leftmargin=1.5em]
+\setlength{\itemsep}{0pt}%
+\setlength{\parskip}{0pt}
+\item \textit{\textbf{stratification:}} create strata with similar $\pi(L)$ (e.\,g.\ deciles), but the average $\pi(L)$ might still be different in some strata
+\item \textit{\textbf{standardization:}} use $\pi(L)$ instead of $L$ to standardize
+\item \textit{\textbf{matching:}} find close ($\rightarrow$ bias-variance trade-off) values of $\pi(L)$, positivity issues arise often
+\end{itemize}
+
+\noindent propensity models don't need to predict well, just ensure exchangeability (good prediction leads to positivity problems)
+
+
+\paragraph{\large Instrumental Variable Estimation} $L$ unmeasured
+
+\noindent surrogate/proxy instruments can be used
+
+\noindent \textbf{instrumental conditions:} 
+\begin{enumerate}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt, leftmargin=1.5em]
+\setlength{\itemsep}{0pt}%
+\setlength{\parskip}{0pt}
+\item relevance condition: $Z \not\!\indep A$ ($Z$ is associated with $A$), weak association $\rightarrow$ weak instrument
+\item exclusion restriction: $Z$ affects $Y$ at most through $A$
+\begin{itemize}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt, leftmargin=1.5em]
+\setlength{\itemsep}{0pt}%
+\setlength{\parskip}{0pt}
+\item population level: $\mathrm{E}\left[Y^{z,a}\right] = \mathrm{E}\left[Y^{z',a}\right]$ (sometimes enough)
+\item individual level: $Y^{z,a}_i =  Y^{z',a}_i = Y^{a}_i$
+\end{itemize}
+\item exchangeability: $Z$ and $Y$ have no shared causes
+\begin{itemize}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt, leftmargin=1.5em]
+\setlength{\itemsep}{0pt}%
+\setlength{\parskip}{0pt}
+\item marginal: $Y^{a,z} \indep Z$ (typically enough)
+\item joint: $\left\{Y^{z, a};a\in\left[0,1\right],z\in\left[0,1\right]\right\} \indep Z$
+\end{itemize}
+\end{enumerate}
+
+
+
+\noindent \textbf{common instruments:} (physician's) general preference, access to/price of $A$, genetic factors (Mendelian randomization)
+
+%todo bounds
+
+%todo everything from 16.2 onwards
 
 
 
@@ -615,20 +671,10 @@ weights $\alpha_i$ are determined inside the cross-validation; for the predictio
 
 
 
-
-
-
-\paragraph{Outcome regression} chapter 15
-
-\vspace{20em}
-
-\paragraph{instrumental variable estimation} chapter 16
-
-\vspace{20em}
 
 \paragraph{causal survival analysis} chapter 17 (and technical point 22.3)
 
-\vspace{20em}
+
 
 
 
@@ -965,13 +1011,27 @@ $$\forall \epsilon>0, P \in \mathcal{M}: \mathrm{Pr}_P\left[|\hat{\theta}_n-\the
 \item for large $n$ estimator is approximately normally distributed
 \end{itemize}
 
-\paragraph{\large Influence Curve} \citep{van2011targeted}
+\paragraph{\large Influence Curve} \citep{hampel1974influence, van2011targeted}
+how robust is estimator toward extreme values?
+$$IC_{T,P_n}(O)=\lim_{\epsilon\to 0}\frac{T\left[\left(1-\epsilon\right)P_n + \epsilon\delta_O\right]-T(P_n)}{\epsilon}$$
+for estimator $T$ and distribution $P_n$, with $0<\epsilon<1$ and $\delta_O$ probability measure determined by the point mass 1
 
-influence curve IC(O): how robust is estimator toward extreme values
+%what is delta_x / delta_omega
+\noindent can also be rewritten as
+$$IC_{T,P_n}=\frac{d}{d\epsilon}T\left[\left(1-\epsilon\right)P_n + \epsilon\delta_O\right] = 
+\frac{d}{dP_n}T\left(\delta_O - P_n\right)$$
+last part is a \textit{\textbf{directional derivative}} at $P_n$ (empirical probability measure that puts mass $1/n$ on $O_i$) in direction $(\delta_O - P_n)$
 
-$mean IC(P_0) = 0$ and its finite variance is the asymptotic variance of the standard estimator  
 
-%todo  p.114
+
+
+\noindent $\boldsymbol{\overline{IC}(P_0)} = 0$ and $\mathrm{Var}(IC(P_0))$ is the asymptotic variance of the standard estimator  $\sqrt{n} (\psi_n - \psi_0)$, therefore $Var(\hat{\Psi}(P_n)) = \frac{Var_{IC}}{n}$
+
+\noindent \textbf{efficient IC:} an estimator is asymptotically efficient $\Leftrightarrow$ its influence curve is the efficient influence curve $IC(O)=D^*(O)$
+
+
+%todo Hampel paper
+
 
 
 \paragraph{\large TMLE} \citep{van2011targeted}
@@ -1025,6 +1085,25 @@ TMLE sets the mean of the IC, $\overline{IC}_n$, to zero ($b$ has already mean z
 \noindent \textit{standard error} of estimator: $\sigma_n = \sqrt{\frac{S^2(IC_n)}{n}}$
 
 \noindent \textit{95\% CI:} $\psi_{TMLE,n} \pm z_{0.975}\frac{\sigma_n}{\sqrt{n}}$; p-value: $2\left[1-\Phi\left(\left|\frac{\psi_{TMLE,n}}{\sigma_n/\sqrt{n}}\right|\right)\right]$
+
+
+\paragraph{\large LTMLE} longitudinal
+
+\noindent for $t=T,..., 1$:
+
+1. model $\mathrm{E}(Y_t|\bar{A}_{t-1}, \bar{L}_t)$ (fit on individuals that are uncensored and alive at $t-1$
+
+2. plug in $\bar{a}_{t-1}=\bar{d}_{t-1}$; use regression from 1 to predict outcome at time $t$, ie. $\bar{Y}_t^{\bar{d}_t}$ 
+
+3. update estimate
+with $Y_{t} = offset(step 2 result in t) + \epsilon \times clever covariate$: predict $\bar{Y}_t^{\bar{d}_t}$ (alternatively the clever covariate can be used as a weight)
+
+4. $\hat{\psi}_T =$ mean of $\bar{Y}_1^{\bar{d}_1}$
+
+
+
+
+
 
 \paragraph{\large TMLE advanced} \citep{van2011targeted}
 
