@@ -636,49 +636,104 @@ $\mathrm{Pr}\left[A=1|L\right] =: \pi(L)$
 \begin{enumerate}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt, leftmargin=1.5em]
 \setlength{\itemsep}{0pt}%
 \setlength{\parskip}{0pt}
-\item relevance condition: $Z \not\!\indep A$ ($Z$ is associated with $A$), weak association $\rightarrow$ weak instrument
-\item exclusion restriction: $Z$ affects $Y$ at most through $A$
-\begin{itemize}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt, leftmargin=1.5em]
+\item \textbf{\textit{relevance condition:}} $Z \not\!\indep A$, meaning $Z$ is associated with $A$ \newline (weak association (F-statistic $< 10$) $\rightarrow$ weak instrument)
+\item \textbf{\textit{exclusion restriction:}} $Z$ affects $Y$ at most through $A$
+\begin{enumerate}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt, leftmargin=1.5em]
 \setlength{\itemsep}{0pt}%
 \setlength{\parskip}{0pt}
 \item population level: $\mathrm{E}\left[Y^{z,a}\right] = \mathrm{E}\left[Y^{z',a}\right]$ (sometimes enough)
-\item individual level: $Y^{z,a}_i =  Y^{z',a}_i = Y^{a}_i$
-\end{itemize}
-\item exchangeability: $Z$ and $Y$ have no shared causes
-\begin{itemize}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt, leftmargin=1.5em]
+\item \textbf{\textit{individual level:}} $Y^{z,a}_i =  Y^{z',a}_i = Y^{a}_i$
+\end{enumerate}
+\item \textbf{\textit{exchangeability:}} $Z$ and $Y$ have no shared causes
+\begin{enumerate}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt, leftmargin=1.5em]
 \setlength{\itemsep}{0pt}%
 \setlength{\parskip}{0pt}
-\item marginal: $Y^{a,z} \indep Z$ (typically enough)
+\item \textbf{\textit{marginal:}} $Y^{a,z} \indep Z$ (typically enough)
 \item joint: $\left\{Y^{z, a};a\in\left[0,1\right],z\in\left[0,1\right]\right\} \indep Z$
-\end{itemize}
 \end{enumerate}
-
-
+\item  (not needed for an instrument, just the IV estimand below)
+\begin{enumerate}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt, leftmargin=1.5em]
+\setlength{\itemsep}{0pt}%
+\setlength{\parskip}{0pt}
+\item \textit{effect homogeneity:} (i) constant effect $A\rightarrow Y \,\, \forall i$ (ii) constant average effect $A\rightarrow Y \,\, \forall A$ (iii) no additive effect modifiers (iv) additive Z-A association is constant across $L$
+\item \textit{monotonicity:} $A^{z=1} \geq A^{z=0} \,\, \forall i$ (more credible than 4a)
+\end{enumerate}
+\end{enumerate}
 
 \noindent \textbf{common instruments:} (physician's) general preference, access to/price of $A$, genetic factors (Mendelian randomization)
 
-%todo bounds
+\noindent \textbf{bounds:} binary outcome ATE $\left[-1,1\right]$ (width 2)  $\overset{data}{\rightarrow}$ (width 1)
 
-%todo everything from 16.2 onwards
+\noindent \textit{natural bounds} need 2a,3a  (width $\mathrm{Pr}\left[A{=}1|Z{=}0\right] + \mathrm{Pr}\left[A{=}0|Z{=}1\right]$)
 
-
-
-
+\noindent \textit{sharp bounds} require 2a,3b (narrower than natural bounds)
 
 
+\noindent \textbf{IV estimand ATE}: intention-to-treat $\div$ measure of compliance
 
+\noindent (1,2b,3a,4a):  ATE;
+  (1,2b,3a,4b): ATE in compliers
 
+\noindent binary $Z$: $\frac{\mathrm{E}\left[Y|Z=1\right] - \mathrm{E}\left[Y|Z=0\right]}{\mathrm{E}\left[A|Z=1\right] - \mathrm{E}\left[A|Z=0\right]}$, continuous $Z$: $\frac{Cov(Y,Z)}{Cov(A,Z)}$; \newline can be calculated as \textit{two-stage-least-squares estimator:} \newline 1.\ $\mathrm{E}\left[A|Z\right]$ 2.\ $\mathrm{E}\left[Y|Z\right] = \beta_0 + \beta_1\hat{\mathrm{E}}\left[A|Z\right]$ 3. $\hat{\beta}_1$ is IV estimate
 
-
-
-
-\paragraph{causal survival analysis} chapter 17 (and technical point 22.3)
-
+\noindent \textbf{disadvantages:} often leads to wide CI, small violations of conditions can lead to large biases
 
 
 
+\paragraph{\large Causal Survival Analysis} time-to-event data
+
+\noindent additional censoring due to administrative end of follow-up
+
+\noindent \textbf{competing events} (often death): censoring (assume population with death abolished) or not (after death, chance of event is zero, but what is the effect of $A$?) $\rightarrow$ create composite event
+
+\noindent \textbf{survival quantities} $k$ is a time point, $T$ is time of event
+\begin{itemize}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt, leftmargin=1.5em]
+\setlength{\itemsep}{0pt}%
+\setlength{\parskip}{0pt}
+\item \textit{survival} at $k$: $\mathrm{Pr}\left[T>k\right] =:\mathrm{Pr}\left[D_k=0\right]$
+\item \textit{risk} at $k$: $1-\mathrm{Pr}\left[T>k\right] = \mathrm{Pr}\left[T \leq k\right] = \mathrm{Pr}\left[D_k=1\right]$
+\item \textit{hazard} at $k$: $\mathrm{Pr}\left[T=k|T> k{-}1\right] =\mathrm{Pr}\left[D_k=1|D_{k{-}1}=0\right]$, \textit{hazard ratio} is paradoxical due to  in-built selection bias
+\end{itemize}
+
+\noindent \textbf{modeling:} some options
+\begin{itemize}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt, leftmargin=1.5em]
+\setlength{\itemsep}{0pt}%
+\setlength{\parskip}{0pt}
+\item \textit{\textbf{Kaplan-Meier}} aka product limit formula (nonparametric): $\mathrm{Pr}\left[D_k=0\right] = \prod_{m=1}^k \mathrm{Pr}\left[D_m=0|D_{m-1}=0\right]$
+\item parametric e.\,g.\ log hazards model: 
+\begin{itemize}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt, leftmargin=1.5em]
+\setlength{\itemsep}{0pt}%
+\setlength{\parskip}{0pt}
+\item use \textit{\textbf{IP weigths}} $SW^A$ in structural marginal model $\mathrm{logit} \: \mathrm{Pr}\left[D_{k+1}^{a, \bar{c}=\bar{0}}=0|D_{k}^{a, \bar{c}=\bar{0}}=0\right] = \beta_{0,k} + \beta_1a+\beta_2ak $
+\item \textit{\textbf{standardize}} ($\prod_k 1-$) parametric hazards model $\mathrm{Pr}\left[D_{k+1}=1|D_k = 0, C_k=0, L, A\right]$ weighting across $L$
+\end{itemize}
+\item \textit{\textbf{structural nested cumulative failure time model (CFT):}}
+$\frac{\mathrm{Pr}\left[D_k^a=1|L,A\right]}{\mathrm{Pr}\left[D_k^{a=0}=1|L,A\right]} = \exp\left[\gamma_k(L,A;\psi)\right]$ (log-linear has no upper limit 1 $\rightarrow$ rare failure $\uparrow$; if $\downarrow$, use a survival model (CST)), use g-estimation like with AFT
+\item \textit{\textbf{accelerated failure time model (AFT)}} with g-estimation: $T_i^a/T_i^{a=0} = \exp(-\psi_1a -\psi_2aL_i)$, exchangeability for $C$ is guaranteed via artificial censoring (include only individuals who would not have been censored either way) 
+\end{itemize}
 
 
+
+\vspace{0.2em}
+\noindent \colorbox{lightgray!20!white}{\begin{minipage}{28em}
+
+
+
+
+\textbf{\textcolor{darkgray}{time-varying}} two options based on g-methods as examples
+
+\noindent \textbf{standardization} (plug-in estimate): risk is $\mathrm{Pr}\left[D_{k+1}^{\bar{a},\bar{c}=\bar{0}}=1\right] =$ \vspace{-0.5em}
+\begin{align*}%{3}
+ \sum_{\bar{l}_k}&\sum_{j=0}^k \mathrm{Pr}\left[D_{j+1}=0|\bar{A}_j=\bar{a}_j, \bar{L}_j=\bar{l}_j, \bar{D}_j=0\right] \times \\[-0.1em]
+\prod_{s=0}^j & \Big\{  \mathrm{Pr}\left[D_s=0|\bar{A}_{s-1}=\bar{a}_{s-1}, \bar{L}_{s-1}=\bar{l}_{s-1}, \bar{D}_{s-1}=0\right] \times  \\[-0.7em]
+   &   \,\,\,\,\, f\left(l_s|\bar{a}_{s-1}, \bar{l}_{s-1}, D_s=0\right)\Big\}
+\end{align*}
+\noindent \textbf{IP weighting:} fit a pooled logistic hazard model with time-varying weights
+$W^{\bar{A}}_k =\prod_{m=0}^k\frac{1}{f(A_m|\bar{A}_{m-1}, \bar{L}_m}$
+
+
+
+\end{minipage}}
 
 
 
@@ -1132,7 +1187,7 @@ with $Y_{t} = offset(step 2 result in t) + \epsilon \times clever covariate$: pr
 
 
 
-$\mathcal{L}(O) = \overbrace{\mathrm{Pr}(Y|A, W)}^{Q_Y}\overbrace{\mathrm{Pr}(A|W)}^{g}\overbrace{\mathrm{Pr}(W)}^{Q_W}$
+$\mathcal{L}(O) = \overbrace{\mathrm{Pr}(Y|A, W)}^{Q_Y}\overbrace{\mathrm{Pr}(A|W)}^{g}\overbrace{\mathrm{Pr}(W)}^{Q_W}$: $g$ itself is not needed as we intervene on treatment, but it can help improving the estimate of $Q_Y$
 
 
 
