@@ -1066,12 +1066,12 @@ $$\forall \epsilon>0, P \in \mathcal{M}: \mathrm{Pr}_P\left[|\hat{\theta}_n-\the
 \item for large $n$ estimator is approximately normally distributed
 \end{itemize}
 
-\paragraph{\large Influence Curve} \citep{hampel1974influence, van2011targeted}
-how robust is estimator toward extreme values?
+\paragraph{\large Influence Curve} \citep{hampel1974influence, van2011targeted, zepeda2022delta}
+how robust is an estimator?
 $$IC_{T,P_n}(O)=\lim_{\epsilon\to 0}\frac{T\left[\left(1-\epsilon\right)P_n + \epsilon\delta_O\right]-T(P_n)}{\epsilon}$$
-for estimator $T$ and distribution $P_n$, with $0<\epsilon<1$ and $\delta_O$ probability measure determined by the point mass 1
+for estimator $T$ and distribution $P_n$ with $0<\epsilon<1$ 
 
-%what is delta_x / delta_omega
+
 \noindent can also be rewritten as
 $$IC_{T,P_n}=\frac{d}{d\epsilon}T\left[\left(1-\epsilon\right)P_n + \epsilon\delta_O\right] = 
 \frac{d}{dP_n}T\left(\delta_O - P_n\right)$$
@@ -1084,9 +1084,34 @@ last part is a \textit{\textbf{directional derivative}} at $P_n$ (empirical prob
 
 \noindent \textbf{efficient IC:} an estimator is asymptotically efficient $\Leftrightarrow$ its influence curve is the efficient influence curve $IC(O)=D^*(O)$
 
+%todo Zepeda
 
-%todo Hampel paper
+\noindent estimand written as a function of $\theta$, i.e. $\psi := \phi(\theta)$, we know the variance of $\hat{\theta}$, but what is the variance of $\hat{\psi}$
 
+\noindent \textbf{classical delta method:} (under regularity conditions) distribution of $\phi(\hat{\theta})$ can be approximated as a normal with a variance proportional to $\phi$'s rate of change at $\theta$:
+$$\sqrt{n}\left(\phi(\hat{\theta}_n)-\phi(\mu)\right) \overset{\text{approx}}{\sim} \mathrm{N}\left(0, \phi'(\theta)\sigma^2\right)$$
+which allows for Wald-type CI: $\hat{\theta}_n \pm z_{1-\frac{\alpha}{2}}\sqrt{\frac{\phi'(\theta)\sigma^2}{n}}$
+(very similar to central limit theorem)
+
+\noindent \textbf{Taylor's approximation} requirements:
+\begin{itemize}[leftmargin=*, itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
+\item univariate $\phi$: differentiable at $\theta$
+\item multivariate $\phi$: $\exists$ $\partial_v\phi(\theta)$ (directional derivative)
+\item functional $\phi$ (function of functions): $\exists$ $\partial_v\phi(\theta)$ \& coincides with one-sided directional (Hadamard) derivatives ($=\nabla \phi(\theta)^Tv$)
+\end{itemize}
+
+\noindent first order Taylor \textcolor{gray}{(rearranged)}: $\phi(\hat{\theta}_n) \overset{\mathbin{\textcolor{gray}{-}}}{\approx} \phi(\theta) \overset{\mathbin{\textcolor{gray}{\approx}}}{+} \partial_{v:=\hat{\theta}-\theta}\phi(\theta)$
+
+\noindent \textbf{classical delta method:} if $\{r_n\}_{n=1}^\infty$ with $\lim_{n\to\infty} r_n=\infty$, where $r_n(\hat{\theta}_n -\theta)$ converges to $Z {\sim} \mathrm{N}(0,1)$ (e.\,g.\  $r_n{=}\sqrt{n/\sigma^2}$), then
+$$r_n\left(\phi(\hat{\theta}_n) -\phi(\theta)\right) \overset{\text{Taylor}}{\approx} \nabla \phi(\theta)^Tr_n(\hat{\theta}_n - \theta)    \overset{d}{\to} \nabla \phi(\theta)^TZ$$
+$\Rightarrow$ $\mathrm{Var}\left[\phi(\hat{\theta}_n) {-}\phi(\theta)\right] = \mathrm{Var}\left[\phi(\hat{\theta}_n)\right]\approx \frac{1}{r^2_n} \mathrm{Var}\left[\nabla\phi(\theta)^TZ\right]$
+
+\noindent \textbf{functional delta:} $r_n(\hat{\theta}_n {-} \theta) \overset{d}{\to}Z$ $\Rightarrow$ 
+$r_n\!\left(\phi(\hat{\theta}_n) {-} \phi(\theta)\right) \overset{d}{\to}\partial_Z\phi(\theta)$
+
+
+
+Influence function is a particular case of this derivative, interpretation: rate of change of functional in the direction of a new observation
 
 
 \paragraph{\large TMLE} \citep{van2011targeted}
