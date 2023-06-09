@@ -19,6 +19,7 @@
 %\usepackage{wrapfig}
 %\usepackage{verbatimbox}
 \usepackage{enumitem}
+\usepackage{framed}
 \usepackage[framemethod=TikZ]{mdframed}
 %\usepackage{bigints}
 \onehalfspacing
@@ -28,7 +29,6 @@
 
 %\usepackage{titlesec}
 \newcommand{\sectionbreak}{\clearpage}
-
 
 
 
@@ -340,7 +340,7 @@ $$V_m = f_m(pa_m, \epsilon_m)$$
 
 \noindent implies any variable can be intervened on
 
-\noindent aka finest causally interpreted structural treee graph (FCISTG)
+\noindent aka finest causally interpreted structural tree graph (FCISTG)
 
 \noindent \textbf{additional assumption} $\cap$ FCISTG $\Rightarrow$ causal Markov condition:
 \begin{itemize}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt, leftmargin=1.5em]
@@ -386,8 +386,15 @@ arrow means direct causal effect for at least one $i$, absence means sharp null 
 \noindent \textit{discovery:} process of learning the causal structure; requires faithfulness, but even with it is often impossible
 
 
+\paragraph{\large Noncausal DAGs} \citep{hernan2023causal}
+$Y^a$ has to be well-defined (identifiability), what about $Y^l$ (if $L\to Y$)? \newline
+if $Y^l$ is not well-defined, but $L \to Y$, then the graph is not causal
 
+\noindent \textbf{statistical interpretation:} only $A\to Y$ is causal, the rest simply encodes conditional independencies, \textit{but} why should a DAG corresponding to the study variables even exist then?
 
+\noindent \textbf{hidden factor:} $L$ is only a surrogate for $H$, with $Y^h$ well-defined, however, $L$ being a surrogate can introduce bias
+
+\noindent \textbf{pragmatic approach:} ``cause'' as a primary concept which does not need explanation in terms of well-defined interventions (approach is in need of mathematical theory)
 
 
 
@@ -397,7 +404,7 @@ arrow means direct causal effect for at least one $i$, absence means sharp null 
 $A$ turns into $A|a$, the left (right) side inherits incoming (outgoing) arrows (intervention with $A=a$); all outcomes of $A$ get a superscript $a$, e.\,g. $Y^a$; more than one intervention possible, dynamic strategies require additional arrows from $L$ to $a$
 
 
-\noindent $A$ and $Y^a$ are d-separated $\rightarrow$ $Y^a \indep A|L$ (for FFRCISTG)
+\noindent $A$ and $Y^a$ are d-separated  for L $\rightarrow$ $Y^a \indep A|L$ (for FFRCISTG)
 
 
 
@@ -468,6 +475,11 @@ $\rightarrow$ conditioning on a collider could be unbiased if restricted to cert
 \item \textit{\textbf{per-protocol effect:}} either as-treated ($\to$ confounded) or restricted to protocol adhering individuals ($\to$ selection bias)
 \item \textit{\textbf{intention-to-treat effect}} ($\to$ measurement bias): advantages: $Z$ is randomized, preserves null (if exclusion restriction holds), $=$ underpowered $\alpha$-level test of the null (only if monotonicity; underpowered may be problematic if treatment safety is tested)
 \end{itemize}
+
+\noindent
+ sometimes mismeasurement doesn't matter as the measurement 
+ is of interest \citep{hernan2023causal}
+
 
 
 
@@ -1084,7 +1096,7 @@ last part is a \textit{\textbf{directional derivative}} at $P_n$ (empirical prob
 
 \noindent \textbf{efficient IC:} an estimator is asymptotically efficient $\Leftrightarrow$ its influence curve is the efficient influence curve $IC(O)=D^*(O)$
 
-%todo Zepeda
+
 
 \noindent estimand written as a function of $\theta$, i.e. $\psi := \phi(\theta)$, we know the variance of $\hat{\theta}$, but what is the variance of $\hat{\psi}$
 
@@ -1097,21 +1109,41 @@ which allows for Wald-type CI: $\hat{\theta}_n \pm z_{1-\frac{\alpha}{2}}\sqrt{\
 \begin{itemize}[leftmargin=*, itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
 \item univariate $\phi$: differentiable at $\theta$
 \item multivariate $\phi$: $\exists$ $\partial_v\phi(\theta)$ (directional derivative)
-\item functional $\phi$ (function of functions): $\exists$ $\partial_v\phi(\theta)$ \& coincides with one-sided directional (Hadamard) derivatives ($=\nabla \phi(\theta)^Tv$)
+\item functional $\phi$ (function of functions): $\exists$ $\partial_v\phi(\theta)$ \& coincides with one-sided directional (Hadamard) derivatives ($\overset{*}{=}\nabla \phi(\theta)^Tv$)
 \end{itemize}
 
-\noindent first order Taylor \textcolor{gray}{(rearranged)}: $\phi(\hat{\theta}_n) \overset{\mathbin{\textcolor{gray}{-}}}{\approx} \phi(\theta) \overset{\mathbin{\textcolor{gray}{\approx}}}{+} \partial_{v:=\hat{\theta}-\theta}\phi(\theta)$
+\noindent first order Taylor \textcolor{gray}{(rearranged$^\dagger$)}: $\phi(\hat{\theta}_n) \overset{\mathbin{\textcolor{gray}{-}}}{\approx} \phi(\theta) \overset{\mathbin{\textcolor{gray}{\approx}}}{+} \partial_{v:=\hat{\theta}-\theta}\phi(\theta)$
 
 \noindent \textbf{classical delta method:} if $\{r_n\}_{n=1}^\infty$ with $\lim_{n\to\infty} r_n=\infty$, where $r_n(\hat{\theta}_n -\theta)$ converges to $Z {\sim} \mathrm{N}(0,1)$ (e.\,g.\  $r_n{=}\sqrt{n/\sigma^2}$), then
-$$r_n\left(\phi(\hat{\theta}_n) -\phi(\theta)\right) \overset{\text{Taylor}}{\approx} \nabla \phi(\theta)^Tr_n(\hat{\theta}_n - \theta)    \overset{d}{\to} \nabla \phi(\theta)^TZ$$
+$$r_n\left(\phi(\hat{\theta}_n) -\phi(\theta)\right) \overset{\mathbin{\textcolor{gray}{\dagger}}*}{\approx} \nabla \phi(\theta)^Tr_n(\hat{\theta}_n - \theta)    \overset{d}{\to} \nabla \phi(\theta)^TZ$$
 $\Rightarrow$ $\mathrm{Var}\left[\phi(\hat{\theta}_n) {-}\phi(\theta)\right] = \mathrm{Var}\left[\phi(\hat{\theta}_n)\right]\approx \frac{1}{r^2_n} \mathrm{Var}\left[\nabla\phi(\theta)^TZ\right]$
 
 \noindent \textbf{functional delta:} $r_n(\hat{\theta}_n {-} \theta) \overset{d}{\to}Z$ $\Rightarrow$ 
 $r_n\!\left(\phi(\hat{\theta}_n) {-} \phi(\theta)\right) \overset{d}{\to}\partial_Z\phi(\theta)$
 
+\noindent \textbf{influence function:} $\psi = \phi(\mathbb{P}_X)$ is a functional
+
+%\noindent $\hat{\psi} = \phi(\hat{\theta}) = \phi(\hat{\mathbb{P}}_X) $ with $\hat{\mathbb{P}}_X$ empirical PMF (plug-in estimator)
+
+\noindent estimations rate of change for $\mathbb{P}_X$ to $Q$, where $Q=\mathbbm{1}_{\{Y\}}$
+$$\mathrm{IF}_{\phi, \mathbb{P}_X}(Y) := \partial_{Q-\mathbb{P}_X}\phi(\mathbb{P}_X) =\lim_{h\downarrow 0}\frac{\phi\left((1-h)\mathbb{P}_X + hQ\right)-\phi(\mathbb{P}_X)}{h},$$
 
 
-Influence function is a particular case of this derivative, interpretation: rate of change of functional in the direction of a new observation
+
+\noindent \textit{interpretation:} rate of change if distribution deviates from $\mathbb{P}_X$ to $Q=$  one observation $Y$, assigns probability 1 to $X$ taking  value $Y$ 
+
+\noindent \textit{use delta:} $\phi(\hat{\mathbb{P}}_X) \approx \phi(\mathbb{P}_X) + \mathrm{IF}_{\phi, \mathbb{P}_X}(Y)$, if $(\hat{\theta}_n - \theta) \overset{n\to\infty}{\sim} \mathrm{N}(.,.)$
+$$\hat{\psi}_n - \psi = \phi(\hat{\theta}_n)-\phi(\theta) \overset{\text{approx}}{\sim} \mathrm{N}\left(0, \mathrm{Var}[\mathrm{IF}_{\phi, \mathbb{P}_X}(Y)]\right),$$
+where
+$\widehat{\mathrm{Var}}[\mathrm{IF}_{\phi, \mathbb{P}_X}(Y)] = \frac{1}{n}\sum_{i=1}^n \left(\mathrm{IF}_{\phi, \mathbb{P}_X}(X_i)\right)^2$, which is the classical $S^2$ estimator since the mean is known ($=0$)
+
+\noindent \textbf{using the delta method (general case)}
+\begin{enumerate}[leftmargin=*, itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
+\item determine asymptotic distribution of $v:=r_n(\hat{\theta}_n -\theta)$
+\item define $\phi$ and compute Hadamard derivative
+\item multiply asymptotic distribution with Hadamard derivative, then estimate the variance
+\end{enumerate}
+
 
 
 \paragraph{\large TMLE} \citep{van2011targeted}
@@ -1327,7 +1359,7 @@ therefore: \newline if last two independences don't hold, one assumption is viol
 
 
 
-\def\bibpreamble{\textit{If no citation is given, the information is taken from the book \citep{hernan2020causal}} \vspace{1.5em}}
+\def\bibpreamble{\textit{If no citation is given, the information is taken from  the book \citep{hernan2020causal}} \vspace{1.5em}}
 
 \bibliographystyle{apalike} 
 \bibliography{cite} 
