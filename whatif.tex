@@ -30,6 +30,9 @@
 %\usepackage{titlesec}
 \newcommand{\sectionbreak}{\clearpage}
 
+\setcounter{tocdepth}{4}
+\titleformat*{\paragraph}{\large\bfseries}
+
 
 
 %\allowdisplaybreaks
@@ -133,7 +136,7 @@
 
 \begin{multicols}{2}
 
-\paragraph{\large Causal Roadmap} \citep{petersen2014causal} 
+\paragraph{Causal Roadmap} \citep{petersen2014causal} 
 systematic approach linking causality to statistical procedures
 
 \noindent \textbf{1. Specifying Knowledge.} structural causal model (unifying counterfactual language, structural equations, \& causal graphs): a set of possible data-generating processes, expresses background knowledge and its limits
@@ -159,7 +162,7 @@ systematic approach linking causality to statistical procedures
 \noindent \textbf{7. Interpret.} hierarchy: statistical, counterfactual, feasible intervention, randomized trial
 
 
-\paragraph{\large Average Causal Effect} $\mathrm{E}\left[Y^{a=1}\right] \neq \mathrm{E}\left[Y^{a=0}\right]$
+\paragraph{Average Causal Effect} $\mathrm{E}\left[Y^{a=1}\right] \neq \mathrm{E}\left[Y^{a=0}\right]$
 \begin{align*}
 \mathrm{E}\left[Y^{a}\right]   &=  \sum_yyp_{Y^a}(y)  &\text{(discrete)}\\
    &=  \int yf_{Y^a}(y)dy &\text{(continuous)}
@@ -198,7 +201,7 @@ $a,y$: particular values; counterfactual $Y^{a=1}$: $Y$ under treatment $a=1$
 
 
 
-\paragraph{\large Target Trial} emulating an ideal randomized experiment
+\paragraph{Target Trial} emulating an ideal randomized experiment
 
 \noindent explicitly formulate target trial \& show how it is emulated $\rightarrow$ \newline less vague causal question, helps spot issues
 
@@ -240,7 +243,7 @@ earliest, random $t$, all $t$ (adjust variance with bootstrapping)
 
 
 
-\paragraph{\large Identifiability Conditions} hold in ideal experiments
+\paragraph{Identifiability Conditions} hold in ideal experiments
 
 \noindent \textbf{consistency} counterfactuals correspond to data $Y=Y^A$: \newline
  if $A=a$, then $Y^a=Y$ for each individual
@@ -281,7 +284,7 @@ alternative definition: $ \mathrm{Pr}\left[A=1|Y^{a=0}, L\right] = \mathrm{Pr}\l
 
 
 
-\paragraph{\large Effect Modification} $A$ on $Y$ varies across levels of $V$
+\paragraph{Effect Modification} $A$ on $Y$ varies across levels of $V$
 
 \noindent null average causal effect $\neq$ null causal effect per subgroup
 
@@ -307,7 +310,7 @@ qualitative (effect in opposite directions)/quantitative, surrogate/causal
 
 
 
-\paragraph{\large Interaction} effects of joint interventions $A$ and $E$ 
+\paragraph{Interaction} effects of joint interventions $A$ and $E$ 
 $$\mathrm{Pr}\left[Y^{1,1}{=}1\right] - \mathrm{Pr}\left[Y^{0,1}{=}1\right] \neq \mathrm{Pr}\left[Y^{1,0}{=}1\right] - \mathrm{Pr}\left[Y^{0,0}{=}1\right]$$
 $A$ and $E$ have equal status and could also be considered a combined treatment $AE$, exchangeability for both is needed
 \textit{additive scale} (above): ``$>$'' superadditive and ``$<$'' subadditive;
@@ -333,7 +336,7 @@ $A$ and $E$ have equal status and could also be considered a combined treatment 
 \textit{sufficient cause interaction:} $A$ and $E$ appear together in a minimal sufficient cause
 
 
-\paragraph{\large NPSEM} \textit{n}on\textit{p}aramentric \textit{s}tructural \textit{e}quation \textit{m}odel
+\paragraph{NPSEM} \textit{n}on\textit{p}aramentric \textit{s}tructural \textit{e}quation \textit{m}odel
 $$V_m = f_m(pa_m, \epsilon_m)$$
 
 \noindent counterfactuals are obtained recursively, e.\,g.\  $V_3^{v_1} = V_3^{v_1, V_2^{v_1}}$
@@ -355,7 +358,7 @@ $$V_m = f_m(pa_m, \epsilon_m)$$
 \noindent NPSEM-IE assume crossworld independencies $\to$ unverifiable
 
 
-\paragraph{\large Causal DAG} draw assumptions before conclusions
+\paragraph{Causal DAG} draw assumptions before conclusions
 
 
 \noindent \textit{rules:}
@@ -386,7 +389,7 @@ arrow means direct causal effect for at least one $i$, absence means sharp null 
 \noindent \textit{discovery:} process of learning the causal structure; requires faithfulness, but even with it is often impossible
 
 
-\paragraph{\large Noncausal DAGs} \citep{hernan2023causal}
+\paragraph{Noncausal DAGs} \citep{hernan2023causal}
 $Y^a$ has to be well-defined (identifiability), what about $Y^l$ (if $L\to Y$)? \newline
 if $Y^l$ is not well-defined, but $L \to Y$, then the graph is not causal
 
@@ -398,7 +401,7 @@ if $Y^l$ is not well-defined, but $L \to Y$, then the graph is not causal
 
 
 
-\paragraph{\large SWIGs} \textit{s}ingle \textit{w}orld \textit{i}ntervention \textit{g}raphs
+\paragraph{SWIGs} \textit{s}ingle \textit{w}orld \textit{i}ntervention \textit{g}raphs
 
 \noindent \textbf{counterfactual graphic approach:}
 $A$ turns into $A|a$, the left (right) side inherits incoming (outgoing) arrows (intervention with $A=a$); all outcomes of $A$ get a superscript $a$, e.\,g. $Y^a$; more than one intervention possible, dynamic strategies require additional arrows from $L$ to $a$
@@ -408,7 +411,7 @@ $A$ turns into $A|a$, the left (right) side inherits incoming (outgoing) arrows 
 
 
 
-\paragraph{\large Confounding} bias due to common cause of $A$ \& $Y$ \textbf{\textit{not in}} $L$
+\paragraph{Confounding} bias due to common cause of $A$ \& $Y$ \textbf{\textit{not in}} $L$
 
 \noindent randomization prevents confounding
 
@@ -432,7 +435,7 @@ $A$ turns into $A|a$, the left (right) side inherits incoming (outgoing) arrows 
 $$\sum_m \mathrm{Pr}\left[M=m|A=a\right] \sum_{a'} \mathrm{Pr}\left[Y=1|M=m, A=a'\right]\mathrm{Pr}\left[A=a'\right]$$
 
 
-\paragraph{\large Selection Bias} bias due to common effect of $A$ \& $Y$ \textbf{\textit{in}} $L$
+\paragraph{Selection Bias} bias due to common effect of $A$ \& $Y$ \textbf{\textit{in}} $L$
 
  \noindent $=$ conditioning on collider (can't be fixed by randomization)
 
@@ -450,7 +453,7 @@ if $Y=0$ is conditionally independent, then $Y=1$ can't be as $\mathrm{Pr}\left[
 $\rightarrow$ conditioning on a collider could be unbiased if restricted to certain levels ($Y=0$)
 
 
-\paragraph{\large Measurement Bias} aka information bias 
+\paragraph{Measurement Bias} aka information bias 
 
 \noindent measurements $X^*$ of variables $X$ can be included in DAG
 
@@ -485,7 +488,7 @@ $\rightarrow$ conditioning on a collider could be unbiased if restricted to cert
 
 
 
-\paragraph{\large Random Variabilty}  quantify uncertainty due to small $n$
+\paragraph{Random Variabilty}  quantify uncertainty due to small $n$
 
 \noindent \textbf{CI}: e.\,g.\ Wald CI $=\hat{\theta} \pm 1.96 \times se(\hat{\theta})$, \textit{calibrated} if it contains 95\,\% of estimands ($>$: \textit{conservative}, $<$: \textit{anticonservative})
 
@@ -514,7 +517,81 @@ continuity principle: also condition on approximate ancillaries
 \noindent \textbf{curse of dimensionality:} difficult to do conditionality principle
 
 
+\vspace{1.5em}
 
+\noindent \colorbox{lightgray!20!white}{\begin{minipage}{28em}
+
+
+
+\paragraph{Time-Varying Treatments} compare 2 treatments
+
+\noindent treatment history up to $k$: $\bar{A}_k=(A_0, A_1, ..., A_k)$
+
+\noindent shorthand: always treated $\bar{A} = \bar{1}$, never treated $\bar{A} = \left(\bar{0}\right)$
+
+ \textbf{static strategy:} $g=\left[g_0(\bar{a}_{-1}), ..., g_K(\bar{a}_{K-1})\right]$
+
+ \textbf{dynamic strategy:} $g=\left[g_0(\bar{l}_0), ..., g_K(\bar{l}_K)\right]$
+
+ \textbf{stochastic strategy:} non-deterministic $g$
+
+\noindent optimal strategy is where $\mathrm{E}\left[Y^g\right]$ is maximized (if high is good)
+
+\end{minipage}}
+
+\vspace{1.5em}
+
+\noindent \colorbox{lightgray!20!white}{\begin{minipage}{28em}
+
+
+\paragraph{Sequential Identifiability} sequential versions of
+
+ \textbf{exchangability:}
+$Y^g \indep A_k| \bar{A}_{k-1} \,\,\, \forall g, k=0,1,...,K$
+
+\textit{conditional exchangeability:}
+$$\left(Y^g, L^g_{k+1}\right) \indep A_k| \bar{A}_{k-1} {=} g\left(\bar{L}_k\right), \bar{L}^k \,\,\, \forall g, k=0,1,...,K$$
+
+ \textbf{positivity:} $f_{\bar{A}_{k-1},\bar{L}_k}(\bar{a}_{k-1},\bar{l}_k)\neq 0 \,\, \Rightarrow$
+$$ f_{A_k|\bar{A}_{k-1},\bar{L}_k}(a_k|\bar{a}_{k-1},\bar{l}_k)>0 \,\, \forall \left(\bar{a}_{k-1},\bar{l}_k\right)$$
+
+ \textbf{consistency:} 
+\begin{align*}
+Y^{\bar{a}} = Y^{\bar{a}^*} & \, \text{ if } {\bar{a}} = {\bar{a}^*};  & \,
+Y^{\bar{a}} = Y & \, \text{ if } {\bar{A}} = {\bar{a}};  \\
+\bar{L}^{\bar{a}}_k = \bar{L}^{\bar{a}^*}_k & \, \text{ if } {\bar{a}_{k-1}} = {\bar{a}^*_{k-1}}; & \,
+\bar{L}^{\bar{a}}_k = \bar{L}_k & \, \text{ if } {\bar{A}_{k-1}} = {\bar{a}_{k-1}}
+\end{align*}
+
+
+\noindent \textbf{generalized backdoor criterion} (static strategy):\,all backdoors into $A_k$ (except through future treatment) are blocked $\forall k$ 
+
+
+\noindent \textbf{static sequential exchangeability for $\boldsymbol{Y^{\bar{a}}}$}
+$$Y^{\bar{a}} \indep A_k| \bar{A}_{k-1}, \bar{L}_k \,\,\,\,\, \text{ for } k=0,1,...,K$$
+use SWIGs to visually check d-separation
+
+\noindent \textbf{time-varying confounding} $\mathrm{E}\left[Y^{\bar{a}}|L_0\right] \neq \mathrm{E}\left[Y|A=\bar{a}, L_0\right]$
+
+
+\end{minipage}}
+
+\vspace{1.5em}
+
+\noindent \colorbox{lightgray!20!white}{\begin{minipage}{28em}
+
+
+\paragraph{Treatment-Confounder Feedback} $A_0 \rightarrow L_1 \rightarrow A_1$: an unmeasured $U$ influencing $L_1$ and $Y$ turns $L_1$ into a collider;
+
+\noindent traditional adjustment (e.\,g.\ stratification) biased: use g-methods
+
+\noindent \textbf{g-null test} sequential exchangeability \& sharp null true $\Rightarrow$ $Y^g {=} Y \,\, \forall g$ $\,\,\,\,\Rightarrow \,\,\,\,$ $Y {\indep} A_0|L_0\,\,$ \& \,\,$Y {\indep} A_1|A_0, L_0, L_1$;
+therefore: \newline if last two independences don't hold, one assumption is violated
+
+\noindent \textbf{g-null theorem:} $\mathrm{E}\left[Y^g\right] = \mathrm{E}\left[Y\right]$, if the two independences hold \newline($\Rightarrow$ sharp null: only if strong faithfulness (no effect cancelling))
+
+
+\end{minipage}}
 
 \end{multicols}
 
@@ -529,7 +606,7 @@ continuity principle: also condition on approximate ancillaries
 
 \begin{multicols}{2}
 
-\paragraph{\large Modeling} data are a sample from the target population \vspace{0.4em}
+\paragraph{Modeling} data are a sample from the target population \vspace{0.4em}
 
 \noindent \hspace{0.9em}\begin{tabular}{l l l}
 \textbf{\it estimand:} & quantity  of interest, & e.\,g.\ $\mathrm{E}\left[Y|A=a\right]$ \\
@@ -545,7 +622,7 @@ continuity principle: also condition on approximate ancillaries
 
 \noindent \textbf{bias-variance trade-off:} \newline wiggliness $\uparrow$ $\rightarrow$ misspecification bias $\downarrow$, CI width $\uparrow$
 
-\paragraph{\large Variable Selection} can induce bias if $L$ includes: 
+\paragraph{Variable Selection} can induce bias if $L$ includes: 
 
 \hspace{-0.2em}\vspace{-1em}
 \begin{tabular}{l l }
@@ -560,25 +637,7 @@ continuity principle: also condition on approximate ancillaries
 
 
 
-
-
-\paragraph{\large Machine Learning} $L$ is high-dimensional
-
-\noindent use lasso or ML for IP weighting/standardization
-
-\noindent \textbf{\textit{but:}} ML does not guarantee elimination of confounding and has largely unknown statistical properties
-
-\noindent $\rightarrow$ \textbf{doubly robust estimator:} consistent if bias  $< \frac{1}{\sqrt{n}}$
-
-\noindent \textit{sample splitting:} train estimators on training sample, use resulting estimators for doubly robust method on estimation sample (CIs on estimation sample are valid, but $n$ halved)
-
-\noindent \textit{cross-fitting:} do again the other way round, average the two estimates, get CI via bootstrapping
-
-\noindent \textbf{problems:} unclear choice of algorithm, is bias small enough?
-
-
-
-\paragraph{\large Super Learning} \citep{van2007super, van2011targeted}
+\paragraph{Super Learning} \citep{van2007super, van2011targeted}
 
 \noindent \textbf{oracle selector:} select best estimator of set of learners $Z_i$
 
@@ -592,6 +651,15 @@ weights $\alpha_i$ are determined inside the cross-validation; for the predictio
 \noindent   can be cross-validated itself to check for overfitting (unlikely)
 
 
+\paragraph{Marginal Structural Models} association is causation in the IP weighted pseudo-population 
+$$\text{associational model } \mathrm{E}\left[Y|A\right] = \text{ causal model } \mathrm{E}\left[Y^a\right]$$
+
+\noindent \textit{step 1:} estimate/model $f\left[A|L\right]$ (and $f\left[A\right]$) $\rightarrow$ get $(S)W^A$
+
+\noindent \textit{step 2:} estimate regression parameters for pseudo-population
+
+\noindent \textbf{effect modification} variables $V$ can be included (e.\,g.\ $\beta_0+\beta_1 a+\beta_2 V a + \beta_3 V$; technically not marginal anymore), $SW^A(V) = \frac{f\left[A|V\right]}{f\left[A|L\right]}$ more efficient than $SW^A$
+ 
 
 
 
@@ -611,19 +679,19 @@ weights $\alpha_i$ are determined inside the cross-validation; for the predictio
 
 
 
-\paragraph{\large Stratification}  calculate risk for each stratum of $L$
+\paragraph{Stratification}  calculate risk for each stratum of $L$
 
 \noindent only feasible if enough data per stratum
 
 
-\paragraph{\large Outcome Regression} often assume no effect modification
+\paragraph{Outcome Regression} often assume no effect modification
 $$\mathrm{E}\left[Y^{a,c=0}|L\right] = \beta_0 + \beta_1 a + \beta_2 aL +\beta_3 L = \mathrm{E}\left[Y|A, C=0, L\right]$$
 
 \noindent faux marginal structural model as no IP weighting/$SW^A(L)=1$
 
 \noindent for ATE only $\beta_1,\beta_2$ of interest, the rest are \textit{nuisance parameters}
 
-\paragraph{\large Propensity Score Methods}
+\paragraph{Propensity Score Methods}
 $\mathrm{Pr}\left[A=1|L\right] =: \pi(L)$ 
  
 \noindent  $\Rightarrow A\indep L|\pi(L)$ (definition of a  balancing score); can be modelled  
@@ -640,7 +708,7 @@ $\mathrm{Pr}\left[A=1|L\right] =: \pi(L)$
 \noindent propensity models don't need to predict well, just ensure exchangeability (good prediction leads to positivity problems)
 
 
-\paragraph{\large Instrumental Variable Estimation} $L$ unmeasured
+\paragraph{Instrumental Variable Estimation} $L$ unmeasured
 
 \noindent surrogate/proxy instruments can be used
 
@@ -690,9 +758,12 @@ $\mathrm{Pr}\left[A=1|L\right] =: \pi(L)$
 
 \noindent \textbf{disadvantages:} often leads to wide CI, small violations of conditions can lead to large biases
 
+\noindent \textbf{regression discontinuity design:} if threshold in $L$ exists which determines $A$ perfectly + assumption of continuity in $L$ $\to$ jump in $Y$ at threshold is the causal effect (if no effect modification by $L$); a fuzzy variant also exists
+\citep{hernan2023causal}
 
 
-\paragraph{\large Causal Survival Analysis} time-to-event data
+
+\paragraph{Causal Survival Analysis} time-to-event data
 
 \noindent additional censoring due to administrative end of follow-up
 
@@ -762,21 +833,52 @@ $W^{\bar{A}}_k =\prod_{m=0}^k\frac{1}{f(A_m|\bar{A}_{m-1}, \bar{L}_m}$
 \begin{multicols}{2}
 
 
-\paragraph{\large G-Methods} \textit{g}eneralized treatment contrasts:
+\paragraph{G-Methods} \textit{g}eneralized treatment contrasts:
 adjust for (surrogate) confounders $L$
-
-
 
 
 \begin{itemize}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
 \setlength{\itemsep}{0pt}%
 \setlength{\parskip}{0pt}
-\item \textbf{standardization} two types of g-formula
-\item \textbf{IP weighting} also g-formula
-\item \textbf{g-estimation:} not needed unless longitudinal
+\item \textbf{\textit{standardization:}} two types of g-formula
+\item \textbf{\textit{IP weighting:}} also g-formula
+\item \textbf{\textit{g-estimation:}} not needed unless longitudinal
 \end{itemize}
 
-\paragraph{\large Standardization} plug-in (or parametric if so) g-formula
+\noindent \textbf{standardization and IP weighting}
+are equivalent, \textit{\textbf{but}} if modeled, different ``no misspecification'' assumptions: outcome model (standardization), treatment model (IP weighting)
+
+
+\noindent \textbf{censoring:} measure joint effect of $A$ and $C$ with
+$\mathrm{E}\left[Y^{a, c=0}\right]$
+
+\noindent \textit{standardization} $\mathrm{E}\left[Y|A=a\right] = \int \mathrm{E}\left[Y|L{=}l, A{=}a, C{=}0\right]dF_L\left[l\right]$\vspace{0.2em}
+
+\noindent \textit{IP weights}\vspace{-1.30em}
+
+\hspace{3.5em}\begin{tabular}{l l l}
+$W^{A,C}=W^A \times W^C$  &(uses $n$) & or \\
+$SW^{A,C}=SW^A \times SW^C$ &(uses $n^{c=0}$) & 
+\end{tabular}\vspace{0.3em}
+
+\noindent \textit{g-estimation} only adjusts for confounding  $\rightarrow$ use IP weights
+
+\vspace{0.2em}
+\noindent \colorbox{lightgray!20!white}{\begin{minipage}{28em}
+
+\textbf{\textcolor{darkgray}{time-varying}} censoring $\bar{C}$: monotonic type of missing data 
+
+\noindent \textbf{standardization}: $\!\!\!\displaystyle\int\!\! f(y|\bar{a}, \bar{c}{=}\bar{0}, \bar{l}) \prod\limits_{k=0}^K dF\left(l_k|\bar{a}_{k-1}, c_{k-1} {=} 0, \bar{l}_{k-1}\right)$
+
+\noindent \textbf{IP weighting}:
+\noindent $$\textcolor{gray}{S}W^{\bar{C}}= \prod_{k=1}^{K+1}\frac{1\textcolor{gray}{\cdot \mathrm{Pr}\left(C_k=0|\bar{A}_{k-1}, C_{k-1}=0\right)}}{\mathrm{Pr}\left(C_k=0|\bar{A}_{k-1}, C_{k-1}=0, \bar{L}_k\right)} $$
+
+\end{minipage}}
+
+
+
+
+\paragraph{Standardization} plug-in (or parametric if so) g-formula
 $$\mathrm{E}\left[Y^{a}\right] = \overbrace{\mathrm{E}\left[\mathrm{E}\left[Y|A{=}a,L{=}l\right]\right]}^{\text{conditional expectation}} =  \overbrace{ \textstyle{\int} \mathrm{E}\left[Y|L=l, A=a\right]f_L\left[l\right]dl}^{\text{joint density estimator}} $$
 weighted average of stratum-specific risks; unknowns can be estimated non-parametrically or modeled
 
@@ -786,9 +888,6 @@ weighted average of stratum-specific risks; unknowns can be estimated non-parame
 
 \vspace{0.2em}
 \noindent \colorbox{lightgray!20!white}{\begin{minipage}{28em}
-
-
-
 
 \textbf{\textcolor{darkgray}{time-varying}} standardize over all possible $\bar{l}$-histories
 
@@ -802,6 +901,8 @@ weighted average of stratum-specific risks; unknowns can be estimated non-parame
 \end{align*}
 
 \noindent for \textit{stochastic strategies} multiply with $\prod_{k=0}^K f^{int} \left(a_k|\bar{a}_{k-1}, \bar{l}_{k}\right) $
+
+
 
 
 \begin{mdframed}[linecolor=black!20!,
@@ -821,18 +922,18 @@ at $k>0$: set $\bar{A} = \bar{a}$, \textit{draw} from models estimated in 1.
 \item calculate mean of $\hat{Y}_{K,i}^{\bar{a}}$ (bootstrap for CI)
 \end{enumerate}
 
-
-
 \end{mdframed}
+
+
+\end{minipage}}
+
+\noindent \colorbox{lightgray!20!white}{
+\begin{minipage}{28em}
 
 
 \textbf{iterated conditional expectation (ice)} 
 $$\mathrm{E}\left[ Y_T^{\bar{a}}\right] = \mathrm{E} \left[ \mathrm{E} \left[\mathrm{E} \left[ ... \mathrm{E} \left[Y_T| \bar{A}_{T{-}1} {=} \bar{a}_{T{-}1}, \bar{L}_T \right]  ...|\bar{A}_0 {=} a_0, L_1 \right] |L_0 \right]\right]$$
 
-%\end{minipage}}
-
-%\noindent \colorbox{lightgray!20!white}{
-%\begin{minipage}{28em}
 
 
 \begin{mdframed}[linecolor=black!20!,
@@ -877,6 +978,30 @@ CE: conditional expectation; *: exchangeability; \newline LTP: law of total prob
 
 
 
+\paragraph{IP Weighting} \textit{i}nverse \textit{p}robability of treatment (g-formula)
+$$\mathrm{E}\left[Y^{a}\right] = \mathrm{E}\left[\frac{I(A=a)Y}{f\left[A|L\right]}\right]; W^A=\frac{1}{f\left[A|L\right]}; SW^A = \frac{f(A)}{f\left[A|L\right]}$$
+
+\noindent unknowns can be estimated non-parametrically or modeled
+\noindent \textbf{pseudo-population:} everyone is treated \& untreated ($L\not\to A$)
+
+\noindent \textbf{FRCISTG} \textit{(fully randomized causally interpreted structured graph)}: probability tree for $L \rightarrow A \rightarrow Y$, can be used to calculate/visualize simulation of values for $A$ 
+
+\noindent \textbf{for discrete $\boldsymbol{A, L}$} $f\left[a|l\right] = \mathrm{Pr}\left[A=a,L=l\right]$
+
+\noindent \textbf{estimators:} Horvitz-Thompson; Hajek (modified version) %todo p.152 
+
+\noindent \textbf{stabilized weights $\boldsymbol{SW^A}$} should have an average of 1 (check!) $\rightarrow$ pseudo-population same size $\rightarrow$ CI width $\downarrow$
+
+\vspace{0.2em}
+\noindent \colorbox{lightgray!20!white}{\begin{minipage}{28em}
+
+
+
+
+\textbf{\textcolor{darkgray}{time-varying}}
+$$ W^{\bar{A}} = \prod_{k=0}^K \frac{1}{f\left(A_k|\bar{A}_{k-1}, \bar{L}_k\right)}; \,\,\,\, SW^{\bar{A}} = \prod_{k=0}^K \frac{f\left(A_k|\bar{A}_{k-1}\right)}{f\left(A_k|\bar{A}_{k-1}, \bar{L}_k\right)}$$
+
+\end{minipage}}
 
 
 
@@ -888,36 +1013,15 @@ CE: conditional expectation; *: exchangeability; \newline LTP: law of total prob
 
 
 
-\paragraph{\large Marginal Structural Models} association is causation in the IP weighted pseudo-population 
-$$\text{associational model } \mathrm{E}\left[Y|A\right] = \text{ causal model } \mathrm{E}\left[Y^a\right]$$
-
-\noindent \textit{step 1:} estimate/model $f\left[A|L\right]$ (and $f\left[A\right]$) $\rightarrow$ get $(S)W^A$
-
-\noindent \textit{step 2:} estimate regression parameters for pseudo-population
-
-\noindent \textbf{effect modification} variables $V$ can be included (e.\,g.\ $\beta_0+\beta_1 a+\beta_2 V a + \beta_3 V$; technically not marginal anymore), $SW^A(V) = \frac{f\left[A|V\right]}{f\left[A|L\right]}$ more efficient than $SW^A$
- 
-
-\paragraph{\large Censoring} measuring joint effect of $A$ and $C$
-$$\mathrm{E}\left[Y^{a, c=0}\right] \text{ is of interest}$$
-
-\noindent \textbf{standardization} $\mathrm{E}\left[Y|A=a\right] = \int \mathrm{E}\left[Y|L{=}l, A{=}a, C{=}0\right]dF_L\left[l\right]$\vspace{0.2em}
-
-\noindent \textbf{IP weights}\vspace{-1.30em}
-
-\hspace{3.5em}\begin{tabular}{l l l}
-$W^{A,C}=W^A \times W^C$  &(uses $n$) & or \\
-$SW^{A,C}=SW^A \times SW^C$ &(uses $n^{c=0}$) & 
-\end{tabular}\vspace{0.3em}
-
-\noindent \textbf{g-estimation} can only adjust for confounding, not selection bias $\rightarrow$ use IP weights
 
 
 
 
 
 
-\paragraph{\large G-Estimation} (additive) structural nested models %todo: verbesserung von allem, ich habs noch nicht ganz verstanden
+
+
+\paragraph{G-Estimation} (additive) structural nested models %todo: verbesserung von allem, ich habs noch nicht ganz verstanden
 \begin{align*}
 \mathrm{logit} \, \mathrm{Pr}\left[A=1|H(\psi^\dagger), L\right] &= \alpha_0 + \alpha_1H(\psi^\dagger) + \alpha_2L \\
 H(\psi^\dagger) &= Y - \psi_\dagger A
@@ -952,69 +1056,10 @@ multiplicative is preferred if $Y$ always positive, but does not extend to longi
 
 \noindent \textbf{doubly robust estimators} exist%todo
 
-
-\paragraph{\large IP Weighting} \textit{i}nverse \textit{p}robability of treatment (g-formula)
-$$\mathrm{E}\left[Y^{a}\right] = \mathrm{E}\left[\frac{I(A=a)Y}{f\left[A|L\right]}\right]; W^A=\frac{1}{f\left[A|L\right]}; SW^A = \frac{f(A)}{f\left[A|L\right]}$$
-
-\noindent unknowns can be estimated non-parametrically or modeled
-\noindent \textbf{pseudo-population:} everyone is treated \& untreated ($L\not\to A$)
-
-\noindent \textbf{FRCISTG} \textit{(fully randomized causally interpreted structured graph)}: probability tree for $L \rightarrow A \rightarrow Y$, can be used to calculate/visualize simulation of values for $A$ 
-
-\noindent \textbf{for discrete $\boldsymbol{A, L}$} $f\left[a|l\right] = \mathrm{Pr}\left[A=a,L=l\right]$
-
-\noindent \textbf{estimators:} Horvitz-Thompson; Hajek (modified version) %todo p.152 
-
-\noindent \textbf{stabilized weights $\boldsymbol{SW^A}$} should have an average of 1 (check!) $\rightarrow$ pseudo-population same size $\rightarrow$ CI width $\downarrow$
-
-\paragraph{\large Standardization and IP Weighting}
-
-are equivalent, \textit{\textbf{but}} if modeled, different ``no misspecification'' assumptions:
-
-standardization: outcome model
-
-IP weighting: treatment model
-
-\noindent \textbf{doubly robust estimators:} reduce model misspecification bias, consistent if either model is correct; \textbf{\textit{e.\,g.:}} \vspace{-0.9em}
-
-1. fit outcome regression with variable $R = \begin{cases} +W^A & \text{if } A{=}1 \\ -W^A & \text{if } A{=}0 \end{cases}$ \vspace{-0.9em}
-
-2. standardize by averaging
-
-
-
-\subsubsection{Time-varying A}
-
-
-
-
-
-
-
-\paragraph{\large IP Weighting} 
-
-$$ W^{\bar{A}} = \prod_{k=0}^K \frac{1}{f\left(A_k|\bar{A}_{k-1}, \bar{L}_k\right)}$$
-
-
-$$ SW^{\bar{A}} = \prod_{k=0}^K \frac{f\left(A_k|\bar{A}_{k-1}\right)}{f\left(A_k|\bar{A}_{k-1}, \bar{L}_k\right)}$$
-
-\paragraph{\large Doubly Robust Estimator} sequential estimation
-\begin{enumerate}[leftmargin=*, itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
-\setlength{\itemsep}{0pt}%
-\setlength{\parskip}{0pt}
-\item 
-estimate $\hat{f}\left(A_m|\bar{A}_{m-1}, \bar{L}_m\right)$ (e.\,g.\ logistic model), use it to \newline
-calculate at each time $m$: $\widehat{W}^{\bar{A}_m} = \prod_{k=0}^m\frac{1}{\hat{f}\left(A_k|\bar{A}_{k-1}, \bar{L}_k\right)}$ and modified IP weights at $m$: $\widehat{W}^{\bar{A}_{m-1, a_m}} = \frac{\widehat{W}^{\bar{A}_{m-1}}}{\hat{f}\left(a_m|\bar{A}_{m-1}, \bar{L}_m\right)} $
-\item with $\widehat{T}_{K+1}:=Y$, recursively for $m=K, K-1, ..., 0$:\newline
- (a) fit outcome regression on $\widehat{T}_{m+1}$ with variable  $\widehat{W}^{\bar{A}_m}$\newline
- (b) calculate $\widehat{T}_{m}$ using the outcome model with $\widehat{W}^{\bar{A}_{m-1, a_m}}$
-\item calculate standardized mean outcome $\widehat{\mathrm{E}}\left[Y^{\bar{a}}\right] = \mathrm{E}\left[\widehat{T}_0\right]$
-\end{enumerate}
-
-\noindent \textbf{valid, if} treatment or outcome model correct, or treatment correct until k and outcome otherwise ($k+1$ robustness)
-
-
-\paragraph{\large G-Estimation} nested equations: for each time $k$
+\vspace{0.2em}
+\noindent \colorbox{lightgray!20!white}{\begin{minipage}{28em}
+\textbf{\textcolor{darkgray}{time-varying}}
+ nested equations: for each time $k$
 
 \noindent \textbf{strutural nested mean models} separate effect of each $a_k$
 $$\mathrm{E}\left[Y^{\bar{a}_{k-1}, a_k, \underline{0}_{k+1}} - Y^{\bar{a}_{k-1}, \underline{0}_{k+1}}|\bar{L}^{\bar{a}_{k-1}}=\bar{l}_k, \bar{A}_{k-1} = \bar{a}_{k-1}\right] = $$
@@ -1032,14 +1077,22 @@ find $\alpha_1$ that is closest to zero
 
 a closed form estimator exists for the linear case
 
+\end{minipage}}
 
 
-\paragraph{\large Censoring} $\bar{C}$: monotonic type of missing data 
 
-\noindent \textbf{standardization}: $\int f(y|\bar{a}, \bar{c}{=}\bar{0}, \bar{l}) \prod_{k=0}^K dF\left(l_k|\bar{a}_{k-1}, c_{k-1} {=} 0, \bar{l}_{k-1}\right)$
 
-\noindent \textbf{IP weighting}:
-\noindent $$\textcolor{gray}{S}W^{\bar{C}}= \prod_{k=1}^{K+1}\frac{1\textcolor{gray}{\cdot \mathrm{Pr}\left(C_k=0|\bar{A}_{k-1}, C_{k-1}=0\right)}}{\mathrm{Pr}\left(C_k=0|\bar{A}_{k-1}, C_{k-1}=0, \bar{L}_k\right)} $$
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1058,7 +1111,66 @@ a closed form estimator exists for the linear case
 
 \begin{multicols}{2}
 
-\paragraph{\large  Advantages} \citep{van2011targeted}
+
+
+%todo p 280-283, 284
+
+
+\paragraph{Double-Robustness} \citep{hernan2023causal}
+
+\noindent g-formula: \textit{either} treatment model $f(L)$  \textit{or} outcome model $b(L)$ 
+
+\noindent \textit{\textbf{or}} appropriately combine both: ``two chances to get it right''
+
+\noindent \textbf{all doubly robust estimators} 
+\begin{itemize}[leftmargin=*, itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
+\item involve a correction of  outcome $\hat{b}(L)$ using the treatment $\hat{f}(L)$
+\item have a bias depending on a product of the errors $\frac{1}{\pi(l)} - \frac{1}{\hat{\pi}(l)}$ and $b(l) - \hat{b}(l)$ known as second order bias 
+%(as discussed in chapter 18, this allows machine learning, as machine learning will get that bias smaller than other things in high-dimensional cases)
+\end{itemize}
+
+\vspace{0.2em}
+\noindent \colorbox{lightgray!20!white}{\begin{minipage}{28em}
+
+\textbf{\textcolor{darkgray}{time-varying:}} 
+  multiple robustness for $k=0,1,...K$
+  
+ $K{+}\,2$ robustness: consistent, if $\hat{f}_0$ to $\hat{f}_l$ and $\hat{b}_{l+1}$ to $\hat{b}_K$ are 
+ 
+ $2^{K{+}1}$ robustness: consistent, if for each k, either  $\hat{f}_k$ or $\hat{b}_k$ are
+  
+  \end{minipage}}
+
+\paragraph{Machine Learning} $L$ is high-dimensional
+
+\noindent one could use lasso or ML for IP weighting/standardization
+
+\noindent \textbf{\textit{but:}} ML does not guarantee elimination of confounding and has largely unknown statistical properties: how to get CI?
+
+\noindent \textbf{sample splitting:} train estimators on training sample $T_r$, use resulting estimators for doubly robust method on estimation sample (CIs on estimation sample are valid, but $n$ halved)
+
+\noindent \textbf{cross-fitting:} do again the other way round, average the two estimates, get CI via bootstrapping
+[\textit{alternatively:} split into $M$ samples, use one sample for estimation and $M{-}1$ for training $\to$ improved finite sample behavior \citep{hernan2023causal}]
+
+
+
+%todo p.240 - 244
+\noindent \textbf{asymptotic behavior} 
+for valid (Wald) CI we need:
+\begin{itemize}[leftmargin=*, itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
+\item a bias  much smaller than $c \cdot 1/\sqrt{n}$, which is how the $se$ typically scales (use doubly robust methods for small bias)
+%Wald CI for $\mathrm{E}\left[Y^a\right] $ standard error typically scales as $c \cdot 1/\sqrt{n}$, therefore, the bias needs to be much less for valid CI 
+\item asymptotic normality (for Wald CI)
+\item for a doubly robust estimator $\psi_{dr}$, we need sample splitting, otherwise $\hat{b}(l)$ and $\hat{f}(l)$ are correlated with $\psi_{dr}$
+\end{itemize}
+
+\noindent if $\hat{b}(l)$ and $\hat{f}(l)$ are consistent and $\mathrm{E}[\hat{\psi} - \psi|T_r]/se(\hat{\psi})$ converges to 0 $\to$ $\hat{\psi}$ with sample splitting is asymptotically normal and unbiased $\to$ CI is calibrated
+\citep{hernan2023causal}
+
+
+\noindent \textbf{problems:} unclear choice of algorithm, is bias small enough?
+
+\paragraph{Advantages} \citep{van2011targeted}
 
 \noindent \textbf{consistent} \textit{if either $\bar{Q}_0$ or $g_n$ are consistent (doubly robust)}:
 $$\forall \epsilon>0, P \in \mathcal{M}: \mathrm{Pr}_P\left[|\hat{\theta}_n-\theta(P)|>\epsilon\right] \to 0 \text{ as } n\to\infty$$
@@ -1078,7 +1190,7 @@ $$\forall \epsilon>0, P \in \mathcal{M}: \mathrm{Pr}_P\left[|\hat{\theta}_n-\the
 \item for large $n$ estimator is approximately normally distributed
 \end{itemize}
 
-\paragraph{\large Influence Curve} \citep{hampel1974influence, van2011targeted, zepeda2022delta}
+\paragraph{Influence Curve} \citep{hampel1974influence, van2011targeted, zepeda2022delta}
 how robust is an estimator?
 $$IC_{T,P_n}(O)=\lim_{\epsilon\to 0}\frac{T\left[\left(1-\epsilon\right)P_n + \epsilon\delta_O\right]-T(P_n)}{\epsilon}$$
 for estimator $T$ and distribution $P_n$ with $0<\epsilon<1$ 
@@ -1145,8 +1257,67 @@ $\widehat{\mathrm{Var}}[\mathrm{IF}_{\phi, \mathbb{P}_X}(Y)] = \frac{1}{n}\sum_{
 \end{enumerate}
 
 
+\paragraph{Simple Plug-In Estimator} \ \\  \vspace{-0.9em}
 
-\paragraph{\large TMLE} \citep{van2011targeted}
+1. fit outcome regression with variable $R = \begin{cases} +W^A & \text{if } A{=}1 \\ -W^A & \text{if } A{=}0 \end{cases}$ \vspace{-0.9em}
+
+2. standardize by averaging
+
+
+\vspace{0.2em}
+\noindent \colorbox{lightgray!20!white}{\begin{minipage}{28em}
+
+\textbf{\textcolor{darkgray}{time-varying}}  $k+2$ robust estimator (related to TMLE)
+\begin{enumerate}[leftmargin=*, itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
+\setlength{\itemsep}{0pt}%
+\setlength{\parskip}{0pt}
+\item 
+estimate $\hat{f}\left(A_m|\bar{A}_{m-1}, \bar{L}_m\right)$ (e.\,g.\ logistic model), use it to \newline
+calculate at each time $m$: $\widehat{W}^{\bar{A}_m} = \prod_{k=0}^m\frac{1}{\hat{f}\left(A_k|\bar{A}_{k-1}, \bar{L}_k\right)}$ and modified IP weights at $m$: $\widehat{W}^{\bar{A}_{m-1, a_m}} = \frac{\widehat{W}^{\bar{A}_{m-1}}}{\hat{f}\left(a_m|\bar{A}_{m-1}, \bar{L}_m\right)} $
+\item with $\widehat{T}_{K+1}:=Y$, recursively for $m=K, K-1, ..., 0$:\newline
+ (a) fit outcome regression on $\widehat{T}_{m+1}$ with variable  $\widehat{W}^{\bar{A}_m}$\newline
+ (b) calculate $\widehat{T}_{m}$ using the outcome model with $\widehat{W}^{\bar{A}_{m-1, a_m}}$
+\item calculate standardized mean outcome $\widehat{\mathrm{E}}\left[Y^{\bar{a}}\right] = \mathrm{E}\left[\widehat{T}_0\right]$
+\end{enumerate}
+
+\end{minipage}}
+
+
+\paragraph{Augmented IP Weighting (AIPTW)} \citep{hernan2023causal}
+
+%(dichotomous $A$)
+
+
+%$$ \hat{\mathrm{E}}\left[Y^{a=1}\right] = \frac{1}{n}\sum_{i=1}^n\left[\hat{b}(L_i)+\frac{A_i}{\hat{\pi}(L_i)}\left(Y_i {-} \hat{b}(L_i)\right)\right]  $$
+
+\begin{align*}
+\hat{\mathrm{E}}\left[Y^{a}\right] &= \frac{1}{n}\sum_{i=1}^n\left[
+\frac{\mathbbm{1}(A=a)Y}{\hat{f}(A|L)} - \left(\frac{\mathbbm{1}(A=a)}{\hat{f}(A|L)} -1\right)\hat{b}(a,L)
+\right]  %\\
+%&= P_n \left[ \hat{b}(a,L) + \frac{\mathbbm{1}(A=a)\left\{Y-\hat{b}(A,L)\right\}}{\hat{f}(A|L)}\right]
+\end{align*}
+
+\begin{mdframed}[style=MyFrame,nobreak=true, innerleftmargin=2pt, innerrightmargin=2pt]
+Relationship between AIPTW and TMLE for causal effect:
+$$\hat{\psi}_{1, AIPTW} - \hat{\psi}_{0, AIPTW} = P_n\left[\hat{b}(1,L)\right] -  P_n\left[\hat{b}(0,L)\right] $$
+$$ - P_n \left[  \frac{\left\{\mathbbm{1}(A{=}1)-\mathbbm{1}(A{=}0)\right\}\left(Y-\hat{b}(A,L)\right)}{\hat{f}(A|L)}\right]\textcolor{gray}{^{^\dagger}}$$
+
+\noindent using the IRLS estimate for \hspace{2em} $\overbrace{ \hspace{6.7em} }^{\text{clever covariate}}$ \newline
+ $b(A,L;\beta,\theta)=\phi\left[m(A,L;\beta) + \theta\left\{\frac{\mathbbm{1}(A{=}1)-\mathbbm{1}(A{=}0)}{\hat{f}(A|L)}\right\}\right]$ with canonical link $\phi$ sets the last part\textcolor{gray}{$^\dagger$} to zero (as the score equation for $\theta$)
+\end{mdframed}
+
+
+
+
+
+
+
+
+
+
+
+
+\paragraph{TMLE} \citep{van2011targeted}
 
 \textit{t}argeted \textit{m}aximum \textit{l}ikelihood \textit{e}stimation
 $$O=(W, A, Y) \sim P_0$$
@@ -1199,7 +1370,7 @@ TMLE sets the mean of the IC, $\overline{IC}_n$, to zero ($b$ has already mean z
 \noindent \textit{95\% CI:} $\psi_{TMLE,n} \pm z_{0.975}\frac{\sigma_n}{\sqrt{n}}$; p-value: $2\left[1-\Phi\left(\left|\frac{\psi_{TMLE,n}}{\sigma_n/\sqrt{n}}\right|\right)\right]$
 
 
-\paragraph{\large LTMLE} longitudinal
+\paragraph{LTMLE} longitudinal
 
 \noindent for $t=T,..., 1$:
 
@@ -1217,7 +1388,7 @@ with $Y_{t} = offset(step 2 result in t) + \epsilon \times clever covariate$: pr
 
 
 
-\paragraph{\large TMLE advanced} \citep{van2011targeted}
+\paragraph{TMLE advanced} \citep{van2011targeted}
 
 \textit{t}argeted \textit{m}inimum \textit{l}oss-based \textit{e}stimation
 
@@ -1274,7 +1445,7 @@ MLE solves $\sum_{i=1}^n H(A_i, W_i)\left[Y_i-\bar{Q}^*_n(A_i,W_i)\right]=0$ whe
  influence curve based inference: 
  asymptotic linearity $\sqrt{n}\left(\psi_n^{TMLE} - \psi_0\right) \overset{D}{\rightarrow} \mathrm{N}(0,\sigma^2)$
  
- \paragraph{\large AIPTW} \textit{a}ugmented \textit{i}nverse \textit{p}robability of \textit{t}reatment \textit{w}eighting
+ \paragraph{AIPTW} \textit{a}ugmented \textit{i}nverse \textit{p}robability of \textit{t}reatment \textit{w}eighting
  
  %todo pages 105-106
  
@@ -1285,76 +1456,6 @@ MLE solves $\sum_{i=1}^n H(A_i, W_i)\left[Y_i-\bar{Q}^*_n(A_i,W_i)\right]=0$ whe
 \end{multicols}
 
 
-%-------------------------------------------------------------------------------
-
-% SECTION: LONGITUDINAL
-
-%-------------------------------------------------------------------------------
-
-\section{Longitudinal Data}
-\begin{multicols}{2}
-
-\paragraph{\large Time-Varying Treatments} compare 2 treatments
-
-\noindent treatment history up to $k$: $\bar{A}_k=(A_0, A_1, ..., A_k)$
-
-\noindent shorthand: always treated $\bar{A} = \bar{1}$, never treated $\bar{A} = \left(\bar{0}\right)$
-
-\textbf{static strategy:} $g=\left[g_0(\bar{a}_{-1}), ..., g_K(\bar{a}_{K-1})\right]$
-
-\textbf{dynamic strategy:} $g=\left[g_0(\bar{l}_0), ..., g_K(\bar{l}_K)\right]$
-
-\textbf{stochastic strategy:} non-deterministic $g$
-
-\noindent optimal strategy is where $\mathrm{E}\left[Y^g\right]$ is maximized (if high is good)
-
-
-
-
-
-
-\paragraph{\large Sequential Identifiability} sequential versions of
-
- \textbf{exchangability:}
-$Y^g \indep A_k| \bar{A}_{k-1} \,\,\, \forall g, k=0,1,...,K$
-
-\textit{conditional exchangeability:}
-$$\left(Y^g, L^g_{k+1}\right) \indep A_k| \bar{A}_{k-1} {=} g\left(\bar{L}_k\right), \bar{L}^k \,\,\, \forall g, k=0,1,...,K$$
-
- \textbf{positivity:} $f_{\bar{A}_{k-1},\bar{L}_k}(\bar{a}_{k-1},\bar{l}_k)\neq 0 \,\, \Rightarrow$
-$$ f_{A_k|\bar{A}_{k-1},\bar{L}_k}(a_k|\bar{a}_{k-1},\bar{l}_k)>0 \,\, \forall \left(\bar{a}_{k-1},\bar{l}_k\right)$$
-
- \textbf{consistency:} 
-\begin{align*}
-Y^{\bar{a}} = Y^{\bar{a}^*} & \, \text{ if } {\bar{a}} = {\bar{a}^*};  & \,
-Y^{\bar{a}} = Y & \, \text{ if } {\bar{A}} = {\bar{a}};  \\
-\bar{L}^{\bar{a}}_k = \bar{L}^{\bar{a}^*}_k & \, \text{ if } {\bar{a}_{k-1}} = {\bar{a}^*_{k-1}}; & \,
-\bar{L}^{\bar{a}}_k = \bar{L}_k & \, \text{ if } {\bar{A}_{k-1}} = {\bar{a}_{k-1}}
-\end{align*}
-
-
-\noindent \textbf{generalized backdoor criterion} (static strategy):\,all backdoors into $A_k$ (except through future treatments) are blocked $\forall k$ 
-
-
-\noindent \textbf{static sequential exchangeability for $\boldsymbol{Y^{\bar{a}}}$}
-$$Y^{\bar{a}} \indep A_k| \bar{A}_{k-1}, \bar{L}_k \,\,\,\,\, \text{ for } k=0,1,...,K$$
-use SWIGs to visually check d-separation
-
-\noindent \textbf{time-varying confounding} $\mathrm{E}\left[Y^{\bar{a}}|L_0\right] \neq \mathrm{E}\left[Y|A=\bar{a}, L_0\right]$
-
-
-\paragraph{\large Treatment-Confounder Feedback} $A_0 \rightarrow L_1 \rightarrow A_1$: an unmeasured $U$ influencing $L_1$ and $Y$ turns $L_1$ into a collider;
-
-\noindent traditional adjustment (e.\,g.\ stratification) biased: use g-methods
-
-\noindent \textbf{g-null test} sequential exchangeability \& sharp null true $\Rightarrow$ $Y^g = Y \,\, \forall g$ $\,\,\,\,\Rightarrow \,\,\,\,$ $Y \indep A_0|L_0$ \& $Y \indep A_1|A_0, L_0, L_1$;
-therefore: \newline if last two independences don't hold, one assumption is violated
-
-\noindent \textbf{g-null theorem:} $\mathrm{E}\left[Y^g\right] = \mathrm{E}\left[Y\right]$, if the two independences hold \newline($\Rightarrow$ sharp null: only if strong faithfulness (no effect cancelling))
-
-
-
-\end{multicols}
 
 
 
