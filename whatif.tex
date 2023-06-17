@@ -33,6 +33,9 @@
 \setcounter{tocdepth}{4}
 \titleformat*{\paragraph}{\large\bfseries}
 
+\usepackage{tikz}
+\usepackage{adjustbox}
+
 
 
 %\allowdisplaybreaks
@@ -590,6 +593,59 @@ therefore: \newline if last two independences don't hold, one assumption is viol
 
 \noindent \textbf{g-null theorem:} $\mathrm{E}\left[Y^g\right] = \mathrm{E}\left[Y\right]$, if the two independences hold \newline($\Rightarrow$ sharp null: only if strong faithfulness (no effect cancelling))
 
+\end{minipage}}
+
+\vspace{1.5em}
+
+\noindent \colorbox{lightgray!20!white}{\begin{minipage}{28em}
+
+\paragraph{Causal Mediation} \citep{hernan2023causal}
+
+\noindent \trimbox{0cm 0.095cm 0cm 0cm}{\begin{tikzpicture}
+    % x node set with absolute coordinates
+    \node (a) at (0,0) {$A$};
+    \node (m) at (1,0) {$M$};
+    \node (y) at (2,0) {$Y$};
+    \path[->] (a) edge (m);
+    \path[->] (m) edge (y);
+    \path[->, bend left=20] (a) edge (y);
+\end{tikzpicture}} seen as longitudinal with  $k_0$: $A$ and $k_1$: $M$
+
+
+\textbf{decomposition} of $\mathrm{E}\left[Y^{a=1}\right]  - \mathrm{E}\left[Y^{a=0}\right]$ into cross-world quantities
+\begin{itemize}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt, leftmargin=1.5em]
+\item pure (aka natural) direct effect (upper path) $$\mathrm{E}\left[Y^{a=1, M^{a=0}}\right]  - \mathrm{E}\left[Y^{a=0, M^{a=0}}\right]$$
+\item total (aka natural) indirect effect (lower path) $$\mathrm{E}\left[Y^{a=1, M^{a=1}}\right]  - \mathrm{E}\left[Y^{a=1, M^{a=0}}\right]$$
+\end{itemize}
+
+\textbf{mediation formula} under NPSEM-IE (requires $Y^{a=1,m} \indep M^{a=0}$ cross-world independence)
+$$\mathrm{E}\left[Y^{a=1,M^{a=0}}\right] = \sum_m \mathrm{E}\left[Y|A=1, M=m\right]\mathrm{Pr}\left[M=m|A=0\right] $$
+
+
+\textbf{interventional interpretation}
+
+additional assumptions: 
+
+\trimbox{0cm 0.095cm 0cm 0cm}{\begin{tikzpicture}
+    % x node set with absolute coordinates
+    \node (a) at (-1,0.125) {$A$};
+    \node (n) at (0,0.25) {$N$};
+    \node (o) at (0.5,0) {$O$};
+    \node (m) at (1,0.25) {$M$};
+    \node (y) at (2,0.125) {$Y$};
+    \path[->, line width=0.3mm] (a) edge (n);
+    \path[->] (n) edge (m);
+    \path[->] (m) edge (y);
+    \path[->, line width=0.3mm] (a) edge (o);
+    \path[->] (o) edge (y);
+\end{tikzpicture}}
+
+thick arrows are deterministic
+
+two assumptions: no $N\to Y$ and no $O\to M$ (``no controlled direct effect'' assumptions)
+
+
+
 
 \end{minipage}}
 
@@ -848,6 +904,16 @@ adjust for (surrogate) confounders $L$
 \noindent \textbf{standardization and IP weighting}
 are equivalent, \textit{\textbf{but}} if modeled, different ``no misspecification'' assumptions: outcome model (standardization), treatment model (IP weighting)
 
+\noindent \textbf{big g-formula}
+not all methods use (sequential) exchangeability 
+\begin{itemize}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
+\item \textit{problem:} DAG is known, but unmeasured variables exist
+\item \textit{solution:} include un- \& measured variables in big g-formula $\to$ derive
+alternative effect identification methods using only d-separation (e.\,g.\  front door formula)
+\end{itemize}
+it can always be determined, if the DAG allows for identification with the big g-formula
+\citep{hernan2023causal}
+
 
 \noindent \textbf{censoring:} measure joint effect of $A$ and $C$ with
 $\mathrm{E}\left[Y^{a, c=0}\right]$
@@ -902,7 +968,10 @@ weighted average of stratum-specific risks; unknowns can be estimated non-parame
 
 \noindent for \textit{stochastic strategies} multiply with $\prod_{k=0}^K f^{int} \left(a_k|\bar{a}_{k-1}, \bar{l}_{k}\right) $
 
+\end{minipage}}
 
+\noindent \colorbox{lightgray!20!white}{
+\begin{minipage}{28em}
 
 
 \begin{mdframed}[linecolor=black!20!,
@@ -925,10 +994,7 @@ at $k>0$: set $\bar{A} = \bar{a}$, \textit{draw} from models estimated in 1.
 \end{mdframed}
 
 
-\end{minipage}}
 
-\noindent \colorbox{lightgray!20!white}{
-\begin{minipage}{28em}
 
 
 \textbf{iterated conditional expectation (ice)} 
