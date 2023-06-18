@@ -483,7 +483,7 @@ $\rightarrow$ conditioning on a collider could be unbiased if restricted to cert
 \end{itemize}
 
 \noindent
- sometimes mismeasurement doesn't matter as the measurement 
+ sometimes mismeasurement doesn't matter as the measurement itself
  is of interest \citep{hernan2023causal}
 
 
@@ -566,6 +566,12 @@ Y^{\bar{a}} = Y & \, \text{ if } {\bar{A}} = {\bar{a}};  \\
 \bar{L}^{\bar{a}}_k = \bar{L}_k & \, \text{ if } {\bar{A}_{k-1}} = {\bar{a}_{k-1}}
 \end{align*}
 
+\end{minipage}}
+
+\vspace{1.5em}
+
+\noindent \colorbox{lightgray!20!white}{\begin{minipage}{28em}
+
 
 \noindent \textbf{generalized backdoor criterion} (static strategy):\,all backdoors into $A_k$ (except through future treatment) are blocked $\forall k$ 
 
@@ -612,7 +618,7 @@ therefore: \newline if last two independences don't hold, one assumption is viol
 \end{tikzpicture}} seen as longitudinal with  $k_0$: $A$ and $k_1$: $M$
 
 
-\textbf{decomposition} of $\mathrm{E}\left[Y^{a=1}\right]  - \mathrm{E}\left[Y^{a=0}\right]$ into cross-world quantities
+\textbf{decompose} $\mathrm{E}\left[Y^{a=1}\right]  - \mathrm{E}\left[Y^{a=0}\right]$ into cross-world quantities
 \begin{itemize}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt, leftmargin=1.5em]
 \item pure (aka natural) direct effect (upper path) $$\mathrm{E}\left[Y^{a=1, M^{a=0}}\right]  - \mathrm{E}\left[Y^{a=0, M^{a=0}}\right]$$
 \item total (aka natural) indirect effect (lower path) $$\mathrm{E}\left[Y^{a=1, M^{a=1}}\right]  - \mathrm{E}\left[Y^{a=1, M^{a=0}}\right]$$
@@ -622,10 +628,7 @@ therefore: \newline if last two independences don't hold, one assumption is viol
 $$\mathrm{E}\left[Y^{a=1,M^{a=0}}\right] = \sum_m \mathrm{E}\left[Y|A=1, M=m\right]\mathrm{Pr}\left[M=m|A=0\right] $$
 
 
-\textbf{interventional interpretation}
-
-additional assumptions: 
-
+\textbf{interventional interpretation} advocating NPSEM-IE assuming:
 \trimbox{0cm 0.095cm 0cm 0cm}{\begin{tikzpicture}
     % x node set with absolute coordinates
     \node (a) at (-1,0.125) {$A$};
@@ -639,11 +642,13 @@ additional assumptions:
     \path[->, line width=0.3mm] (a) edge (o);
     \path[->] (o) edge (y);
 \end{tikzpicture}}
+(thick arrows are deterministic)
 
-thick arrows are deterministic
+no controlled direct effects: no $N\to Y$ and no $O\to M$
 
-two assumptions: no $N\to Y$ and no $O\to M$ (``no controlled direct effect'' assumptions)
+FFRCISTG point of view: intervention on $N$ and $O$ separately
 
+if decomposable (can be verified in a randomized trial), g-formula for $N$ and $O$ reduces to mediation formula for $A$
 
 
 
@@ -1256,32 +1261,29 @@ $$\forall \epsilon>0, P \in \mathcal{M}: \mathrm{Pr}_P\left[|\hat{\theta}_n-\the
 \item for large $n$ estimator is approximately normally distributed
 \end{itemize}
 
-\paragraph{Influence Curve} \citep{hampel1974influence, van2011targeted, zepeda2022delta}
-how robust is an estimator?
+\paragraph{Influence Curve} how robust is an estimator? %\citep{hampel1974influence, van2011targeted}
 $$IC_{T,P_n}(O)=\lim_{\epsilon\to 0}\frac{T\left[\left(1-\epsilon\right)P_n + \epsilon\delta_O\right]-T(P_n)}{\epsilon}$$
 for estimator $T$ and distribution $P_n$ with $0<\epsilon<1$ 
 
 
-\noindent can also be rewritten as
+\noindent can also be rewritten as a \textit{\textbf{directional derivative}} at $P_n$
 $$IC_{T,P_n}=\frac{d}{d\epsilon}T\left[\left(1-\epsilon\right)P_n + \epsilon\delta_O\right] = 
 \frac{d}{dP_n}T\left(\delta_O - P_n\right)$$
-last part is a \textit{\textbf{directional derivative}} at $P_n$ (empirical probability measure that puts mass $1/n$ on $O_i$) in direction $(\delta_O - P_n)$
+in direction $(\delta_O - P_n)$, where $P_n$ empirical probability measure that puts mass $1/n$ on $O_i$ \citep{hampel1974influence}
+
+
+\noindent \textbf{special cases} \citep{van2011targeted}
+\begin{itemize}[leftmargin=*, itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
+\item $\overline{IC}(P_0) = 0$ and $\mathrm{Var}(IC(P_0))$ asymptotic variance of the standard estimator  $\sqrt{n} (\psi_n - \psi_0)$, $\to$ $Var(\hat{\Psi}(P_n)) = \frac{Var_{IC}}{n}$
+\item efficient IC: an estimator is asymptotically efficient $\Leftrightarrow$ its influence curve is the efficient influence curve $IC(O)=D^*(O)$ 
+\end{itemize}
 
 
 
 
-\noindent $\boldsymbol{\overline{IC}(P_0)} = 0$ and $\mathrm{Var}(IC(P_0))$ is the asymptotic variance of the standard estimator  $\sqrt{n} (\psi_n - \psi_0)$, therefore $Var(\hat{\Psi}(P_n)) = \frac{Var_{IC}}{n}$
 
-\noindent \textbf{efficient IC:} an estimator is asymptotically efficient $\Leftrightarrow$ its influence curve is the efficient influence curve $IC(O)=D^*(O)$
+\paragraph{Delta Method}  \citep{zepeda2022delta} estimand is a function of $\theta$, i.e. $\psi := \phi(\theta)$, $Var(\hat{\theta})$ known, but what is $Var(\hat{\psi})$?
 
-
-
-\noindent estimand written as a function of $\theta$, i.e. $\psi := \phi(\theta)$, we know the variance of $\hat{\theta}$, but what is the variance of $\hat{\psi}$
-
-\noindent \textbf{classical delta method:} (under regularity conditions) distribution of $\phi(\hat{\theta})$ can be approximated as a normal with a variance proportional to $\phi$'s rate of change at $\theta$:
-$$\sqrt{n}\left(\phi(\hat{\theta}_n)-\phi(\mu)\right) \overset{\text{approx}}{\sim} \mathrm{N}\left(0, \phi'(\theta)\sigma^2\right)$$
-which allows for Wald-type CI: $\hat{\theta}_n \pm z_{1-\frac{\alpha}{2}}\sqrt{\frac{\phi'(\theta)\sigma^2}{n}}$
-(very similar to central limit theorem)
 
 \noindent \textbf{Taylor's approximation} requirements:
 \begin{itemize}[leftmargin=*, itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
@@ -1349,19 +1351,17 @@ calculate at each time $m$: $\widehat{W}^{\bar{A}_m} = \prod_{k=0}^m\frac{1}{\ha
 \end{minipage}}
 
 
-\paragraph{Augmented IP Weighting (AIPTW)} \citep{hernan2023causal}
-
-%(dichotomous $A$)
-
-
-%$$ \hat{\mathrm{E}}\left[Y^{a=1}\right] = \frac{1}{n}\sum_{i=1}^n\left[\hat{b}(L_i)+\frac{A_i}{\hat{\pi}(L_i)}\left(Y_i {-} \hat{b}(L_i)\right)\right]  $$
-
+\paragraph{Augmented IPTW} \citep{hernan2023causal}
 \begin{align*}
 \hat{\mathrm{E}}\left[Y^{a}\right] &= \frac{1}{n}\sum_{i=1}^n\left[
 \frac{\mathbbm{1}(A=a)Y}{\hat{f}(A|L)} - \left(\frac{\mathbbm{1}(A=a)}{\hat{f}(A|L)} -1\right)\hat{b}(a,L)
 \right]  %\\
 %&= P_n \left[ \hat{b}(a,L) + \frac{\mathbbm{1}(A=a)\left\{Y-\hat{b}(A,L)\right\}}{\hat{f}(A|L)}\right]
 \end{align*}
+
+ 
+\noindent \textbf{disadvantages}: ignores global constraints $\to$ often unstable if sparsity, sometimes not well-defined \citep{van2011targeted}
+ 
 
 \begin{mdframed}[style=MyFrame,nobreak=true, innerleftmargin=2pt, innerrightmargin=2pt]
 Relationship between AIPTW and TMLE for causal effect:
@@ -1511,12 +1511,7 @@ MLE solves $\sum_{i=1}^n H(A_i, W_i)\left[Y_i-\bar{Q}^*_n(A_i,W_i)\right]=0$ whe
  influence curve based inference: 
  asymptotic linearity $\sqrt{n}\left(\psi_n^{TMLE} - \psi_0\right) \overset{D}{\rightarrow} \mathrm{N}(0,\sigma^2)$
  
- \paragraph{AIPTW} \textit{a}ugmented \textit{i}nverse \textit{p}robability of \textit{t}reatment \textit{w}eighting
- 
- %todo pages 105-106
- 
- disadvantages \citep{van2011targeted}: ignores global constraints $\to$ often unstable under sparsity, sometimes not well-defined
- 
+
 
 
 \end{multicols}
