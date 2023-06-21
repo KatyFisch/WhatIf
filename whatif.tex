@@ -538,6 +538,7 @@ continuity principle: also condition on approximate ancillaries
 
  \textbf{stochastic strategy:} non-deterministic $g$
 
+
 \noindent optimal strategy is where $\mathrm{E}\left[Y^g\right]$ is maximized (if high is good)
 
 \end{minipage}}
@@ -573,12 +574,13 @@ Y^{\bar{a}} = Y & \, \text{ if } {\bar{A}} = {\bar{a}};  \\
 \noindent \colorbox{lightgray!20!white}{\begin{minipage}{28em}
 
 
-\noindent \textbf{generalized backdoor criterion} (static strategy):\,all backdoors into $A_k$ (except through future treatment) are blocked $\forall k$ 
+\noindent \textbf{generalized\,\,backdoor\,\,criterion} (static strategy): all backdoors into $A_k$ (except through future treatment) are blocked $\forall k$ 
 
 
-\noindent \textbf{static sequential exchangeability for $\boldsymbol{Y^{\bar{a}}}$}
+\noindent \textbf{static sequential exchangeability for $\boldsymbol{Y^{\bar{a}}}$} (weaker version)
 $$Y^{\bar{a}} \indep A_k| \bar{A}_{k-1}, \bar{L}_k \,\,\,\,\, \text{ for } k=0,1,...,K$$
-use SWIGs to visually check d-separation
+sufficient to identify mean counterfactual outcome for static strategies and can be checked on SWIGS via d-separation
+%use SWIGs to visually check d-separation
 
 \noindent \textbf{time-varying confounding} $\mathrm{E}\left[Y^{\bar{a}}|L_0\right] \neq \mathrm{E}\left[Y|A=\bar{a}, L_0\right]$
 
@@ -594,7 +596,7 @@ use SWIGs to visually check d-separation
 
 \noindent traditional adjustment (e.\,g.\ stratification) biased: use g-methods
 
-\noindent \textbf{g-null test} sequential exchangeability \& sharp null true $\Rightarrow$ $Y^g {=} Y \,\, \forall g$ $\,\,\,\,\Rightarrow \,\,\,\,$ $Y {\indep} A_0|L_0\,\,$ \& \,\,$Y {\indep} A_1|A_0, L_0, L_1$;
+\noindent \textbf{g-null\,\,test} sequential exchangeability \& sharp null true $\Rightarrow$ $Y^g {=} Y \,\, \forall g$ $\,\,\,\,\Rightarrow \,\,\,\,$ $Y {\indep} A_0|L_0\,\,$ \& \,\,$Y {\indep} A_1|A_0, L_0, L_1$;
 therefore: \newline if last two independences don't hold, one assumption is violated
 
 \noindent \textbf{g-null theorem:} $\mathrm{E}\left[Y^g\right] = \mathrm{E}\left[Y\right]$, if the two independences hold \newline($\Rightarrow$ sharp null: only if strong faithfulness (no effect cancelling))
@@ -694,7 +696,7 @@ if decomposable (can be verified in a randomized trial), g-formula for $N$ and $
 
 \noindent temporal ordering is not enough to conclude anything
 
-\noindent \textbf{bias amplification:} e.g. by adjusting for an instrument $Z$ (can also reduce bias)
+\noindent \textbf{bias amplification:} e.\,g.\ by adjusting for an instrument $Z$ (can also reduce bias)
 
 
 
@@ -873,7 +875,7 @@ $\frac{\mathrm{Pr}\left[D_k^a=1|L,A\right]}{\mathrm{Pr}\left[D_k^{a=0}=1|L,A\rig
    &   \,\,\,\,\, f\left(l_s|\bar{a}_{s-1}, \bar{l}_{s-1}, D_s=0\right)\Big\}
 \end{align*}
 \noindent \textbf{IP weighting:} fit a pooled logistic hazard model with time-varying weights
-$W^{\bar{A}}_k =\prod_{m=0}^k\frac{1}{f(A_m|\bar{A}_{m-1}, \bar{L}_m}$
+$W^{\bar{A}}_k =\prod_{m=0}^k\frac{1}{f(A_m|\bar{A}_{m-1}, \bar{L}_m)}$
 
 
 
@@ -895,14 +897,12 @@ $W^{\bar{A}}_k =\prod_{m=0}^k\frac{1}{f(A_m|\bar{A}_{m-1}, \bar{L}_m}$
 
 
 \paragraph{G-Methods} \textit{g}eneralized treatment contrasts:
-adjust for (surrogate) confounders $L$
-
-
+adjust for $L$
 \begin{itemize}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
 \setlength{\itemsep}{0pt}%
 \setlength{\parskip}{0pt}
-\item \textbf{\textit{standardization:}} two types of g-formula
-\item \textbf{\textit{IP weighting:}} also g-formula
+\item \textbf{\textit{standardization:}}  two types of g-formula
+\item \textbf{\textit{IP weighting:}} (in theory) also g-formula 
 \item \textbf{\textit{g-estimation:}} not needed unless longitudinal
 \end{itemize}
 
@@ -949,7 +949,7 @@ $SW^{A,C}=SW^A \times SW^C$ &(uses $n^{c=0}$) &
 
 
 
-\paragraph{Standardization} plug-in (or parametric if so) g-formula
+\paragraph{Standardization} plug-in (parametric if so) g-formula
 $$\mathrm{E}\left[Y^{a}\right] = \overbrace{\mathrm{E}\left[\mathrm{E}\left[Y|A{=}a,L{=}l\right]\right]}^{\text{conditional expectation}} =  \overbrace{ \textstyle{\int} \mathrm{E}\left[Y|L=l, A=a\right]f_L\left[l\right]dl}^{\text{joint density estimator}} $$
 weighted average of stratum-specific risks; unknowns can be estimated non-parametrically or modeled
 
@@ -1057,7 +1057,7 @@ $$\mathrm{E}\left[Y^{a}\right] = \mathrm{E}\left[\frac{I(A=a)Y}{f\left[A|L\right
 
 \noindent \textbf{FRCISTG} \textit{(fully randomized causally interpreted structured graph)}: probability tree for $L \rightarrow A \rightarrow Y$, can be used to calculate/visualize simulation of values for $A$ 
 
-\noindent \textbf{for discrete $\boldsymbol{A, L}$} $f\left[a|l\right] = \mathrm{Pr}\left[A=a,L=l\right]$
+\noindent \textbf{for discrete $\boldsymbol{A, L}$:} $f\left[a|l\right] = \mathrm{Pr}\left[A=a,L=l\right]$
 
 \noindent \textbf{estimators:} Horvitz-Thompson; Hajek (modified version) %todo p.152 
 
@@ -1511,6 +1511,117 @@ MLE solves $\sum_{i=1}^n H(A_i, W_i)\left[Y_i-\bar{Q}^*_n(A_i,W_i)\right]=0$ whe
  influence curve based inference: 
  asymptotic linearity $\sqrt{n}\left(\psi_n^{TMLE} - \psi_0\right) \overset{D}{\rightarrow} \mathrm{N}(0,\sigma^2)$
  
+
+
+
+
+\paragraph{LMTP}  \citep{diaz2021nonparametric} modified treatment policies
+
+
+\noindent \textbf{problems} for (longitudinal) continuous, or multi-valued $A$:
+\begin{itemize}[leftmargin=*, itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
+\item fixed value counterfactuals
+\item infinite-dimensional dose-response curve needs parametric assumptions or is not $n^{1/2}$ consistent
+\item positivity is often violated (LMTP non-parametric alternative can be designed to satisfy positivity)
+\end{itemize}
+\textbf{solution:} longitudinal MTP $A_t^{\mathbbm{d}} = \mathbbm{d}\left(A_t(\bar{A}_{t-1}^{\mathbbm{d}}, H_t(\bar{A}_{t-1}^\mathbbm{d})\right)$, e.\,g.\ threshold (max$(c,a_t)$), shift ($a_t + \delta$ if positivity else $a_t$), stochastic (draw from $F(\mathbbm{d}(A_t,H_t)|H_t)$; randomizer $\indep$ $U, P$), shifted propensity score (only for binary $A$)
+
+\noindent \textbf{identification} under NPSEM %todo annahmen sind da dahinter
+
+\begin{itemize}[leftmargin=*, itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
+\item \textit{positivity} $(a_t,h_t) \in  \mathrm{supp}\!\left\{A_t,H_t\right\} \Rightarrow \mathbbm{d}((a_t,h_t)|h_t) \in  \mathrm{supp}\!\left\{A_t,H_t\right\}$
+\item \textit{sequential randomization:} 
+\begin{itemize}[leftmargin=*, itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
+\item \textit{standard} $U_{A,t}\indep\underline{U}_{L,t+1}|H_t$ (for stochastic LMTP)
+\item \textit{strong}  $U_{A,t}\indep(\underline{U}_{L,t+1},\underline{U}_{A,t+1})|H_t$ (for other LMTP)
+\end{itemize}
+\end{itemize}
+
+\noindent set $m_{\tau+1}:=Y$, for $t=\tau,...,1$:
+
+\noindent $m_t: (a_t,h_t) \mapsto \mathrm{E}\left[m_{t+1}(A_{t+1}^{\mathbbm{d}}, H_{t+1})|A_t=a_t,H_t=h_t\right]$
+
+\noindent solve $\theta = \mathrm{E}\left[m_1(A_1^{\mathbbm{d}},L_1)\right]$
+
+\noindent \textbf{optimality}
+
+threshold LMTP can't be $n^{1/2}$ consistent as not differentiable
+
+only consider continuous $\mathbbm{d}$, if \textit{piecewise smooth invertibility}
+
+efficient influence function for $\mathrm{E}\left[m_1(A^{\mathbbm{d}}, L_1)\right] $: $\phi_1(Z) - \theta$ with
+
+$r_t(a_t, h_t) =\frac{g_t^{\mathbbm{d}}(a_t|h_t)}{g_t(a_t|h_t)}  $
+
+
+$\phi_t: z \mapsto \sum_{s=t}^\tau \left(\prod_{k=t}^s r_k(a_k,h_k)\right)\left\{m_{s+1}(a_{s+1}^{\mathbbm{d}},h_{s+1})-m_s(a_s,h_s)\right\} + m_t(a_t^{\mathbbm{d}},h_t)$
+
+\noindent \textbf{estimation}
+use Super Learner for $\hat{r}_t$ and $\hat{m}_t$
+
+
+substitution (standardization): $\hat{\theta}_{\text{sub}}=\frac{1}{n} \sum_{i=1}^n \hat{m}_1(A^{\mathbbm{d}}_{1,i},L_{1,i})$
+
+IPTW: $\hat{\theta}_{\text{iptw}}=\frac{1}{n} \sum_{i=1}^n \left(\prod_{t=1}^\tau \hat{r}_t(A_{t,i},H_{t,i})\right)Y_i$
+
+\noindent asymptotically linear and $n^{1/2}$ consistent if models correctly specified, asymptotic distribution generally unknown
+
+tmle: use sample splitting and cross-fitting with sets $\mathcal{T}_j$
+
+cross-validated EIF estimating equation $P_n\left\{\phi_1(.,\tilde{\eta}_j(.))-\hat{\theta}_{\text{tmle}}\right\} = 0 $
+
+
+step 1: itinitialize $\tilde{\eta} = \hat{\eta}$ and $\tilde{m}_{\tau+1,j(i)}(A_{\tau+1,i}^{\mathbbm{d}},H_{\tau+1,i}) = Y_i$
+
+step 2: compute $\tau$ weights $\omega_{s,i}=\prod_{k=1}^s \hat{r}_{k,j(i)}(A_{k,i},H_{k,i})$
+
+step 3: for $t=\tau,...,1:$ fit generalized linear tilting model 
+
+$$\mathrm{link}\, \tilde{m}_{t}^\epsilon(A_{t,i},H_{t,i}) = \epsilon + \mathrm{link} \,\tilde{m}_{t,j(i)}(A_{t,1},H_{t,i})$$ with the canonical link and use $\hat{\epsilon}$ to update $\tilde{m}_{t, j(i)}^{\hat{\epsilon}}$
+
+step 4: $\hat{\theta}_{\text{tmle}} = \frac{1}{2} \sum_{i=1}^n \tilde{m}_{1,j(i)}(A^{\mathbbm{d}}_{1,i},L_{1,i})$
+
+$\tau+1$ multiply robust, $n^{1/2}$ consistent, if nuisance consistant
+
+
+
+SDR:
+
+step 0: cross-fit estimates $\hat{r}_{1,j(i)},..., \hat{r}_{\tau,j(i)}$
+
+
+step 1: $\phi_{\tau+1}(Z_i;\underline{\check{\eta}}_{\tau,j(i)})=Y_i$
+
+step 2: for $t=\tau,...,1:$
+
+compute pseudo-outcome $\check{Y}_{t+1,i} =   \phi_{t+1}(Z_i;\underline{\check{\eta}}_{\tau,j(i)})$
+
+for $j=1,...,J:$ regress $\check{Y}_{t+1,i}$ on $(A_{t,i}, H_{t,i}$ only using $i \in \mathcal{T}_j$, with $\check{m}_{t,j}$ output, update $\check{\underline{\eta}}_{t,j} = (\hat{r}_{t,j},\check{m}_{t,j}, ...,\hat{r}_{\tau,j},\check{m}_{\tau,j}) $
+
+step 3: $\hat{\theta}_{\text{sdr}} = \frac{1}{n} \sum_{i=1}^n \phi_1(Z_i,\check{\eta}_{j(i)})$    
+
+
+$2^\tau$ multiply robust (sequentially double robust) and 
+same rate of $n^{1/2}$ consistency as tmle, better finite sample behavior as tmle but estimate is not guaranteed to be in support
+
+
+estimate density ratio $r_t$: duplicate dataset, where duplicates get assigned $A_t^{\mathbbm{d}}$ with indicator $\Lambda\in\{0,1\}$
+
+\noindent $r_t(a_t,h_t) \! \overset{1}{=} \!\frac{p^\lambda(a_t,h_t|\Lambda =1)}{p^\lambda(a_t,h_t|\Lambda =0)} 
+\overset{2}{=} \frac{P^\lambda(\Lambda=1|A_t=a_t, H_t=h_t)}{P^\lambda(\Lambda=0|A_t=a_t, H_t=h_t)}
+\overset{3}{=} \frac{u_t^\lambda(a_t,h_t)}{1{-}u_t^\lambda(a_t,h_t)}
+$
+
+\noindent with 1 definition of $r_t$, 2 Bayes rule, and 3 by definition
+
+\noindent $\Rightarrow$ any classification method can be used (e.\,g.\ Super Learning), cross-fitting should be used
+
+
+
+
+
+
+
 
 
 
