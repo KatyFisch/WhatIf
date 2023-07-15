@@ -1322,7 +1322,7 @@ $\widehat{\mathrm{Var}}[\mathrm{IF}_{\phi, \mathbb{P}_X}(Y)] = \frac{1}{n}\sum_{
 \end{enumerate}
 
 
-\paragraph{Simple Plug-In Estimator} \ \\  \vspace{-0.9em}
+\paragraph{Simple Plug-In Estimator} proto-TMLE   \vspace{-0.3em}
 
 1. fit outcome regression with variable $R = \begin{cases} +W^A & \text{if } A{=}1 \\ -W^A & \text{if } A{=}0 \end{cases}$ \vspace{-0.9em}
 
@@ -1372,38 +1372,29 @@ $$ - P_n \left[  \frac{\left\{\mathbbm{1}(A{=}1)-\mathbbm{1}(A{=}0)\right\}\left
 
 
 
+\paragraph{TMLE} \citep{van2006targeted, van2011targeted} \textit{t}argeted \textit{m}aximum \textit{l}ikelihood \textit{e}stimation:  an ML-based substitution estimator of the g-formula
+\vspace{-2.5em}
 
-
-
-
-
-
-
-
-\paragraph{TMLE} \citep{van2011targeted}
-
-\textit{t}argeted \textit{m}aximum \textit{l}ikelihood \textit{e}stimation
-$$O=(W, A, Y) \sim P_0$$
+$$\hspace{1em} O=(W, A, Y) \sim P_0; \hspace{1em} \mathcal{L}(O) = \overbrace{\mathrm{Pr}(Y|A, W)}^{Q}\overbrace{\mathrm{Pr}(A|W)}^{g}\overbrace{\mathrm{Pr}(W)}^{Q_W}$$
 
 \noindent target $\Psi(P_0) = \Psi(\bar{Q}_0, Q_{W,0}) = \psi_0$, 
-
-\textit{often: $\mathrm{E}_{W,0}\left[\mathrm{E}_0(Y|A{=}1,W) {-} \mathrm{E}_0(Y|A{=}0,W)\right]$}
+\textit{ATE: $\bar{Q}_0 = \mathrm{E}_0(Y|A,W)$} %$\mathrm{E}_{W,0}\left[\mathrm{E}_0(Y|A{=}1,W) - \mathrm{E}_0(Y|A{=}0,W)\right]$
 
 \noindent \textbf{first step:} outcome model $\bar{Q}^0_n(A,W)$ estimating $\bar{Q}_0$ (part of $P_0$)
 \begin{itemize}[leftmargin=*, itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
 \setlength{\itemsep}{0pt}%
 \setlength{\parskip}{0pt}
 \item  super learning is often used here, but leads to a biased estimate
-\item not all of $f(Y|A,W)$ needs to be estimated, just the relevant portion, \textit{typically average  outcome $\mathrm{E}_0(Y|A,W)$}  $\rightarrow$ efficiency $\uparrow$
+\item not all of $P_0$ is estimated, just relevant portion  $\bar{Q}_0$ $\rightarrow$ efficiency 
 \end{itemize}
 
-\noindent \textbf{second step:} update $\bar{Q}^0_n(A,W)$ to $\bar{Q}^1_n(A,W)$ using treatment model $g_n$ estimating $g_0 = P_0(A|W)$ 
+\noindent \textbf{second step:} update $\bar{Q}^0_n(A,W)$ to $\bar{Q}^1_n(A,W)$ using treatment model $g_n$ estimating $g_0 = P_0(A|W)$, \textit{e.\,g.\ for binary $A$:} 
 \begin{enumerate}[leftmargin=*, itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
 \setlength{\itemsep}{0pt}%
 \setlength{\parskip}{0pt}
 \item model $g_n$,  super learning is a popular choice here, too
-\item calculate $n$ clever covariates: $H^*_n(A,W) {=} \begin{cases}\frac{1}{g_n(1|W)}  &\text{if } A_i{=}1 \\   \frac{1}{g_n(0|W)}        &\text{if } A_i{=}0 \end{cases}$
-\item update $\bar{Q}_n^0$, by estimating $\epsilon_n$ with offset logistic regression: $\mathrm{logit} \bar{Q}_n^1(A,W) = \mathrm{logit} \bar{Q}_n^0(A,W) + \epsilon_n H_n^*(A,W)$ \newline (converges after first update), then calculate counterfactuals
+\item calculate $n$ clever covariates: $H^*_n(A,W) {=} \begin{cases}\frac{1}{g_n(1|W)}  &\text{if } A_i{=}1 \\   \frac{{-}1}{g_n(0|W)}        &\text{if } A_i{=}0 \end{cases}$
+\item update $\bar{Q}_n^0$, by estimating $\epsilon_n$ with offset logistic regression: $\mathrm{logit} \, \bar{Q}_n^1(A,W) = \mathrm{logit}\, \bar{Q}_n^0(A,W) + \epsilon_n H_n^*(A,W)$ \newline (converges after first update), then calculate counterfactuals
 \end{enumerate}
 \begin{itemize}[leftmargin=*, itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
 \setlength{\itemsep}{0pt}%
@@ -1416,15 +1407,15 @@ $$O=(W, A, Y) \sim P_0$$
 
 
 
-\noindent \textbf{advantages:} loss-based (does not only solve efficient influence curve estimating equation, but also uses a loss and working model preserving global constraints), well-defined (as a loss-based learner), substition estimator (respects global constraints $\to$ more robust to outliers and sparsity)
+\noindent \textbf{advantages:} loss-based (does not only solve efficient influence curve estimating equation, but also uses a loss and working model preserving global constraints), well-defined (as a loss-based learner), substition estimator (respects global constraints $\to$ more robust to outliers and sparsity) $\to$ good finite sample performance
 
 
 
-\noindent \textbf{closed form inference based on the influence curve:}
+\noindent \textbf{closed form inference based on the influence curve}, \textit{e.\,g.\,:}
 \begin{align*}IC_n^*(O_i) &= \overbrace{\left[\frac{\mathbbm{1}(A_i=1)}{g_n(1,W_i)} - \frac{\mathbbm{1}(A_i=0)}{g_n(0,W_i)}\right] \left[Y-\bar{Q}^1_n(A_i,W_i)\right]}^{a} \\ 
 &+ \overbrace{\bar{Q}^1_n(1,W_i) - \bar{Q}^1_n(0,W_i) -\psi_{TMLE,n}}^{b} 
 \end{align*}
-TMLE sets the mean of the IC, $\overline{IC}_n$, to zero ($b$ has already mean zero, see third step, the first part of $a$ is the clever covariate)
+TMLE sets the mean of the IC, $\overline{IC}_n$, to zero ($b$ has already mean zero, see third step, MLE sets the sum of $a$ to zero, if $H_n^*(A,W)$ is chosen correctly $\to$ the first part of $a$ is the clever covariate)
 
 \noindent \textit{sample variance} is then: $S^2(IC_n) = \frac{1}{n}\sum_{i=1}^n\left(IC_n(o_i) - \bar{IC}_n\right)^2$
 
@@ -1433,20 +1424,22 @@ TMLE sets the mean of the IC, $\overline{IC}_n$, to zero ($b$ has already mean z
 \noindent \textit{95\% CI:} $\psi_{TMLE,n} \pm z_{0.975}\frac{\sigma_n}{\sqrt{n}}$; p-value: $2\left[1-\Phi\left(\left|\frac{\psi_{TMLE,n}}{\sigma_n/\sqrt{n}}\right|\right)\right]$
 
 
-\paragraph{LTMLE} longitudinal
+\paragraph{LTMLE}  \citep{schomaker_using_2019, van2012targeted} \textit{l}ongitudinal TMLE: based on ice g-formula
 
 \noindent for $t=T,..., 1$:
+\begin{enumerate}[leftmargin=*, itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
+\item model $\mathrm{E}(Y_t|\bar{A}_{t-1}, \bar{L}_t)$ (for individuals observed at $t{-}1$)
 
-1. model $\mathrm{E}(Y_t|\bar{A}_{t-1}, \bar{L}_t)$ (fit on individuals that are uncensored and alive at $t-1$
+\item plug in $\bar{A}_{t-1}=\bar{d}_{t-1}$; use regression from step 1 to predict outcome at time $t$, i.\,e.\ $\bar{Y}_t^{\bar{d}_t}$ 
 
-2. plug in $\bar{a}_{t-1}=\bar{d}_{t-1}$; use regression from 1 to predict outcome at time $t$, ie. $\bar{Y}_t^{\bar{d}_t}$ 
+\item update estimate
+with $\bar{Y}_{t,\text{new}}^{\bar{d}_t} = offset(\bar{Y}_t^{\bar{d}_t}) + \epsilon \hat{H}(\bar{A},\bar{C},\bar{L})_{t-1}$: update $\bar{Y}_t^{\bar{d}_t}$ (clever covariate can also be used as a weight)
 
-3. update estimate
-with $Y_{t} = offset(step 2 result in t) + \epsilon \times clever covariate$: predict $\bar{Y}_t^{\bar{d}_t}$ (alternatively the clever covariate can be used as a weight)
+clever covariate: $\hat{H}(\bar{A},\bar{C},\bar{L})_{t-1}=\sum_{s=0}^{t-1}\frac{\mathbbm{1}(\bar{A}_s = \bar{d}_s)}{\widehat{\mathrm{Pr}}(A_s=d_s| \bar{A}_{s-1} = \bar{d}_{s-1} )}$
 
-4. $\hat{\psi}_T =$ mean of $\bar{Y}_1^{\bar{d}_1}$
-
-
+\item $\hat{\psi}_T =$ mean of $\bar{Y}_1^{\bar{d}_1}$, get CI using influence curve
+\end{enumerate}
+%todo
 
 
 
@@ -1471,43 +1464,6 @@ with $Y_{t} = offset(step 2 result in t) + \epsilon \times clever covariate$: pr
 6. TMLE olves the efficient influence curve equation $0=\sum_{i=1}^n D^*(P^*_n)(O_i)$ $\to$ esymptotic linearity and efficiency
 
 %todo read chapter 5
-
-
-\ \\
-\noindent----------------------------------------------------------------------------------
-
-
-
-$\mathcal{L}(O) = \overbrace{\mathrm{Pr}(Y|A, W)}^{Q_Y}\overbrace{\mathrm{Pr}(A|W)}^{g}\overbrace{\mathrm{Pr}(W)}^{Q_W}$: $g$ itself is not needed as we intervene on treatment, but it can help improving the estimate of $Q_Y$
-
-
-
-$H(A,W)$ depends on target parameter and loss function but is a function of the propensitiy score
-update initial fit $\bar{Q}^*_n = \bar{Q}^0_n + \hat{\epsilon}H(A,W)$
-
-
-valid inference, good finite sample performance, 
-
-
-$H(A,W)$ comes from the influence curve, targeting ensures mean of efficient influence curve $D^*(P)$  is zero
-
-TMLE solves $P_nD^*(P^*_n)=0$
-
-
-
-TMLE is a substitution estimator $\psi_n^{TMLE} = \frac{1}{2}\sum_{i=1}^n \bar{Q}^*_n(1,W_i) - \frac{1}{2}\sum_{i=1}^n \bar{Q}^*_n(0,W_i)$ therefore mean of b is zero
-
-targeting step makes sure a also has mean zero
-
-
-
-MLE solves $\sum_{i=1}^n H(A_i, W_i)\left[Y_i-\bar{Q}^*_n(A_i,W_i)\right]=0$ where $\bar{Q}^*_n(A_i,W_i) = \hat{\epsilon}H(A,W) + \bar{Q}^0_n$
- therefore obvious choice: $H(A,W) = \frac{A}{g(1,W)} - \frac{1-A}{g(0,W)}$
- 
- 
- influence curve based inference: 
- asymptotic linearity $\sqrt{n}\left(\psi_n^{TMLE} - \psi_0\right) \overset{D}{\rightarrow} \mathrm{N}(0,\sigma^2)$
- 
 
 
 
