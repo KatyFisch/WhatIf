@@ -1,8 +1,11 @@
-\documentclass[8pt,oneside]{extarticle}
+\documentclass[8pt,twoside]{extarticle}
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{xcolor}
-\usepackage[a4paper,left=2.3cm,right=1.2cm,top=2cm,bottom=2cm]{geometry} 
+
+% for printing
+%\usepackage[a4paper,inner=2.3cm,outer=1.2cm,top=2cm,bottom=2cm, asymmetric, twoside]{geometry}
+\usepackage[a4paper,inner=1.75cm,outer=1.75cm,top=2cm,bottom=2cm, asymmetric, twoside]{geometry} 
 %\usepackage{blindtext}
 \usepackage{setspace}
 %\usepackage{float}
@@ -1423,45 +1426,49 @@ TMLE sets the mean of the IC, $\overline{IC}_n$, to zero ($b$ has already mean z
 
 \noindent \textit{95\% CI:} $\psi_{TMLE,n} \pm z_{0.975}\frac{\sigma_n}{\sqrt{n}}$; p-value: $2\left[1-\Phi\left(\left|\frac{\psi_{TMLE,n}}{\sigma_n/\sqrt{n}}\right|\right)\right]$
 
+\vspace{0.2em}
+\noindent \colorbox{lightgray!20!white}{\begin{minipage}{28em}
 
-\paragraph{LTMLE}  \citep{schomaker_using_2019, van2012targeted} \textit{l}ongitudinal TMLE: based on ice g-formula
+\textbf{\textcolor{darkgray}{time-varying} LTMLE}
+ \citep{schomaker_using_2019, van2012targeted} \textit{l}ongitudinal TMLE: based on ice g-formula
 
 \noindent for $t=T,..., 1$:
 \begin{enumerate}[leftmargin=*, itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
-\item model $\mathrm{E}(Y_t|\bar{A}_{t-1}, \bar{L}_t)$ (for individuals observed at $t{-}1$)
+\item model $\widehat{\mathrm{E}}(Y_t|\bar{A}_{t-1}, \bar{L}_t)$ (for individuals observed at $t{-}1$)
 
 \item plug in $\bar{A}_{t-1}=\bar{d}_{t-1}$; use regression from step 1 to predict outcome at time $t$, i.\,e.\ $\bar{Y}_t^{\bar{d}_t}$ 
 
 \item update estimate
-with $\bar{Y}_{t,\text{new}}^{\bar{d}_t} = offset(\bar{Y}_t^{\bar{d}_t}) + \epsilon \hat{H}(\bar{A},\bar{C},\bar{L})_{t-1}$: update $\bar{Y}_t^{\bar{d}_t}$ (clever covariate can also be used as a weight)
-
-clever covariate: $\hat{H}(\bar{A},\bar{C},\bar{L})_{t-1}=\sum_{s=0}^{t-1}\frac{\mathbbm{1}(\bar{A}_s = \bar{d}_s)}{\widehat{\mathrm{Pr}}(A_s=d_s| \bar{A}_{s-1} = \bar{d}_{s-1} )}$
+with $\bar{Y}_{t,\text{new}}^{\bar{d}_t} = \mathrm{offset}(\bar{Y}_t^{\bar{d}_t}) + \epsilon \hat{H}(\bar{A},\bar{C},\bar{L})_{t-1}$: update $\bar{Y}_t^{\bar{d}_t}$ (or regress $\mathrm{offset}(\bar{Y}_t^{\bar{d}_t}) + \epsilon 1$ with weights $\hat{H}(\bar{A},\bar{C},\bar{L})_{t-1}$), with
+clever covariate (without censoring): $\hat{H}(\bar{A},\bar{L})_{t-1}=\prod_{s=0}^{t-1}\frac{\mathbbm{1}(\bar{A}_s = \bar{d}_s)}{\widehat{\mathrm{Pr}}(A_s=d_s| \bar{A}_{s-1} = \bar{d}_{s{-}1}, \bar{L}_s = \bar{l}_s )}$
 
 \item $\hat{\psi}_T =$ mean of $\bar{Y}_1^{\bar{d}_1}$, get CI using influence curve
 \end{enumerate}
-%todo
+
+result is a $K+2$ multiply robust estimator \citep{diaz2021nonparametric}
+
+\end{minipage}}
 
 
 
 
-\paragraph{TMLE advanced} \citep{van2011targeted}
+%\paragraph{TMLE advanced} \citep{van2011targeted}
+\vspace{0.5em}
 
-\textit{t}argeted \textit{m}inimum \textit{l}oss-based \textit{e}stimation
+\noindent \textbf{\textit{t}argeted \textit{m}inimum \textit{l}oss-based \textit{e}stimation}
 
 
 \noindent target parameter $\Psi: \mathcal{M} \to \mathbb{R}$, with $\mathcal{M}$ the statistical model used
 
-1. compute its pathwise derivative at $P$ and corresponding canonical gradient $D^*(P)$ (efficient influence curve: a function of $O$ with mean zero under $P$)
-
-2. define loss function $L()$ s.t. $P\to E_0L(P)$ is minimized at true $P_0$ (or just relevant $Q$)
-
-3. for a $P$ in model $\mathcal{M}$ define a parametric working model $\left\{P(\epsilon):\epsilon\right\}$ s.t. $P(\epsilon=0)=P$ and a ``score'' $\frac{d}{d\epsilon}L(P(\epsilon))$:  score (or linear combination of its components) equals $D^*(P)$ at $P$ (or just relevant $Q$)
-
-4. with initial estimate $P_n^0$, compute $\epsilon_n^0=\arg\min_\epsilon \sum_{i=1}^n L(P_n^0(\epsilon))(O_i)$, calculate first iteration $P^1_n=P_n^0(\epsilon_n^0)$, repeat until $\epsilon^k_n=0$ (or just relevant $Q$)
-
-5. get TMLE estimate $\psi_0$ as the substitution estimator pluggint $P^*_n$ into $\Psi$
-
-6. TMLE olves the efficient influence curve equation $0=\sum_{i=1}^n D^*(P^*_n)(O_i)$ $\to$ esymptotic linearity and efficiency
+\begin{enumerate}[leftmargin=*, itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
+\item compute $\Psi$'s pathwise derivative at $P$ and its corresponding canonical gradient $D^*(P)$ (efficient influence curve)
+\item define a loss $L()$ s.\,t.\ $P\to E_0L(P)$ is minimized at true $P_0$ 
+\item for a $P$ in model $\mathcal{M}$ define a parametric working model $\left\{P(\epsilon):\epsilon\right\}$ s.\,t.\ $P(\epsilon=0)=P$ and a ``score'' $\frac{d}{d\epsilon}L(P(\epsilon))$ s.\,t.\ it (or linear combination of its components) equals $D^*(P)$ at $P$ 
+\item  compute $\epsilon_n^0{=}\arg\min_\epsilon\! \sum_{i=1}^n \! L(P_n^0(\epsilon))(O_i)$, with initial estimate $P_n^0$, then  first iteration $P^1_n=P_n^0(\epsilon_n^0)$, repeat until $\epsilon^k_n=0$ 
+\item get TMLE estimate $\psi_0$ by plugging $P^*_n$ into $\Psi$ (substitution)
+\item  TMLE solves the efficient influence curve equation $\sum_{i=1}^n D^*(P^*_n)(O_i)=0$ $\to$ asymptotic linearity and efficiency
+\end{enumerate}
+can also be carried out for a relevant part $Q$ instead of all of $P$
 
 %todo read chapter 5
 
