@@ -142,6 +142,20 @@
 
 \begin{multicols}{2}
 
+\paragraph{Ladder Of Causation} \citep{pearl2019seven}
+
+\noindent
+\hspace{-0.9em}
+\begin{minipage}{\textwidth}
+\begin{tabular}{l@{\hskip 5pt} l@{\hskip 5pt}l@{\hskip 5pt}l@{\hskip 5pt}}
+1.\ rung: \textbf{association} & $Pr\left[y|x\right]$ & observation & \textit{What is?} \\
+2.\ rung: \textbf{intervention} & $Pr\left[y|do(x),z\right]$ & experiment & \textit{What if?} \\
+3.\ rung: \textbf{counterfactuals} & $Pr\left[y^x|x',y'\right]$ & retrospection & \textit{Why?}
+\end{tabular}
+\end{minipage}
+if a tool can answer rung $i$ questions, it can also answer rung $j<i$
+
+
 \paragraph{Causal Roadmap} \citep{petersen2014causal} 
 systematic approach linking causality to statistical procedures
 
@@ -255,8 +269,6 @@ earliest, random $t$, all $t$ (adjust variance with bootstrapping)
  if $A=a$, then $Y^a=Y$ for each individual
  
 \begin{itemize}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt, leftmargin=1.5em]
-\setlength{\itemsep}{0pt}%
-\setlength{\parskip}{0pt}
 \item precise definition of $Y^a$ via specifying $a$ (sufficiently well-defined $a$ maybe impossible (effect of DNA before it was discovered), relies on expert consensus)
 \item linkage of counterfactuals to data ($a$ must be seen in data) 
 \end{itemize}
@@ -264,8 +276,6 @@ earliest, random $t$, all $t$ (adjust variance with bootstrapping)
 \noindent \textbf{positivity} $\mathrm{Pr}\left[A=a|L=l\right] >0 \,\,\, \forall \, l \text{ with } \mathrm{Pr}\left[L=l\right]>0$; $$f_L(l)\neq 0 \Rightarrow f_{A|L}(a|l)>0 \,\, \forall a,l$$
 
 \begin{itemize}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt, leftmargin=1.5em]
-\setlength{\itemsep}{0pt}%
-\setlength{\parskip}{0pt}
 \item structural violations (inference not on full population)
 \item random variability (smooth over with parametric models)
 \end{itemize}
@@ -273,8 +283,6 @@ earliest, random $t$, all $t$ (adjust variance with bootstrapping)
 
 \noindent \textbf{exchangeability} unverifiable without randomization
 \begin{itemize}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt, leftmargin=1.5em]
-\setlength{\itemsep}{0pt}%
-\setlength{\parskip}{0pt}
 \item \textit{marginal:} $Y^a \indep A$ $\widehat{=}$ randomized experiment, \newline counterfactuals are missing completely at random (MCAR)
 
 \item \textit{conditional:} $Y^a {\indep} A|L$ $\widehat{=}$ conditionally randomized, counterfactuals are missing at random (MAR)
@@ -1184,9 +1192,6 @@ a closed form estimator exists for the linear case
 
 
 
-%todo p 280-283, 284
-
-
 \paragraph{Double-Robustness} \citep{hernan2023causal}
 
 \noindent g-formula: \textit{either} treatment model $f(L)$  \textit{or} outcome model $b(L)$ 
@@ -1225,7 +1230,6 @@ a closed form estimator exists for the linear case
 
 
 
-%todo p.240 - 244
 \noindent \textbf{asymptotic behavior} 
 for valid (Wald) CI we need:
 \begin{itemize}[leftmargin=*, itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
@@ -1486,7 +1490,7 @@ can also be carried out for a relevant part $Q$ instead of all of $P$
 \end{itemize}
 \textbf{solution:} longitudinal MTP $A_t^{\mathbbm{d}} = \mathbbm{d}\left(A_t(\bar{A}_{t-1}^{\mathbbm{d}}), H_t(\bar{A}_{t-1}^\mathbbm{d})\right)$, e.\,g.\ threshold (max$(c,a_t)$), shift ($a_t + \delta$ if positivity else $a_t$), stochastic (draw from $F(\mathbbm{d}(A_t,H_t)|H_t)$; randomizer $\indep$ $U, P$), shifted propensity score (only for binary $A$)
 
-\noindent \textbf{identification} for a given NPSEM, assumptions: %todo annahmen sind da dahinter
+\noindent \textbf{identification} for a given NPSEM, assumptions: 
 
 \begin{itemize}[leftmargin=*, itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
 \item \textit{positivity} if $(a_t,h_t)$ in  $\mathrm{supp}\!\left\{A_t,H_t\right\}$ then $ \mathbbm{d}((a_t,h_t)|h_t) $ too
