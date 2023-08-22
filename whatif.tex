@@ -1484,7 +1484,7 @@ can also be carried out for a relevant part $Q$ instead of all of $P$
 
 \noindent \textbf{problems} for (longitudinal) continuous or multi-valued $A$:
 \begin{itemize}[leftmargin=*, itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
-\item fixed value counterfactuals
+\item fixed value counterfactuals unrealistic
 \item infinite-dimensional dose-response curve needs parametric assumptions or is not $n^{1/2}$ consistent
 \item positivity is often violated 
 \end{itemize}
@@ -1493,7 +1493,7 @@ can also be carried out for a relevant part $Q$ instead of all of $P$
 \noindent \textbf{identification} for a given NPSEM, assumptions: 
 
 \begin{itemize}[leftmargin=*, itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
-\item \textit{positivity} if $(a_t,h_t)$ in  $\mathrm{supp}\!\left\{A_t,H_t\right\}$ then $ \mathbbm{d}((a_t,h_t)|h_t) $ too
+\item \textit{positivity} if $(a_t,h_t)$ in  $\mathrm{supp}\!\left\{A_t,H_t\right\}$ then $ (\mathbbm{d}(a_t,h_t),h_t) $ too
 \item \textit{sequential randomization:} 
 \begin{itemize}[leftmargin=*, itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
 \item \textit{standard} $U_{A,t}\indep\underline{U}_{L,t+1}|H_t$ (for stochastic LMTP)
@@ -1508,10 +1508,10 @@ can also be carried out for a relevant part $Q$ instead of all of $P$
 \noindent solve $\theta = \mathrm{E}\left[m_1(A_1^{\mathbbm{d}},L_1)\right]$
 
 
-\noindent \textbf{optimality}  \textit{limitations:} threshold LMTPs can't be $n^{1/2}$ consistent as not differentiable,
-continuous $A$ can only be considered, if \textit{piecewise smooth invertibility}
+\noindent \textbf{optimality}  \textit{limitations:} threshold LMTPs can't be $n^{1/2}$ consistent as parameter not pathwise differentiable,
+continuous $A$ can only be considered, if $\mathbbm{d}(\cdot,h_t)$ \textit{piecewise smooth invertible}
 
-\noindent efficient influence curve:
+\noindent efficient influence curve (assumes $\mathbbm{d} \indep $ P):
 $$EIF\left(\mathrm{E}\left[m_1(A^{\mathbbm{d}}, L_1)\right]\right) = \phi_1(Z) - \theta$$ with
 $r_t(a_t, h_t) =\frac{g_t^{\mathbbm{d}}(a_t|h_t)}{g_t(a_t|h_t)}  $ and
 $\phi_t: z \mapsto \sum_{s=t}^\tau \left(\prod_{k=t}^s r_k(a_k,h_k)\right)$ $\left\{m_{s+1}(a_{s+1}^{\mathbbm{d}},h_{s+1})-m_s(a_s,h_s)\right\} + m_t(a_t^{\mathbbm{d}},h_t)$
@@ -1541,7 +1541,7 @@ $\tau{+}1$ multiply robust \& $n^{1/2}$ consistent (if nuisance consistant)
 \noindent \textit{step 3:} for $t=\tau,...,1:$ fit generalized linear tilting model 
 $$\hspace{-1em}\mathrm{link}\, \tilde{m}_{t}^\epsilon(A_{t,i},H_{t,i}) = \epsilon + \mathrm{link} \,\tilde{m}_{t,j(i)}(A_{t,i},H_{t,i})$$ with the canonical link and use $\hat{\epsilon}$ to update $\tilde{m}_{t, j(i)}^{\hat{\epsilon}}$
 
-\noindent \textit{step 4:} $\hat{\theta}_{\text{tmle}} = \frac{1}{2} \sum_{i=1}^n \tilde{m}_{1,j(i)}(A^{\mathbbm{d}}_{1,i},L_{1,i})$
+\noindent \textit{step 4:} $\hat{\theta}_{\text{tmle}} = \frac{1}{n} \sum_{i=1}^n \tilde{m}_{1,j(i)}(A^{\mathbbm{d}}_{1,i},L_{1,i})$
 
 
 
