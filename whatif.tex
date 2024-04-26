@@ -128,7 +128,30 @@
 \setlength{\columnseprule}{0.3pt} %Liniendicke zwischen zwei Multicols
 
 
+%-------------------------------------------------------------------------------
 
+% SECTION: PREREQUISITES
+
+%-------------------------------------------------------------------------------
+
+% this is what Introduction to Modern Causal Inference (Schuler, van der Laan) suggests
+\section{Prerequisites}
+
+% intro to real analysis
+\subsection[Real Analysis]{Real Analysis \citep{abbott2015understanding}}
+
+
+
+% measure theoretic probability
+
+
+% functional analysis
+
+
+
+
+
+% asymptotic statistics
 
 
 
@@ -961,12 +984,12 @@ $SW^{A,C}=SW^A \times SW^C$ &(uses $n^{c=0}$) &
 
 
 \paragraph{Standardization} plug-in (parametric if so) g-formula
-$$\mathrm{E}\left[Y^{a}\right] = \overbrace{\mathrm{E}\left[\mathrm{E}\left[Y|A{=}a,L{=}l\right]\right]}^{\text{conditional expectation}} =  \overbrace{ \textstyle{\int} \mathrm{E}\left[Y|L=l, A=a\right]f_L\left[l\right]dl}^{\text{joint density estimator}} $$
+$$\mathrm{E}\left[Y^{a}\right] = \overbrace{\mathrm{E}\left[\mathrm{E}\left[Y|A{=}a,L{=}l\right]\right]}^{\text{conditional expectation}} =  \overbrace{ \textstyle{\int} \mathrm{E}\left[Y|A=a, L=l\right]f_L\left[l\right]dl}^{\text{joint density estimator}} $$
 weighted average of stratum-specific risks; unknowns can be estimated non-parametrically or modeled
 
 \noindent \textbf{no need to estimate $\boldsymbol{f_L\left[l\right]}$/integrate} as empirical distribution can be used: estimate outcome model $\rightarrow$ predict counterfactuals on whole dataset $\rightarrow$ average the results ($\rightarrow$ CI by bootstrapping)
 
-\noindent \textbf{for discrete $\boldsymbol{ L}$}  $\mathrm{E}\left[Y|A=a\right] = \sum_l \mathrm{E}\left[Y|L=l, A=a\right]\mathrm{Pr}\left[L=l\right]$
+\noindent \textbf{for discrete $\boldsymbol{ L}$}  $\mathrm{E}\left[Y|A=a\right]$ is $\sum_l \mathrm{E}\left[Y|A=a,L=l\right]\mathrm{Pr}\left[L=l\right]$
 
 \vspace{0.2em}
 \noindent \colorbox{lightgray!20!white}{\begin{minipage}{28em}
@@ -1047,11 +1070,11 @@ Proof: for $L_0 \rightarrow A_0 \rightarrow Y_0 \rightarrow L_1 \rightarrow A_1 
 \begin{alignat*}{4} 
 \mathrm{E}\left[Y_1^{\bar{a}}\right] & \overset{\text{CE}}{=} && \mathrm{E}\left[\mathrm{E}\left[   Y_1^{\bar{a}}|A_0{=}a_0, L_0   \right]\right]  \\ 
 \text{(ice)}\,\,\, &\overset{\text{CE*}}{=} && \mathrm{E}\left[\mathrm{E}\left[  \mathrm{E}\left[Y_1|\bar{L}, \bar{A}{=}\bar{a}, Y_0 \right]| A_0{=}a_0, L_0   \right]\right]  \\ 
-&\overset{\text{LTP}}{=} && \mathrm{E}\left[ \sum\nolimits_{l_1} \mathrm{E}\left[Y_1|A_0{=}a_0, \bar{L}, Y_0\right] \mathrm{Pr}\left[l_1|a_0,l_0, y_0\right]         \right] \\
-&\overset{\text{LTP}}{=} && \sum\nolimits_{l_0}\!\!\!\left[ \sum\nolimits_{l_1} \!\!\!\mathrm{E}\left[Y_1|A_0{=}a_0, \bar{L}, Y_0\right] \mathrm{Pr}\left[l_1|a_0,l_0, y_0\right]         \right] \mathrm{Pr}\left[l_0\right] \\
+&\overset{\text{LIE}}{=} && \mathrm{E}\left[ \sum\nolimits_{l_1} \mathrm{E}\left[Y_1|A_0{=}a_0, \bar{L}, Y_0\right] \mathrm{Pr}\left[l_1|a_0,l_0, y_0\right]         \right] \\
+&\overset{\text{LIE}}{=} && \sum\nolimits_{l_0}\!\!\!\left[ \sum\nolimits_{l_1} \!\!\!\mathrm{E}\left[Y_1|A_0{=}a_0, \bar{L}, Y_0\right] \mathrm{Pr}\left[l_1|a_0,l_0, y_0\right]         \right] \mathrm{Pr}\left[l_0\right] \\
 \text{(jde)}\,\,\, &\overset{\text{sum}}{=} &&  \sum\nolimits_{\bar{l}} \mathrm{E}\left[Y_1|A_0{=}a_0, \bar{L}, Y_0\right] \mathrm{Pr}\left[l_1|a_0,l_0\right]          \mathrm{Pr}\left[l_0\right] 
 \end{alignat*}
-CE: conditional expectation; *: exchangeability; \newline LTP: law of total probability
+CE: conditional expectation; *: exchangeability; \newline LIE: law of iterated expectation
 \end{mdframed}
 
 
@@ -1577,8 +1600,23 @@ $
 \noindent $\Rightarrow$ any classification method can be used (e.\,g.\ Super Learning), cross-fitting should be used
 
 
+\paragraph{Methods for continuous \textit{A}} \citep{kennedy2017non}
 
+\noindent doubly robust methods possible for continuous $A$ for \textit{parametric} effect curves otherwise a $\sqrt{n}$ consistent estimator can not exist
 
+\noindent \textbf{procedure:} found double robust $\xi$ using efficient influence curve in 
+$\mathbb{E}\left\{\xi(Z;\bar{\pi},\bar{\mu})|A=a\right\}=\theta(a)$, with data $Z$ and nuisance $\pi,\mu$
+
+\begin{itemize}[leftmargin=*, itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
+\item[] \textit{step 1:} estimate nuisance $\pi,\mu$ and predict
+\item[] \textit{step 2:} construct pseudo-outcome $\hat{\xi}(Z;\hat{\pi}, \hat{\mu})$ and regress on $A$ (e.\,g.\ using local linear kernel regression)
+\end{itemize}
+
+\noindent \textbf{consistent if:} either $\bar{\pi}=\pi$ or $\bar{\mu}=\mu$, $\theta(a)$ twice continuously differentiable (and two other items are continuous, assumptions on the kernel part and the function class of nuisance) 
+
+\noindent \textbf{asymptotic normality} if at least one nuisance is  fast enough
+
+\noindent \textbf{TMLE version} a clever covariate is given by the authors
 
 
 
