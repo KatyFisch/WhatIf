@@ -246,7 +246,7 @@ $E$ is connected $\Leftrightarrow$ all nonempty disjoint sets  $B,C$ s.t.\ $E=B\
 
   \textbf{Baire's Theorem:} $\mathbb{R}$ cannot be written as the countable union of nowhere-dense sets; $E$ is nowhere-dense if $\bar{E}$ contains no nonempty open intervals
 
-\paragraph{Functional Limits and Continuity}  hi
+\paragraph{Functional Limits and Continuity}  \ \\
 
  \textbf{Functional Limit:} let $f:A\to\mathbb{R}$ and $c$ limit point of $A$
 $\forall \epsilon > 0 \, \exists \delta>0$ s.t.\ $0<|x-c|<\delta$ (and $x\in A$) if follows $|f(x)-L|<\epsilon$, then $\lim_{x\to c} f(x)=L$
@@ -298,6 +298,80 @@ if $f$ is continuous on a compact set, $f$ attains min/max values
 
 
 
+\paragraph{Derivation} $g'(c)=\lim_{x\to c} \frac{g(x)-g(c)}{x-c}$ \newline
+$(f{+}g)'(c) = f'(c) {+} g'(c)$; \,\,\, $(fg)'(c)=f'(c)g(c) {+} f(c)g'(c)$; $(kf)'(c) = kf'(c)$; \,\,\, $(f/g)'(c) =\frac{g(c)f'(c)-f(c)g'(c)}{g^2(c)}$, for $g(c)\neq 0$; 
+$g\circ f)'(c)=g'(f(c))\cdot f'(c)$
+
+
+\textbf{Differentiability:} Differentiability at $c$ implies continuity at $c$
+
+\textbf{Interior Extremum Theorem:} let $f$ differentiable on $(a,b)$; if $f$ has a maximum or minimum at $f(c)$, then $f'(c)=0$
+
+
+\textbf{Darboux's Theorem:} if $f$ differentiable on $\left[a,b\right]$ and $f'(a)<\alpha<f'(b)$ then $\exists c\in (a,b)$, where $f'(c)=\alpha$
+
+
+\textbf{Rolle's Theorem:} $f(a)=f(b) \Rightarrow \exists c\in (a,b)$ with $f'(c)=0$
+
+\textbf{Mean Value Theorem:} if $f:[a,b]\to\mathbb{R}$ continuous on $[a,b]$ and differentiable on $(a,b)$ then $\exists c\in(a,b)$ with $f'(c)=\frac{f(b)-f(a)}{b-a}$
+
+\textbf{Generalized Mean Value Theorem:} $f,g$ continuous on $[a,b]$ and differentiable on 
+$(a,b)$ $\Rightarrow \exists c\in(a,b)$ with $\left[f(b)-f(a)\right]g'(c) = $  $ \left[g(b)-g(a)\right]f'(c)$; 
+if $g\neq0$: $\frac{f'(c)}{g'(c)}=\frac{f(b)-f(a)}{g(b)-g(a)}$
+
+\textbf{L'Hopital's Rules:} 
+
+\textbf{0/0: } let $a\in I$, $f,g$ continuous on $I$, diff'able on $I\setminus a$:  
+
+if $f(a){=}0{=}g(a)$ then $\lim_{x\to a}\frac{f'(x)}{g'(x)} = L \Rightarrow \lim_{x\to a}\frac{f(x)}{g(x)} = L$
+
+\textbf{$\boldsymbol{\infty}$/$\boldsymbol{\infty}$: } let $f,g$ differentiable on $(a,b)$:
+
+if $\lim_{x\to a}g(x)=\infty$ then $\lim_{x\to a}\frac{f'(x)}{g'(x)}=L \Rightarrow \lim_{x\to a}\frac{f(x)}{g(x)}=L$
+
+
+\paragraph{Functional Sequences} \ \\
+
+\textbf{Convergence:} let $f_n$ be defined on $A\subseteq\mathbb{R}$ 
+
+\textit{Pointwise:} if  $\lim_{n\to \infty} f_n(x)=f(x)$ $\forall x \in A$ then $f_n\to f$
+
+\textit{Uniform:} $\forall \epsilon>0 \,\exists N\in\mathbb{N}$ s.t.\ $|f_n(x)-f(x)|<\epsilon \,\,\,\forall x\in A, n\geq N$
+
+\textit{Cauchy Criterion:} $(f_n)$ converges uniformly if and only if  $\forall \epsilon > 0\,\exists N\in \mathbb{N}$ s.t.\ $|f_n(x)-f_m(x)|<\epsilon \forall x\in A, m,n \geq N$
+
+\textbf{Continuity:}  let $(f_n)$ converges uniformly to $f$, if all $f_n$ are continuous at $c\in A$, then $f$ is in continuous at $c$
+
+\textbf{Differentiability:} let $(f_n)$ differentiable on $[a,b]$ and $(f'_n) \to g$ uniformly on $[a,b]$; if $\exists x_0\in[a,b]$ where $f_n(x_0)$ convergent, then (1) $(f_n)$ converges uniformly (2) $f{=}\lim f_n$ differentiable (3) $f'{=}g$
+
+\paragraph{Functional Series} $\sum_{n=1}^\infty f_n(x)$
+
+\textbf{Convergence:} converges \textit{pointwise (uniformly)} on $A$ to $f(x)$ if sequence of partial sums converges pointwise (uniformly) to $f(x)$
+
+\textit{Cauchy Criterion:} $\forall \epsilon>0 \,\exists N\in \mathbb{N}$ s.t.\ $\forall n>m\geq N: |f_{m+1}(x) + f_{m+2}(x) + ... f_{n}(x)| <\epsilon \,\forall x\in A$
+
+ \textit{Weierstrass M-Test:} let $(f_n)$ defined on $A\subseteq \mathbb{R}$, let $M_n>0$ satisfy $|f_n(x)|\leq M_n \,\forall x\in A$; if $\sum_{n=1}^\infty M_n$ converges, then $\sum_{n=1}^\infty f_n$ converges uniformly on $A$
+ 
+ \textbf{Power Series:} $f(x)=\sum_{n=0}^\infty a_nx^n$
+
+\textit{Convergence:} $f(x)$ converges for $x_0\in \mathbb{R}$ $\Rightarrow$ converges absolutely for any $x$ with $|x|\leq |x_0|$ (the set of convergence is $(/[-R,R]/)$ with $R\in\mathbb{R}_0^+ \cup \infty$, $R$ is called the radius of convergence)
+
+\textit{Abel's Theorem:} let $f(x)$ converges at $x=R>0$; then $f(x)$ converges uniformly on $[0,R]$ (similar for $x=-R$);
+
+\textit{Uniform Convergence:} if a power series converges pointwise on $A\subseteq \mathbb{R}$, then it converges uniformly on any compact set $K\subseteq A$
+
+
+\textit{Differentiability:} if $f(x)$ converges on interval $A\subseteq \mathbb{R}$, then
+
+\begin{itemize}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt, leftmargin=1.0em]
+\item $f$ continuous on $A$ and differentiable on any $(-R,R)\subseteq A$
+\item the derivative is $f'(x)=\sum_{n=1}^\infty na_nx^{n-1}$
+\item $f$ is infinitely differentiable on $(-R,R)$ 
+\end{itemize} 
+
+\textbf{Taylor Series:}  $f(x)=\frac{f^{(n)}(a)}{n!} (x-a)^n$ \,\,\,(here $a=0$)
+
+\textit{Lagrange's Remainder Theorem:} let $f$ infinitely differentiable on $(-R,R)$, define $a_n=f^{(n)}(0)/n!$, let $S_N$ partial sums to $N$, then for $x\neq 0$ $\exists c:|c|{<}|x|$, where error $f(x){-}S_N(x)=\frac{f^{(N+1)}(c)}{(N+1)!}x^{N+1}$
 
 
 
