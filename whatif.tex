@@ -132,18 +132,18 @@
  \textit{least upper bound (supremum)} $s \in \mathbb{R}$ s.t.\ $s$ is upper bound \& $\forall$ upper bounds $b$: $s\leq b$; greatest lower (infimum) analogous
 
 
- \textbf{Cardinality:} $A\sim B$, if $\exists f:A\to B$, where $f$ is 1-1 and onto
+ \textbf{Cardinality:} $A\sim B$, if $\exists f:A\to B$, where $f$ bijective (in+sur)
 
  \textit{function} $f:A\to B$ mapping $f(x)=...$, domain = $A$, range $\subseteq B$
-``1-1'' if $a_1{\neq} a_2 \Rightarrow f(a_1){\neq} f(a_2)$,
-``onto'' if $\forall b{\in} B \, \exists a{\in} A: f(a){=}b$
+\textit{in/1-1:} $a_1{\neq} a_2 \Rightarrow f(a_1){\neq} f(a_2)$;
+\textit{sur/onto:} if $\forall b{\in} B \, \exists a{\in} A: f(a){=}b$
 
 
  \textbf{Axiom of Completeness:} every nonempty set of real numbers that is bounded above has a least upper bound; AoC, NIP, BW, CC, MCT are equivalent: if one is assumed the others follow
 
 
 
- \textbf{Nested Interval Property:} if $I_n {=}\left[a_n,b_n\right]{=}\left\{x{\in}\mathbb{R}\!:a_n{\leq} x {\leq} b_n\right\}$, where $n\in \mathbb{N}$ and $I_1\supseteq I_2 \supseteq I_3 ...$, then $\cap_{n=1}^\infty I_n \neq 0$
+ \textbf{Nested Interval Property:} if $I_n {=}\left[a_n,b_n\right]{=}\left\{x{\in}\mathbb{R}\!:a_n{\leq} x {\leq} b_n\right\}$, where $n\in \mathbb{N}$ and $I_1\supseteq I_2 \supseteq I_3 ...$, then $\cap_{n=1}^\infty I_n \neq \emptyset$
 
 
 
@@ -155,11 +155,11 @@
 
  \textit{Cauchy sequence:} $\forall \epsilon>0\exists N\in\mathbb{N}$ s.t.\ $m,n\geq N\Rightarrow |a_n-a_m|<\epsilon$
 
- \textbf{Boundedness:} $(x_n)$ is bounded if $\exists M>0$ s.t.\ $|x_n|\leq M \forall n\in \mathbb{N}$
+ \textbf{Boundedness:} $(x_n)$ is bounded if $\exists M>0$ s.t.\ $|x_n|\leq M \,\forall n\in \mathbb{N}$
 
- \textbf{Algebraic Limit Theorem:} if $(a_n){\to} a$, $(b_n){\to} b$, then $(ca_n) {\to} ca$, $(a_n {+} b_n){\to} a{+}b$, $(a_nb_n){\to} ab$, $(a_n/b_n){\to} ab$ for $b\neq 0$
+ \textbf{Algebraic Limit Theorem:} if $(a_n){\to} a$, $(b_n){\to} b$, then $(ca_n) {\to} ca$, $(a_n {+} b_n){\to} a{+}b$, $(a_nb_n){\to} ab$, $(a_n/b_n){\to} a/b$ for $b\neq 0$
 
- \textbf{Order Limit Theorem:} $a_n\geq 0 \, \forall n\in\mathbb{N} \Rightarrow a\geq 0$ ($\leq$ analogous), $\exists c\in\mathbb{R} c\leq b_n\forall\mathbb{N}\Rightarrow c\leq b$ ($\geq$ analogous)
+ \textbf{Order Limit Theorem:} $a_n\geq 0 \, \forall n\in\mathbb{N} \Rightarrow a\geq 0$ ($\leq$ analogous), $\exists c\in\mathbb{R}$ s.t.\ $c\leq b_n\forall n\in\mathbb{N}\Rightarrow c\leq b$ ($\geq$ analogous)
 
 
 
@@ -167,7 +167,9 @@
 
 
 
- \textbf{Bolzano-Weierstrass Theorem:} all bounded sequences have a convergent subsequence
+ \textbf{Bolzano-Weierstrass Theorem:} 
+ 
+ all bounded sequences have a convergent subsequence
 
  \textit{subsequences} of a convergent sequence converge to the same limit
 
@@ -177,9 +179,9 @@
 \paragraph{Series} infinite series are sums over sequences: $\sum_{n=1}^\infty b_n$
 
  \textit{harmonic series} $\sum_{n=1}^\infty \frac{1}{n}$
-, \textit{geometric series} $\sum_{k=0}^\infty ar^k \overset{|r|<1}{=} \frac{1}{1-r}$
+, \textit{geometric series} $\sum_{k=0}^\infty ar^k \overset{|r|<1}{=} \frac{a}{1-r}$
 
- \textbf{Convergence:} to $B$, if $(s_m)\to B$ with partial sums $s_m=\sum_{n=1}^m$
+ \textbf{Convergence:} to $B$, if $(s_m){\to} B$, partial sums $s_m=\sum_{n=1}^m b_n$
 
  \textit{Cauchy Criterion:} $\sum_{k=1}^\infty a_k$ converges $\Leftrightarrow$ \newline
 $\forall \epsilon>0\exists N\in\mathbb{N}$ s.t.\ $n>m\geq N \Rightarrow |a_{m+1} + a_{m+2}+...+a_n|<\epsilon$;
@@ -196,8 +198,7 @@ that implies if $\sum_{k=1}^\infty a_k$ converges then $(a_k)\to 0$
  \textbf{Comparison Test:} if $0\leq a_k \leq b_k \forall k\in \mathbb{N}$, then $\sum_{k=1}^\infty b_k$ converges $\Rightarrow \sum_{k=1}^\infty a_k$ too \& $\sum_{k=1}^\infty a_k$ diverges $\Rightarrow \sum_{k=1}^\infty b_k$ too
 
  \textbf{Absolute Convergence Test:} 
-\newline 
-$\sum_{n=1}^\infty |a_n|$ converges $\Rightarrow$ $\sum_{n=1}^\infty a_n$ too
+$\sum_{n=1}^\infty |a_n|$ conv $\Rightarrow$ $\sum_{n=1}^\infty a_n$ too
 
  \textbf{Alternating Series Test:} if $(a_n)$ is decreasing and converges, then $\sum_{n=1}^\infty (-1)^{n+1}a_n$ converges
 
@@ -238,18 +239,18 @@ where $s_{nn} = \sum_{i=1}^n\sum_{j=1}^n a_{ij}$
   
  \textbf{Perfection:} closed and no isolated points; a nonempty perfect set is uncountable; the Cantor set is perfect
 
- \textbf{Separation:} of $A$ and $B$ if $\bar{A}\cap B$ \& $A\cap \bar{B}$
+ \textbf{Separation:} of $A$ and $B$ if $\bar{A}\cap B =\emptyset$ \& $A\cap \bar{B}=\emptyset$
 
  \textbf{Disconnection:} if $A=B\cup C$, with $B,C$ nonempty \& separated;
 \newline
-$E$ is connected $\Leftrightarrow$ all nonempty disjoint sets  $B,C$ s.t.\ $E=B\cup C$ have a convergent sequence with a limit in the other set $\Leftrightarrow$ whenever $a<c<b$ with $a,b\in E$, then $c \in E$
+$E$ is \textit{connected} $\Leftrightarrow$ all nonempty disjoint sets  $B,C$ s.t.\ $E=B\cup C$ have a convergent sequence with a limit in the other set $\Leftrightarrow$ whenever $a<c<b$ with $a,b\in E$, then $c \in E$
 
-  \textbf{Baire's Theorem:} $\mathbb{R}$ cannot be written as the countable union of nowhere-dense sets; $E$ is nowhere-dense if $\bar{E}$ contains no nonempty open intervals
+  \textbf{Baire's Theorem:} $\mathbb{R}$ cannot be written as the countable union of nowhere-dense sets; $E$ is \textit{nowhere-dense} if $\bar{E}$ contains no nonempty open intervals
 
 \paragraph{Functional Limits and Continuity}  \ \\
 
  \textbf{Functional Limit:} let $f:A\to\mathbb{R}$ and $c$ limit point of $A$
-$\forall \epsilon > 0 \, \exists \delta>0$ s.t.\ $0<|x-c|<\delta$ (and $x\in A$) if follows $|f(x)-L|<\epsilon$, then $\lim_{x\to c} f(x)=L$
+if $\forall \epsilon > 0 \, \exists \delta>0$ s.t.\ $0<|x-c|<\delta$ (and $x\in A$) it follows $|f(x)-L|<\epsilon$, then $\lim_{x\to c} f(x)=L$
 
  \textit{Sequential Criterion:}  $\lim_{x\to c} f(x)=L \Leftrightarrow$ for all sequences $(x_n)\subseteq A$, with $x\neq c$ and $(x_n)\to c$ follows $f(x_n)\to L$
 
@@ -259,7 +260,7 @@ $\displaystyle\lim_{x\to c}\left[f(x) + g(x)\right]=L+M$; $\displaystyle\lim_{x\
 
  \textbf{Divergence Criterion:} if $(x_n)$ and $(y_n)$ with $x_n\neq c \neq y_n$ and $\lim x_n{=}\lim y_n{=}c$ but $\lim f(x_n) {\neq} f(y_n)$ then $\not\!\exists$ $\lim_{x\to c}f(c)$ 
 
- \textbf{Continuity at $c$:} $\forall \epsilon>0\,\exists \delta>0$ s.t.\ whenever
+ \textbf{Continuity at $\boldsymbol{c}$:} $\forall \epsilon>0\,\exists \delta>0$ s.t.\ whenever
  $|x-c|<\delta$ (and $x\in A$) then $|f(x)-f(c)|<\epsilon$, 
  can also be expressed as: \newline $(x_n)\to c$ (with $x_n \in A$) $\Rightarrow f(x_n)\to f(c)$
  
@@ -267,7 +268,7 @@ $\displaystyle\lim_{x\to c}\left[f(x) + g(x)\right]=L+M$; $\displaystyle\lim_{x\
  
   \textbf{Compositions:} $f$  continuous at $c$ and $g$ is continuous at $f(c)$ $\Rightarrow g\circ f$ is continuous at $c$ (if $g \circ f(x)$ well-defined)
  
-  \textbf{Boundedness:} $f$ is bounded on its domain $A$ $\Leftrightarrow$ $f(A)$ is bounded; $f$ is bounded \textit{on $B$} $\Leftrightarrow$ $f(B)$ is bounded
+  \textbf{Boundedness:} $f$ is bounded on its domain $A$ $\Leftrightarrow$ $f(A)$ is bounded; $f$ is bounded \textit{on $B\subseteq A$} $\Leftrightarrow$ $f(B)$ is bounded
 
  \textbf{Preservation of Compact Sets:} $K$ compact $\Rightarrow$ $f(K)$ is too;
 if $f$ is continuous on a compact set, $f$ attains min/max values
@@ -281,7 +282,7 @@ if $f$ is continuous on a compact set, $f$ attains min/max values
 
  \textbf{Intermediate Value Theorem:} $f:[a,b]\to\mathbb{R}$ continuous then $f(a)<L<f(b)$ $\Rightarrow$ $\exists c\in (a,b)$, where $f(c)=L$
 
- alternatively: \textit{Preservation of Connectedness:} $f:A\to \mathbb{R}$ continuous, $E\subseteq A$ connected $\Rightarrow$ $F(E)$ connected
+ alternatively: \textit{Preservation of Connectedness:} $f:A\to \mathbb{R}$ continuous, $E\subseteq A$ connected $\Rightarrow$ $f(E)$ connected
 
  \textit{Intermediate Value Property} (converse of IVM): $f$ has IVP on $\left[a,b\right]$ if $\forall x<y$ \& $L$ s.t.\ $f(x)<L<f(y)$ $\exists c\in(x,y)$, where $f(c)=L$ (implies continuity if $f$ is monotone)
  
@@ -300,7 +301,7 @@ if $f$ is continuous on a compact set, $f$ attains min/max values
 
 \paragraph{Derivation} $g'(c)=\lim_{x\to c} \frac{g(x)-g(c)}{x-c}$ \newline
 $(f{+}g)'(c) = f'(c) {+} g'(c)$; \,\,\, $(fg)'(c)=f'(c)g(c) {+} f(c)g'(c)$; $(kf)'(c) = kf'(c)$; \,\,\, $(f/g)'(c) =\frac{g(c)f'(c)-f(c)g'(c)}{g^2(c)}$, for $g(c)\neq 0$; 
-$g\circ f)'(c)=g'(f(c))\cdot f'(c)$
+$(g\circ f)'(c)=g'(f(c))\cdot f'(c)$
 
 
 \textbf{Differentiability:} Differentiability at $c$ implies continuity at $c$
@@ -321,13 +322,15 @@ if $g\neq0$: $\frac{f'(c)}{g'(c)}=\frac{f(b)-f(a)}{g(b)-g(a)}$
 
 \textbf{L'Hopital's Rules:} 
 
-\textbf{0/0: } let $a\in I$, $f,g$ continuous on $I$, diff'able on $I\setminus a$:  
+\textbf{0/0: } let $a\in I$, $f,g$ continuous on $I$, differentiable on $I\setminus a$:  
 
 if $f(a){=}0{=}g(a)$ then $\lim_{x\to a}\frac{f'(x)}{g'(x)} = L \Rightarrow \lim_{x\to a}\frac{f(x)}{g(x)} = L$
 
 \textbf{$\boldsymbol{\infty}$/$\boldsymbol{\infty}$: } let $f,g$ differentiable on $(a,b)$:
 
 if $\lim_{x\to a}g(x)=\infty$ then $\lim_{x\to a}\frac{f'(x)}{g'(x)}=L \Rightarrow \lim_{x\to a}\frac{f(x)}{g(x)}=L$
+
+\ \\
 
 
 \paragraph{Functional Sequences} \ \\
@@ -336,11 +339,11 @@ if $\lim_{x\to a}g(x)=\infty$ then $\lim_{x\to a}\frac{f'(x)}{g'(x)}=L \Rightarr
 
 \textit{Pointwise:} if  $\lim_{n\to \infty} f_n(x)=f(x)$ $\forall x \in A$ then $f_n\to f$
 
-\textit{Uniform:} $\forall \epsilon>0 \,\exists N\in\mathbb{N}$ s.t.\ $|f_n(x)-f(x)|<\epsilon \,\,\,\forall x\in A, n\geq N$
+\textit{Uniform:} $\forall \epsilon>0 \,\exists N\in\mathbb{N}$ s.t.\ $|f_n(x)-f(x)|<\epsilon \,\,\, \forall x\in A, n\geq N$
 
-\textit{Cauchy Criterion:} $(f_n)$ converges uniformly if and only if  $\forall \epsilon > 0\,\exists N\in \mathbb{N}$ s.t.\ $|f_n(x)-f_m(x)|<\epsilon \forall x\in A, m,n \geq N$
+\textit{Cauchy Criterion:} $(f_n)$ converges uniformly if and only if  $\forall \epsilon > 0\,\exists N\in \mathbb{N}$ s.t.\ $|f_n(x)-f_m(x)|<\epsilon  \,\,\, \forall x\in A, m,n \geq N$
 
-\textbf{Continuity:}  let $(f_n)$ converges uniformly to $f$, if all $f_n$ are continuous at $c\in A$, then $f$ is in continuous at $c$
+\textbf{Continuity:}  let $(f_n)$ converge uniformly to $f$, if all $f_n$ are continuous at $c\in A$, then $f$ is in continuous at $c$
 
 \textbf{Differentiability:} let $(f_n)$ differentiable on $[a,b]$ and $(f'_n) \to g$ uniformly on $[a,b]$; if $\exists x_0\in[a,b]$ where $f_n(x_0)$ convergent, then (1) $(f_n)$ converges uniformly (2) $f{=}\lim f_n$ differentiable (3) $f'{=}g$
 
@@ -378,6 +381,27 @@ if $\lim_{x\to a}g(x)=\infty$ then $\lim_{x\to a}\frac{f'(x)}{g'(x)}=L \Rightarr
 \end{multicols}
 
 % measure theoretic probability
+\subsection[Measure Theory]{Measure Theory \citep{capinski_measure_2004}}
+
+\begin{multicols}{2}
+
+
+\paragraph{Riemann Integral} coinciding upper $U$ and lower $L$ sums
+
+for partitions $P$: $\sum_{i=1}^n \sup_{p_i} \mathrm{len}(p_i)$; $\sum_{i=1}^n \inf_{p_i} \mathrm{len}(p_i)$
+
+\textbf{Riemann's Criterion:} $f$ integrable iff $\forall \epsilon> 0 \,\exists P_\epsilon$ s.t.\ $U{-}L <\epsilon$
+
+\textbf{Fundamental Theorem of Calculus:} if $f:[a,b]\to \mathbb{R}$ continuous and $F'=f$, then $F(b)-F(a)=\int_a^bf(x)\mathrm{d} x$
+
+\textbf{Problems:} why do we need a Lebesgue integral?
+\begin{itemize}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt, leftmargin=1.0em]
+\item scope: many results need continuous $f$ and bounded intervals
+\item dependence on intervals: otherwise often not defined
+\item lack of completeness: $\int_a^b f_n(x) \mathrm{d}x \to \int_a^b f(x) \mathrm{d}x$ doesn't hold
+\end{itemize} 
+
+\end{multicols}
 
 
 % functional analysis
@@ -1333,7 +1357,7 @@ $$\mathrm{E}\left[Y^{a}\right] = \mathrm{E}\left[\frac{I(A=a)Y}{f\left[A|L\right
 
  \textbf{estimators:} Horvitz-Thompson; Hajek (modified version) %todo p.152 
 
- \textbf{stabilized weights $\boldsymbol{SW^A}$} should have an average of 1 (check!) $\rightarrow$ pseudo-population same size $\rightarrow$ CI width $\downarrow$
+ \textbf{stabilized weights $\boldsymbol{SW^A}$} should have an average of 1 (check!) $\rightarrow$ pseudo-population same size $\rightarrow$ (if non-saturated) CI width $\downarrow$ 
 
 \vspace{0.2em}
  \colorbox{lightgray!20!white}{\begin{minipage}{28em}
