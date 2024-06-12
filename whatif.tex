@@ -401,7 +401,7 @@ for partitions $P$: $U=\sum_{i=1}^n \sup_{p_i} \mathrm{len}(p_i)$; $L=\sum_{i=1}
 \item lack of completeness: $\int_a^b f_n(x) \mathrm{d}x \to \int_a^b f(x) \mathrm{d}x$ doesn't hold
 \end{itemize} 
 
-\paragraph{Measure} \ \\
+\paragraph{Measure} $\mathcal{B}\subset\mathcal{M}\subset\mathcal{P}(\mathbb{R})$
 
 \textbf{Null Sets} $\forall \epsilon>0 \,\exists$ a sequence of intervals $(I_n)$ s.t.\ \newline $A\subseteq \bigcup_{n=1}^\infty I_n$ and $\sum_{n=1}^\infty l(I_n)<\epsilon$ ($=\exists$ arbitrarily small cover);
 
@@ -469,6 +469,34 @@ $\forall \epsilon>0\,\exists$ open set $O$ s.t.\ $A\subset O,$ $m(O)\leq m^*(A)+
 
 %eventuell reicht eins von denen
 %$\forall A\in \mathbb{R} \, \exists (O_n)$ s.t.\ $A\subset \bigcap_n O_n,$ $m(\bigcap_n O_n)=m^*(A)$
+
+\textbf{Probability} restriction to $\mathcal{M}_B=\left\{A\cap B: A \in \mathcal{M}\right\}$
+
+\textit{Probability Space:} $(\Omega, \mathcal{F}, P)$, with $\Omega$ an arbitrary set, $\mathcal{F}$ a $\sigma$-field of subsets of $\Omega$ called events, and $P$ measure on $\mathcal{F}$ s.t.\ $P(\Omega)=1$;
+
+%\textit{Define:} $P(A|B){=}\frac{P(A\cap B)}{P(B)}$;
+
+\textit{Independence:} 
+
+\begin{itemize}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt, leftmargin=1.0em]
+\item events $E=\{A_1,... A_n\}$: $\forall K\subseteq E: P(\bigcap_K A_i)= \prod_K P(A_i)$
+\item $\sigma$-fields $S=\{\mathcal{F}_1, ... \mathcal{F}_n\}$ on $(\Omega, \mathcal{F}, P)$: $\forall S_s\subseteq S: F_i \in \mathcal{F}_j \in S_s \Rightarrow P(\bigcap_{S_s} F_i)=\prod_{S_s}P(F_i)$
+\end{itemize}
+
+\paragraph{Measurable Funtions} define $f$ only up to null sets (a.e.)
+
+\textbf{Extended $\mathbb{R}$:} $\bar{\mathbb{R}} = [-\infty, \infty]$, with $0\cdot\infty=0$ and avoid $\infty{-}\infty$
+
+\textbf{(Lebesgue) Measurability:} target range (Riemann: domain)
+
+$E$ is measurable, $f:E\to\mathbb{R}$ is measurable if $\forall I \subseteq \mathbb{R}:$
+
+$f^{-1}(I)\in \mathcal{M}$ (if $\in \mathcal{B}$, then Borel(-measurable) function)
+
+\textit{Equivalences:} $f$ is measurable $\Leftrightarrow$ $\forall a: f^{-1}(x)$ is measurable \newline for $x$ in $\{(a,\infty),[a,\infty), (-\infty,a), (-\infty,a]\}$
+
+\textit{Measurable $f$:} constant, continuous (due to open sets), monotone
+
 
 \end{multicols}
 
