@@ -380,6 +380,8 @@ if $\lim_{x\to a}g(x)=\infty$ then $\lim_{x\to a}\frac{f'(x)}{g'(x)}=L \Rightarr
 
 \end{multicols}
 
+\newpage
+
 % measure theoretic probability
 \subsection[Measure Theory]{Measure Theory \citep{capinski_measure_2004}}
 
@@ -483,7 +485,7 @@ $\forall \epsilon>0\,\exists$ open set $O$ s.t.\ $A\subset O,$ $m(O)\leq m^*(A)+
 \item $\sigma$-fields $S=\{\mathcal{F}_1, ... \mathcal{F}_n\}$ on $(\Omega, \mathcal{F}, P)$: $\forall S_s\subseteq S: F_i \in \mathcal{F}_j \in S_s \Rightarrow P(\bigcap_{S_s} F_i)=\prod_{S_s}P(F_i)$
 \end{itemize}
 
-\paragraph{Measurable Funtions} define $f$ only up to null sets (a.e.)
+\paragraph{Measurable Functions} define $f$ only up to null sets (a.e.)
 
 \textbf{Extended $\mathbb{R}$:} $\bar{\mathbb{R}} = [-\infty, \infty]$, with $0\cdot\infty=0$ and avoid $\infty{-}\infty$
 
@@ -527,7 +529,58 @@ $(f_n)$ m'able, $f_n(x)\to f(x)$ a.e. for $x\in E$ $\Rightarrow$ $f$ m'able
 
 
 
-\paragraph{Integral} \ \\
+\paragraph{Integral} over $E \in \mathcal{M}$ with measure $m$: $\int_E f \,\mathrm{d}m$
+
+\textbf{on \textit{simple function} $\boldsymbol{\varphi}$} (range is finite set of reals $a_i>0$, with corresp.\ domain m'able $A_i$): $\int_E \varphi \,\mathrm{d}m = \sum_{i=1}^n a_i m(A_i\cap E)$
+
+\textbf{on m'able function $\boldsymbol{f\geq 0}$:} $\int_E f \, \mathrm{d}m = \sup Y(E,f)$, where 
+$Y(E,f)=\left\{ \int_E \varphi\,\mathrm{d}m:0\leq \varphi\leq f, \varphi \text{ is simple}\right\}$; $f{=}0$ a.e.\ $\Leftrightarrow \int\! f \,\mathrm{d} m$
+
+% there where some properties, but so far the integral is not defined on all functions, so I thought I'd wait on it. It's on p. 80. also left out prop 4.5 on p 81
+
+\textbf{Monotone Convergence Theorem} if $\{f_n\}$ $\geq 0$, m'able,  \& $f_n \to f$ then: $\lim_{n\to\infty}\int_E f_n(x)\, \mathrm{d}m = \int_E f\,\mathrm{d}m$ \\ (if limit is only a.e.\ then $E$ has to be m'able for result to hold)
+
+\textbf{on m'able function $\boldsymbol{f}$:} $\int_E f\, \mathrm{d}m = \int_E f^+\, \mathrm{d}m - \int_E f^-\, \mathrm{d}m $
+
+($f$ is only integrable if both components are finite)
+
+set of all functions that are integrable over $E$ is called $\boldsymbol{\mathcal{L}^1(E)}$
+
+\textbf{Properties:} let $f,g$ integrable, $c\in\mathbb{R}$, $A,E$ measurable then
+
+$f\leq g \Rightarrow \int f \, \mathrm{d}m \leq \int g \, \mathrm{d}m$; 
+$\int (cf) \, \mathrm{d}m = c \int_E f \, \mathrm{d}m$;
+$f{+}g \text{ int'able, } \mathcal{L}^1 \text{ vector space}$; 
+$\int_E (f{+}g) \, \mathrm{d}m {=} \int_E f \, \mathrm{d}m {+} \int_E g \, \mathrm{d}m$;
+
+$\int_A f \, \mathrm{d}m \leq \int g \, \mathrm{d}m \forall A \Rightarrow f\leq g$ a.e.; int'able $f$ is finite a.e.; 
+
+$m(A)\inf_A f \leq \int_A f \, \mathrm{d}m \leq m(A) \sup_A f$; $|\int f \, \mathrm{d}m| \leq \int |f| \, \mathrm{d}m$;
+
+let $f\geq 0$: (1) $\int f \, \mathrm{d}m{=}0 \Rightarrow f{=}0$ a.e.\ (2) $A\to \int_A f \, \mathrm{d}m$ is  measure
+
+\textbf{Dominated Convergence Theorem:} $(f_n)$ measurable, $|f_n|{\leq} g$ a.e.\ on $E{\in} \mathcal{M}$, $g$ $E$-int'able $\Rightarrow$  $\displaystyle\lim_{n\to\infty} \int_E f_n(x)\,\mathrm{d}m = \int_E f \,\mathrm{d}m$
+
+\textit{Beppo-Levi:} $\sum_{n=1}^\infty \int |f_n| \,\mathrm{d}m$ finite $\Rightarrow$ $\sum_{n=1}^\infty f_n(x)$ converges a.e., is integrable and
+$\int\sum_{n=1}^\infty f_n \,\mathrm{d}m = \sum_{n=0}^\infty \int f_n \,\mathrm{d}m$
+
+\textbf{Relation to Riemann integrals:} let $[a,b] \to \mathbb{R}$ bounded
+
+$f$ continuous a.e.\ $\Leftrightarrow$  $f$ is R-int'able $\Rightarrow$ $f$ is L-int'able ($F_R=F_L$)
+
+L-int's also equal improper R-int's (e.g. $\displaystyle\lim_{a\to -\infty, b\to \infty} \int_a^b f(x)dx$)
+
+\textbf{Approximating m'able functions:}
+
+ $f$ on $[a,b]$ bounded: $\forall \epsilon>0\, \exists$ step function $h$ s.t.\ $\int_a^b|f{-}h|\,\mathrm{d}m\leq \epsilon$
+ 
+ $f{\in} \mathcal{L}^1$: $\forall \epsilon{>}0 \, \exists g$ (cont's, zero outside int.) s.t. $\int|f{-}h|\,\mathrm{d}m\leq \epsilon$
+ 
+ \textit{Riemann-Lebesgue:} $f{\in}\mathcal{L}^1$: $s_n {=} \int_{{-}\infty}^\infty f(x)\overset{(\cos)}{\sin} (kx)  \,\mathrm{d}x$ go to 0
+
+
+
+
 
 
 \end{multicols}
