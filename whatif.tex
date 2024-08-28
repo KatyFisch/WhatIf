@@ -61,6 +61,7 @@
 \newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
 \def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
 \newcommand{\indep}{\perp \!\!\! \perp}
+\newcommand{\compi}{\mathrm{i}\mkern1mu}
 
 
 
@@ -380,7 +381,7 @@ if $\lim_{x\to a}g(x)=\infty$ then $\lim_{x\to a}\frac{f'(x)}{g'(x)}=L \Rightarr
 
 \end{multicols}
 
-\newpage
+%\newpage
 
 % measure theoretic probability
 \subsection[Measure Theory]{Measure Theory \citep{capinski_measure_2004}}
@@ -578,9 +579,42 @@ L-int's also equal improper R-int's (e.g. $\displaystyle\lim_{a\to -\infty, b\to
  
  \textit{Riemann-Lebesgue:} $f{\in}\mathcal{L}^1$: $s_n {=} \int_{{-}\infty}^\infty f(x)\overset{(\cos)}{\sin} (kx)  \,\mathrm{d}x$ go to 0
 
+\textbf{Probability:} for r.v.\ $X$: $\int_\Omega g(X(\omega))\,\mathrm{d}P(\omega) = \int_\mathbb{R} g(x)\,\mathrm{d}P_X(x)$
+
+\textit{absolutely continuous:} int'able $f\geq 0$, where measure $A\to P(A)=\int_A f \,\mathrm{d}m$; $f$ is called a \textit{density} with $\int f \,\mathrm{d} m = 1$; 
+
+\textit{cdf:} defined as $F(y)= P_X((-\infty, y])\overset{a.c.}{=}\int_{-\infty}^y f(x) \,\mathrm{d}x$,
+ continuity of $F$ does not imply $f$ exists (see Lebesgue function), 
+
+$F_X$ is 1 non-decreasing, 2 right continuous and 3 goes from 0 to 1,
+
+%if $F:\mathbb{R}\to [0,1]$ fulfills 1-3: $\exists$ r.v.\ on $\mathcal{B}$ $X:[0,1]\to\mathbb{R}$, s.t.\ $F=F_X$
+
+%let $P_X$ defined on $\mathbb{R}^n$ absolutely continuous with density $f_X$, $g:\mathbb{R}^n\to \mathbb{R}$ int'able $\Rightarrow$ $\int_{\mathbb{R}^n}g(x)\,\mathrm{d} P_X(x)=\int_{\mathbb{R}^n} f_X(x)g(x)\, \mathrm{d}x$
+
+$g:\mathbb{R}\to\mathbb{R}$ increasing  \& diff'able: $f_{g(X)}(y){=}f_X(g^{-1}(y))\frac{\mathrm{d}}{\mathrm{d}y}g^{-1}(y)$
+
+\textit{Expectation:} $\mathbb{E}(X)=\int_{\Omega}X\,\mathrm{d}P
+=\int x\,\mathrm{d}P_X(x)
+\overset{a.c.}{=}\int xf_X(x)\,\mathrm{d}x$
+
+\textit{$\mathbb{C}$:} $\int_E u+\compi v \,\mathrm{d}m = \int_E u \,\mathrm{d}m  + \compi \int_E v \,\mathrm{d}m $, $|\int_E f \,\mathrm{d}m| \leq \int_E |f| \,\mathrm{d}m$
+
+\textit{Characteristic Function:} $\varphi_X(t)=\mathbb{E}(\exp^{\compi tX}) = \int \exp^{\compi tx} \, \mathrm{d}P_X(x)$ for r.v.\ $X$, with $t\in \mathbb{R}$;
+$\varphi_X(0)=1$, $-1\leq\varphi_X(t)\leq 1$
 
 
+\paragraph{Spaces Of Integrable \textit{f}} $\infty$-dim.\ normed vector spaces 
 
+\textit{norm:} $x\to \|x\|$, with $x\in$ vector space: $\| x\|\geq 0$, $\| x\|=0 \Leftrightarrow x=0$, $\|\alpha x\| =|\alpha| \| x\|$ ($\alpha\in\mathbb{R}/\mathbb{C}$, triangle equality
+
+\textit{metric:}  $d:X\times X \to \mathbb{R}$ ($X$ set), with $d(x,y)\geq 0$, symmetric, $d(x,y){=}0 \Leftrightarrow x{=}y$, triangle equality; e.g.: $d(x,y)=\|x{-}y\|$
+
+\textbf{$\boldsymbol{\mathcal{L}^1}$:} consider vector space $L^1(E) = \mathcal{L}^1(E)/_\sim$, where $f\sim g \Leftrightarrow $ $ f(x)=g(x)$ a.e.\ with $\|f\|_1=\int_E|f|\,\mathrm{d}m$, $L^1(E)$ is complete
+
+\textbf{$\boldsymbol{\mathcal{L}^2}$ (Hilbert Space):}
+
+\textbf{$\boldsymbol{\mathcal{L}^p}$:}
 
 
 \end{multicols}
