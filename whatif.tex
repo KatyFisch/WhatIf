@@ -606,15 +606,45 @@ $\varphi_X(0)=1$, $-1\leq\varphi_X(t)\leq 1$
 
 \paragraph{Spaces Of Integrable \textit{f}} $\infty$-dim.\ normed vector spaces 
 
-\textit{norm:} $x\to \|x\|$, with $x\in$ vector space: $\| x\|\geq 0$, $\| x\|=0 \Leftrightarrow x=0$, $\|\alpha x\| =|\alpha| \| x\|$ ($\alpha\in\mathbb{R}/\mathbb{C}$, triangle equality
 
-\textit{metric:}  $d:X\times X \to \mathbb{R}$ ($X$ set), with $d(x,y)\geq 0$, symmetric, $d(x,y){=}0 \Leftrightarrow x{=}y$, triangle equality; e.g.: $d(x,y)=\|x{-}y\|$
 
-\textbf{$\boldsymbol{\mathcal{L}^1}$:} consider vector space $L^1(E) = \mathcal{L}^1(E)/_\sim$, where $f\sim g \Leftrightarrow $ $ f(x)=g(x)$ a.e.\ with $\|f\|_1=\int_E|f|\,\mathrm{d}m$, $L^1(E)$ is complete
 
-\textbf{$\boldsymbol{\mathcal{L}^2}$ (Hilbert Space):}
 
-\textbf{$\boldsymbol{\mathcal{L}^p}$:}
+\textbf{$\boldsymbol{L^1}$} (Banach space := complete normed space): \\ 
+
+\textbf{\textit{norm:}} $x\to \|x\|$, with $x\in$ vector space: $\| x\|\geq 0$, $\| x\|=0 \Leftrightarrow x=0$, $\|\alpha x\| =|\alpha| \| x\|$ ($\alpha\in\mathbb{R}/\mathbb{C}$), triangle equality
+
+\textbf{\textit{metric:}}  $d:X\times X \to \mathbb{R}$ ($X$ set), with $d(x,y)\geq 0$, symmetric, $d(x,y){=}0 \Leftrightarrow x{=}y$, triangle equality; e.g.: $d(x,y)=\|x{-}y\|$
+
+consider vector space $L^1(E) = \mathcal{L}^1(E)/_\sim$, where $f\sim g \Leftrightarrow $ $ f(x)=g(x)$ a.e.\ with $\|f\|_1=\int_E|f|\,\mathrm{d}m$, $L^1(E)$ is complete
+
+\textbf{$\boldsymbol{L^2}$ }(Hilbert space := Banach space + $(.,.)$ inducing $\|.\|$): \\ $\mathcal{L}^2$ is set of m'able functions where norm $\|f\|_2=\left(\int_E|f|^2\,\mathrm{d}m\right)^{\frac{1}{2}}$ is finite, with $L^2$ its set of equivalence classes
+
+norm fulfills $\Delta$-eq.\ due \textit{Schwarz Inequality:} $f,g\in L^2(E, \mathbb{C}) \Rightarrow$ $ |\int_E f\bar{g}\,\mathrm{d} m|\leq \|fg\|_1\leq \|f\|_2\|g\|_2$ ($\bar{g}$ complex conjugate: $a{-}b\compi$)
+
+$L^1 \not\subset \not \supset L^2$, but if for set $D$: $m(D)<\infty$ then $L^2(D) \subset L^1(D)$
+
+\textit{inner product:} $(f,g):=\int f\bar{g}\,\mathrm{d}m$ (induces $\|.\|_2$)
+
+\textbf{\textit{inner product:}} $(.,.): H \times H \to \mathbb{C}$, which is (with induced norm)
+\begin{itemize}[itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt, leftmargin=1.0em]
+\item linear (1st .): $(f{+}g,h)=(f,h)+(g,h)$, $(cf,h)=c(f,h)$
+\item conjugate symmetric: $(f,g)=\overline{(g,f)}$
+\item positive definite: $(f,f)\geq 0$, $(f,f)=0\Leftrightarrow f=0$
+\item (if $\mathbb{C}$: conjugate) linear (2nd .): $(f,cg+h)=\bar{c}(f,g)+(f,h)$
+\end{itemize}
+$\to$ \textit{parallelogram law:} $\|f{+}g\|^2 + \|f{-}g\|^2 = 2\|f\|^2 + 2\|g\|^2$
+
+$\to$ \textit{polar.:} $4(f,g)=\|f{+}g\|^2{-}\|f{-}g\|^2 {+}\compi\!\left( \|f{+}\compi g\|^2 {-} \|f{-}\compi g\|^2\right)$
+
+\textit{orthogonal:} $(f,g)=0$, \textit{angle:} $\cos\theta = \frac{(f,g)}{\|f\|\|h\|}=\text{correlation}$
+
+%if $K$ is complete subspace of a Hilbert space $H$, for each $h\in H \,\exists $ unique $h'\in K$ s.t.\ $h''=h-h'$ is orthogonal to all of $K$ $\Leftrightarrow$
+$\|h-h'\|=\inf \{\|h-k\|:k\in K\}$
+
+\textit{Decomposition:} $\forall \, h\in H: h=h'+h''$, where $h'$ orthogonal pro- jection on $K$ (complete subspace of $H$) and $h''$ orthogonal to $K$. Therefore $H=K\oplus K^{\perp}$ (all $k\in K$ orthogonal to all $k'\in K^{\perp}$).
+
+\textbf{$\boldsymbol{L^p}$:}
 
 
 \end{multicols}
