@@ -642,9 +642,44 @@ $\to$ \textit{polar.:} $4(f,g)=\|f{+}g\|^2{-}\|f{-}g\|^2 {+}\compi\!\left( \|f{+
 %if $K$ is complete subspace of a Hilbert space $H$, for each $h\in H \,\exists $ unique $h'\in K$ s.t.\ $h''=h-h'$ is orthogonal to all of $K$ $\Leftrightarrow$
 $\|h-h'\|=\inf \{\|h-k\|:k\in K\}$
 
-\textit{Decomposition:} $\forall \, h\in H: h=h'+h''$, where $h'$ orthogonal pro- jection on $K$ (complete subspace of $H$) and $h''$ orthogonal to $K$. Therefore $H=K\oplus K^{\perp}$ (all $k\in K$ orthogonal to all $k'\in K^{\perp}$).
+\textit{*Decomposition:} $\forall \, h\in H: h=h'+h''$, where $h'$ orthogonal pro- jection on $K$ (complete subspace of $H$) and $h''$ orthogonal to $K$. Therefore $H=K\oplus K^{\perp}$ (all $k\in K$ orthogonal to all $k'\in K^{\perp}$).
 
-\textbf{$\boldsymbol{L^p}$:}
+\textbf{$\boldsymbol{L^p}$} (Banach spaces): $E$ Lebesgue-finite, $p\leq q \Rightarrow L^q(E)\subseteq L^p(E)$
+
+for $1\leq p\leq \infty$: $\|f\|_p=\left(\int_E |f|^p\,\mathrm{d}m\right)^\frac{1}{p}$; $\|f\|_\infty=\mathrm{ess}\sup f$
+
+\textit{Hölder's Inequality} (needed for $\Delta$ eq.; generalizes Schwarz): 
+
+let $\frac{1}{p}+\frac{1}{q}=1$, $f\in L^p$, $g\in L^q$ $\Rightarrow$ $fg\in L^1$ and $\|fg\|_1\leq \|f\|_p\|g\|_q$
+
+\textit{Minkowski's Inequality:} $f,g\in L^p \Rightarrow \|f{+}g\|_p\leq \|f\|_p+\|g\|_p$
+
+\textbf{Probability:}
+\textit{$n$th moment:} $\mathbb{E}(X^n)$, \textit{central moment:} $\mathbb{E}(X-\mu)^n$
+
+ $\mathbb{E}(X^n)$ (in)finite $\Rightarrow \mathbb{E}(X^k)$ (in)finite ($k\leq n$); 
+  moments (c.m.) of order $n$ are determined by c.m.\ (moments) of order $k$ for $k\leq n$
+
+$\mathbb{E}(X^k)=\frac{1}{i^k}\frac{\mathrm{d}^k}{\mathrm{d}t^k}\varphi_X(0)$ (if $k$th moment finite, $\varphi_X$ is $k\times$  diff'able)
+
+\textit{independent:} $\mathbb{E}(f(X)g(Y))=\mathbb{E}(f(X))\mathbb{E}(g(Y))$, $f,g$ bounded $\mathcal{B}$-m
+
+$\mathbb{E}(XY)=(X,Y)$, it follows: $\mathrm{Cov}(X,Y)=(X_c,Y_c)=$ $\mathbb{E}\left((X-\mathbb{E}(X))(Y-\mathbb{E}(Y))\right)$, where $X_c = X-\mathbb{E}(X)$ centered r.v.\
+
+$\mathrm{Var}(\sum X_i)=\sum\mathrm{Var}(X_i)$; $\varphi_{X_1+...+X_n}(t)=\varphi_{X_1}(t)\cdots \varphi_{X_n}(t)$
+
+\textit{Conditional Expectation:} let $(\Omega, \mathcal{F}, P)$ where $\mathcal{G}$ is sub-$\sigma$-field of $\mathcal{F}$, if $X{\in} \mathcal{L}^1(\mathcal{F}) \,\,\, \exists \, Y{\in} \mathcal{L}^1(\mathcal{G})\,$ s.t.\ $\,\int_G Y\,\mathrm{d}P =  \int_G X\,\mathrm{d}P \,\,\,\, \forall\, G{\in} \mathcal{G}$
+
+$Y=\mathbb{E}(X|\mathcal{G})$ is uniquely defined up to $P$-null sets
+
+\textit{construct $Y$ when $X\in \mathcal{L}^2$:} $Y$ as orthogonal projection to $K=L^2(\mathcal{G})$ (see *) $\Rightarrow$ $(X-Y,\mathbbm{1}_G)=0$ as $\mathbbm{1}_G\in L^2(\mathcal{G}) \,\,\forall G{\in}\mathcal{G}$
+
+$\to$ can be seen as minimising distance between $X$ and $\mathcal{L}^2(\mathcal{G})$
+
+$\to$ $Y$ is `best predictor` of $X$ in $\mathcal{L}^2(\mathcal{G})$
+
+
+\paragraph{Product Measures} \ \\
 
 
 \end{multicols}
