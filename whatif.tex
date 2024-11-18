@@ -713,10 +713,42 @@ fulfills $P(A_1\times A_2)=P_1(A_1)P_2(A_2)$
 and $P$ is countably additive
  
  \textbf{Fubini's Theorem:} integrate $f\in L^1(\Omega_1\times\Omega_2)$ over sections 
+ $\omega_1\to\int_{\Omega_2}f(\omega_1,\omega_2)\mathrm{d}P_2(\omega_2)$ \,\,($\omega_2$ analogous)
 $$\int_{\Omega_1\times\Omega_2}f\,\mathrm{d}(P_1\times P_2) = \int_{\Omega_1}\left( \int_{\Omega_2}f\,\mathrm{d}P_2\right)\mathrm{d}P_1$$ 
  
  
+ \textbf{Probability} random vector $(X,Y):\Omega\to \mathbb{R}$
 
+\textit{joint density:} if $\exists f_{(X,Y)}:$ $P_{(X,Y)}(B) = \int_B f_{(X,Y)}(x,y)\,\mathrm{d}m_2(x,y)$
+
+\textit{marginal distributions:} if $X,Y$ have a joint density, they are absolutely continuous with $f_X(x) = \int_\mathbb{R}f_{(X,Y)}(x,y)\,\mathrm{d}y$
+
+\textit{independence:} iff $P_{(X,Y)}=P_X\times P_Y$ or if $\exists$ joint density: $f_{(X,Y)}(x,y)=f_X(x)\times f_Y(y)$
+
+
+\textit{$X {+} Y$:} $f_{X+Y}(z)=\int_{\mathbb{R}}f_{X,Y}(x,z{-}x)\,\mathrm{d}x \overset{\indep}{=} \int_{\mathbb{R}}f_{X}(x) f_Y(z{-}x)\,\mathrm{d}x$
+
+\textit{characteristic function:} if $F_X$ continuous at $a,b\in \mathbb{R}:$ $F_X(b)-F_X(a)=\lim_{c\to \infty} \frac{1}{2\pi}\int_{-c}^c \frac{\exp^{-\compi ua}-\exp^{\compi ub}}{\compi u}\varphi_X(u)\,\mathrm{d}u$;
+
+if $\varphi_X$ integrable: $f_X(x) = \frac{1}{2\pi}\int_{-\infty}^\infty \exp^{-\compi ux}\varphi_X(x)\,\mathrm{d}u$
+
+\paragraph{Radon-Nikodym} $(\Omega, \mathcal{F})$ is a \textit{measurable space}
+
+\textbf{absolute continuity ($\boldsymbol{\nu \ll \mu}$):} if $\mu(A){=}0 \Rightarrow \nu(A){=}0 \,\,\,\forall A{\in}\mathcal{F}$,
+
+$\nu\ll \mu$ iff: $\forall \epsilon>0 \,\,\exists\, \delta>0 \text{ s.t. } \mu(F)<\delta \Rightarrow \nu(F)<\epsilon\,\,\,\forall F{\in}\mathcal{F}$
+
+\textbf{Radon-Nikodym:} $\nu,\mu$ $\sigma$-finite, $\nu\ll \mu$: $\exists$ m'able function $\geq 0$ $h:\Omega\to \mathbb{R}$ s.t.\ $\nu(F){=}\int_F h\,\mathrm{d}\mu \,\,\,\forall F{\in}\mathcal{F}$, $h$ is unique up to $\mu$-null sets
+
+\textit{Radon-Nikodym derivative:} $\frac{\mathrm{d}\nu}{\mathrm{d}\mu}=h$ with $\lambda\ll\mu$, $\nu\ll \mu$ implying $\phi=\lambda{+}\nu \Rightarrow  \frac{\mathrm{d}\phi}{\mathrm{d}\mu}=\frac{\mathrm{d}\lambda}{\mathrm{d}\mu}+\frac{\mathrm{d}\nu}{\mathrm{d}\mu}$ a.s.\ and $\lambda\ll\nu\Rightarrow \frac{\mathrm{d}\lambda}{\mathrm{d}\mu}=\frac{\mathrm{d}\lambda}{\mathrm{d}\nu}\frac{\mathrm{d}\nu}{\mathrm{d}\mu}$ a.s. 
+
+\textbf{mutual singularity ($\boldsymbol{\mu \!\perp\! \nu}$):} concentrated on disjoint  $A_i{\in}\Omega$
+
+\textit{$\lambda$ concentrated on $E{\in}\mathcal{F}$:}  $\lambda(F)=\lambda(E\cap F) \,\,\, \forall F{\in}\mathcal{F}$
+
+\textbf{Lebesgue decomposition:} $\lambda {=} \lambda_a{+}\lambda_s$, where $\lambda_a \ll\mu$ and $\lambda_s{\perp} \mu$
+
+$\lambda(E)=\int_E h \,\mathrm{d}\mu + \lambda_s(E)$ ``linear combination'': $\mu$ acting as ``basis''
 
 
 
