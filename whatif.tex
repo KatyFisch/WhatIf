@@ -717,6 +717,8 @@ and $P$ is countably additive
 $$\int_{\Omega_1\times\Omega_2}f\,\mathrm{d}(P_1\times P_2) = \int_{\Omega_1}\left( \int_{\Omega_2}f\,\mathrm{d}P_2\right)\mathrm{d}P_1$$ 
  
  
+ 
+ 
  \textbf{Probability} random vector $(X,Y):\Omega\to \mathbb{R}$
 
 \textit{joint density:} if $\exists f_{(X,Y)}:$ $P_{(X,Y)}(B) = \int_B f_{(X,Y)}(x,y)\,\mathrm{d}m_2(x,y)$
@@ -731,6 +733,8 @@ $$\int_{\Omega_1\times\Omega_2}f\,\mathrm{d}(P_1\times P_2) = \int_{\Omega_1}\le
 \textit{characteristic function:} if $F_X$ continuous at $a,b\in \mathbb{R}:$ $F_X(b)-F_X(a)=\lim_{c\to \infty} \frac{1}{2\pi}\int_{-c}^c \frac{\exp^{-\compi ua}-\exp^{\compi ub}}{\compi u}\varphi_X(u)\,\mathrm{d}u$;
 
 if $\varphi_X$ integrable: $f_X(x) = \frac{1}{2\pi}\int_{-\infty}^\infty \exp^{-\compi ux}\varphi_X(x)\,\mathrm{d}u$
+
+
 
 \paragraph{Radon-Nikodym} $(\Omega, \mathcal{F})$ is a \textit{measurable space}
 
@@ -750,7 +754,32 @@ $\nu\ll \mu$ iff: $\forall \epsilon>0 \,\,\exists\, \delta>0 \text{ s.t. } \mu(F
 
 $\lambda(E)=\int_E h \,\mathrm{d}\mu + \lambda_s(E)$ ``linear combination'': $\mu$ acting as ``basis''
 
+\textbf{Lebesgue-Stieltjes measure:} distribution function $F$ has only jump discontinuities \& is right continuous, i.e.\ $F(x{+})=F(x)$
 
+\textit{$F$-outer measure $m_F^*$:} $m^*$ using $l_F$ on intervals, restricted to 
+
+$\mathcal{M}_F:$ complete, contains $\mathcal{B}$ but $\neq \mathcal{M}$,  if $F(x)=x$ then $m_F=m$
+
+\textbf{absolute continuity of real function $\boldsymbol{F}$} on $[a,b]$ if $\forall \epsilon {>}0\,\, \exists\, \delta{>}0$ s.t.\ $\forall$ sets of $n$ disjoint $J_k =(x_k,y_k)$ in $[a,b]$ with $\sum_{k=1}^n(y_k-x_k)<\delta$ follows $\sum_{k=1}^n|F(x_k)-F(y_k)|<\epsilon$;
+
+$F$ monotone increasing \& absolutely continuous $\Rightarrow$ every Lebesgue-measurable set is $m_F$-measurable and $m_F \ll m$
+
+\textbf{bounded variation ($\boldsymbol{F \in BV[a,b]}$)} if $T_F[a,b] <\infty$ where $T_F[a,x]=\sup \{\sum_{k=1}^n|F(x_k)-F(x_{k-1})|\}$ $\Leftrightarrow$ is the difference of two monotone increasing real functions on $[a,b]$;
+
+absolutely continuous functions are $\in BV[a,b]$ as well as the components of the minimal decomposition  $F=F_1-F_2$, Lebesgue-Stieltjes \textit{signed measure of $F$} $m_F=m_{F_1}-m_{F_2}$ on $\mathcal{B}$
+
+\textbf{signed measure:} $\nu:\mathcal{F}\to (-\infty,+\infty]$ with $\nu(\emptyset)=0$ and countably additive, $\nu$ monotone increasing $\Rightarrow$ is measure;
+
+\textit{total variation $|\nu|$} of a bounded signed measure is a measure, $\nu^{+(-)}=\frac{1}{2} (|\nu| {+}(-) \nu)$; with $\mu$ measure: unique $\nu=\nu_a + \nu_s$ with $nu_a\ll\mu$ \& $\nu_s\indep \mu$ and $\nu_a(F=\int_Fh\,\mathrm{d}\mu \,\,\forall F{\in}\mathcal{F}$ with $h\in \mathcal{L}^1(\mu)$;
+
+$\nu$ bounded signed measure and $F(x)=\nu((-\infty,x])$ then: $F$ diff'able with $F'(a)=L$ $\Leftrightarrow$ $\forall \epsilon{>}0\,\, \exists \,\delta {>} 0$ s.t.\ $|\frac{\nu(J)}{\mu(J)} - L|<\epsilon$ if open interval $J$ around $a$ and $l(J)<\epsilon$
+
+\textbf{Fundamental Theorem of Calculus:} $F$ absolutely continuous on $[a,b]$ then $F$ is diff'able $m$-a.e., $\frac{\mathrm{d}m_F}{\mathrm{d}m} = F'$, and $F(x)-F(a) = m_F[a,x]=\int_a^x F'(t)\,\mathrm{d}t \,\,\, \forall x\in[a,b]$
+
+\textbf{Hahn-Jordan decomposition:} $\nu$ bounded signed measure then disjoint $A\cup B=\Omega$ with $\nu^{+(-)}(F)=\nu(B(A)\cap F) \,\,\forall F{\in}\mathcal{F}$,
+ if $\nu=\lambda_1-\lambda_2$ then $\lambda_1\geq \nu^+$, $\lambda_2\geq \nu^-$
+ 
+\textbf{integrals of signed measures:} $\int_F f \,\mathrm{d}\mu = \int_F f \,\mathrm{d}\mu^+ - \int_F f \,\mathrm{d}\mu^-$ (whenever this ist not $\pm(\infty-\infty)$)
 
 
 \end{multicols}
