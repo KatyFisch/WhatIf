@@ -806,6 +806,21 @@ a martingale is only predictable if a.\ s.\ constant, processes can be decompose
 
 \textit{stopped process} $X^\tau_n(\omega)=X_{\min(n,\tau(\omega))}(\omega)$ (again a martingale)
 
+
+\paragraph{Limit Theorems} \ \\
+
+\textbf{convergence $f_n{\to} f$:} (1)$\Rightarrow$(2)$\Rightarrow$(3);  finite measures: (1)$\Rightarrow$(4) 
+
+(1) \textit{uniformly on $E$:} $\forall \epsilon{>}0\,\exists N{=}N(\epsilon)$ s.t.\ $\forall n\geq N$ $\|f_n - f\|_{\infty}= \sup_{x\in E}(|f_n(x)-f(x)|) < \epsilon$ 
+
+(2) \textit{pointwise on $E$:} $\forall x\in E: \forall \epsilon{>}0\,\exists N{=}N(\epsilon,x)$ s.t. $ \forall n\geq N$  $|f_n(x)-f(x)|<\epsilon$
+
+(3) \textit{a.\ e.\ on $E$:} $\exists F\subset E$ null s.t. $f_n \to f$ pointwise on $E\setminus F$
+
+(4) \textit{in $L^p$-norm ($p^{th}$ mean):} $\|f_n-f\|\to 0$ as $n\to \infty$, i.e.\
+
+$\forall \epsilon{>}0\,\exists N{=}N(\epsilon)$ s.t.\ $\forall n\geq N:$ $\left(\int_E|f_n-f|^pdm\right)^{1/p} <\epsilon$
+
 \end{multicols}
 
 
