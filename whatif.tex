@@ -807,7 +807,7 @@ a martingale is only predictable if a.\ s.\ constant, processes can be decompose
 \textit{stopped process} $X^\tau_n(\omega)=X_{\min(n,\tau(\omega))}(\omega)$ (again a martingale)
 
 
-\paragraph{Limit Theorems} \ \\
+\paragraph{Limit Theorems} focus on probability
 
 \textbf{convergence $f_n{\to} f$:} (1)$\Rightarrow$(2)$\Rightarrow$(3);  finite measures: (1)$\Rightarrow$(4) 
 
@@ -820,6 +820,15 @@ a martingale is only predictable if a.\ s.\ constant, processes can be decompose
 (4) \textit{in $L^p$-norm ($p^{th}$ mean):} $\|f_n-f\|\to 0$ as $n\to \infty$, i.e.\
 
 $\forall \epsilon{>}0\,\exists N{=}N(\epsilon)$ s.t.\ $\forall n\geq N:$ $\left(\int_E|f_n-f|^pdm\right)^{1/p} <\epsilon$
+
+
+(5) \textit{convergence in probability:} sequence $(X_n)\to X$ if $\forall \epsilon{>}0$ $P(|X_n-X|>\epsilon)\overset{n\to\infty}{\to} 0$; (3)$\Rightarrow$(5), (4)$\Rightarrow$(5)
+
+\textbf{Chebyshev's Ineq.} r.v.\ $Y{\geq} 0$, $\epsilon{>}0, 0{<}p{<}\infty \Rightarrow$  $P(Y{\geq} \epsilon)\leq \frac{\mathbb{E}(Y^p)}{\epsilon^p}$
+
+it follows r.v.\ $X$ with $\mathbb{E}(X)=m$, variance $\sigma^2$ and $0<a<\infty$ then $P(|X-m|\geq a\sigma)\leq a^{-2}$
+
+\textbf{Weak Law of Large Numbers}
 
 \end{multicols}
 
