@@ -822,13 +822,24 @@ a martingale is only predictable if a.\ s.\ constant, processes can be decompose
 $\forall \epsilon{>}0\,\exists N{=}N(\epsilon)$ s.t.\ $\forall n\geq N:$ $\left(\int_E|f_n-f|^pdm\right)^{1/p} <\epsilon$
 
 
-(5) \textit{convergence in probability:} sequence $(X_n)\to X$ if $\forall \epsilon{>}0$ $P(|X_n-X|>\epsilon)\overset{n\to\infty}{\to} 0$; (3)$\Rightarrow$(5), (4)$\Rightarrow$(5)
+(5) \textit{\textbf{convergence in probability:}} sequence $(X_n)\to X$ if $\forall \epsilon{>}0$ $P(|X_n-X|>\epsilon)\overset{n\to\infty}{\to} 0$; (3)$\Rightarrow$(5), (4)$\Rightarrow$(5)
 
 \textbf{Chebyshev's Ineq.} r.v.\ $Y{\geq} 0$, $\epsilon{>}0, 0{<}p{<}\infty \Rightarrow$  $P(Y{\geq} \epsilon)\leq \frac{\mathbb{E}(Y^p)}{\epsilon^p}$
 
 it follows r.v.\ $X$ with $\mathbb{E}(X)=m$, variance $\sigma^2$ and $0<a<\infty$ then $P(|X-m|\geq a\sigma)\leq a^{-2}$
 
-\textbf{Weak Law of Large Numbers}
+\textbf{Weak Law of Large Numbers} $X_i$ independent, $\mathbb{E}(X_i)=m$, $\mathrm{Var}(X_i)\leq K<\infty \Rightarrow \frac{S_n}{n} \to m$ (basis for Monte Carlo method)
+
+\textbf{Borel-Cantelli Lemmas} 
+$\substack{\text{(lower: } \cup\cap \text{)} \\ \text{\normalsize upper limit: }}\lim\!\! \sup\limits_{n\to\infty}\!\! A_n \!=\! \mathop{\cap}\limits_{n=1}^\infty\mathop{\cup}\limits_{m=n}^\infty\! A_m$ 
+
+(1) $\sum_{n=1}^\infty P(A_n)<\infty \Rightarrow P(\lim \sup_{n\to\infty} A_n)=0$
+
+(2) $\sum_{n=1}^\infty P(A_n)=\infty \Rightarrow P(\lim \sup_{n\to\infty} A_n)=1$ (for $A_n$ indep.)
+
+it follows: $X_n\to X$ in probability $\Rightarrow$ subsequence $\to X$ a.\,s.\
+
+\textbf{Strong Law of Large Numbers}
 
 \end{multicols}
 
