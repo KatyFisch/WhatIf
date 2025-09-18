@@ -450,7 +450,7 @@ $Z_A = \left\{ \sum_{n=1}^\infty l(I_n): I_n \text{ are intervals, } A\subseteq 
 \item $E_n{\in} \mathcal{M}\,\forall n \Rightarrow \bigcup_{n=1}^\infty E_n \in \mathcal{M}$, with countable additivity: $m^*(\bigcup_{n=1}^\infty E_n) = \sum_{n=1}^\infty m^*(E_n)$ for $E_j\cap E_k=\emptyset$ if $j\neq k$
 \end{itemize}
 (it follows that $\mathcal{M}$ is closed under countable intersections as well)
-the intersection of $\sigma$-fields is a $\sigma$-fields
+the intersection of $\sigma$-fields is a $\sigma$-field
 
 \textit{Open Sets:} every open set in $\mathbb{R}$ can be expressed as a union of countable open intervals $\Rightarrow$ all open sets are in $\mathcal{M}$
 
@@ -515,7 +515,7 @@ $E$ is measurable, $f:E\to\mathbb{R}$ is measurable if $\forall I \subseteq \mat
 
 $f^{-1}(I)\in \mathcal{M}$ (if $\in \mathcal{B}$, then Borel(-measurable) function)
 
-\textit{Equivalences:} $f$ is measurable $\Leftrightarrow$ $\forall a: f^{-1}(x)$ is measurable \newline for $x$ in $\{(a,\infty),[a,\infty), (-\infty,a), (-\infty,a]\}$
+\textit{Equivalences:} $f$ is measurable $\Leftrightarrow$ $\forall a: f^{-1}$ is measurable \newline for $x$ in $\{(a,\infty),[a,\infty), (-\infty,a), (-\infty,a]\}$
 
 \textit{Measurable $f$:} constant, continuous (due to open sets), monotone
 
@@ -558,7 +558,7 @@ $Y(E,f)=\left\{ \int_E \varphi\,\mathrm{d}m:0{\leq} \varphi{\leq} f, \varphi \te
 
 % there where some properties, but so far the integral is not defined on all functions, so I thought I'd wait on it. It's on p. 80. also left out prop 4.5 on p 81
 
-\textbf{Monotone Convergence Theorem} if $\{f_n\}$ $\geq 0$, m'able,  \& $f_n \to f$ then: $\lim_{n\to\infty}\int_E f_n(x)\, \mathrm{d}m = \int_E f\,\mathrm{d}m$ \\ (if limit is only a.e.\ then $E$ has to be m'able for result to hold)
+\textbf{Monotone Convergence Theorem} if $\{f_n\}$ $\geq 0$, m'able,  \& $f_n \to f$ pointwise then: $\lim_{n\to\infty}\int_E f_n(x)\, \mathrm{d}m = \int_E f\,\mathrm{d}m$ \\ (if limit is only a.e.\ then $E$ has to be m'able for result to hold)
 
 \textbf{on m'able function $\boldsymbol{f}$:} $\int_E f\, \mathrm{d}m = \int_E f^+\, \mathrm{d}m - \int_E f^-\, \mathrm{d}m $
 
@@ -582,7 +582,7 @@ let $f\geq 0$: (1) $\int f \, \mathrm{d}m{=}0 \Rightarrow f{=}0$ a.e.\ (2) $A\to
 \textbf{Dominated Convergence Theorem:} $(f_n)$ measurable, $|f_n|{\leq} g$ a.e.\ on $E{\in} \mathcal{M}$, $g$ $E$-int'able $\Rightarrow$  $\displaystyle\lim_{n\to\infty} \int_E f_n(x)\,\mathrm{d}m = \int_E f \,\mathrm{d}m$
 
 \textit{Beppo-Levi:} $\sum_{n=1}^\infty \int |f_n| \,\mathrm{d}m$ finite $\Rightarrow$ $\sum_{n=1}^\infty f_n(x)$ converges a.e., is integrable and
-$\int\sum_{n=1}^\infty f_n \,\mathrm{d}m = \sum_{n=0}^\infty \int f_n \,\mathrm{d}m$
+$\int\sum_{n=1}^\infty f_n \,\mathrm{d}m = \sum_{n=1}^\infty \int f_n \,\mathrm{d}m$
 
 \textbf{Relation to Riemann integrals:} let $[a,b] \to \mathbb{R}$ bounded
 
@@ -619,7 +619,7 @@ $g:\mathbb{R}\to\mathbb{R}$ increasing  \& diff'able: $f_{g(X)}(y){=}f_X(g^{-1}(
 
 \textit{$\mathbb{C}$:} $\int_E u+\compi v \,\mathrm{d}m = \int_E u \,\mathrm{d}m  + \compi \int_E v \,\mathrm{d}m $, $|\int_E f \,\mathrm{d}m| \leq \int_E |f| \,\mathrm{d}m$
 
-\textit{Characteristic Function:} $\varphi_X(t)=\mathbb{E}(\exp^{\compi tX}) = \int \exp^{\compi tx} \, \mathrm{d}P_X(x)$ for r.v.\ $X$, with $t\in \mathbb{R}$;
+\textit{Characteristic Function:} $\varphi_X(t)=\mathbb{E}(\mathrm{e}^{\compi tX}) = \int \mathrm{e}^{\compi tx} \, \mathrm{d}P_X(x)$ for r.v.\ $X$, with $t\in \mathbb{R}$;
 $\varphi_X(0)=1$, $-1\leq\varphi_X(t)\leq 1$
 
 
@@ -730,9 +730,9 @@ $$\int_{\Omega_1\times\Omega_2}f\,\mathrm{d}(P_1\times P_2) = \int_{\Omega_1}\le
 
 \textit{$X {+} Y$:} $f_{X+Y}(z)=\int_{\mathbb{R}}f_{X,Y}(x,z{-}x)\,\mathrm{d}x \overset{\indep}{=} \int_{\mathbb{R}}f_{X}(x) f_Y(z{-}x)\,\mathrm{d}x$
 
-\textit{characteristic function:} if $F_X$ continuous at $a,b\in \mathbb{R}:$ $F_X(b)-F_X(a)=\lim_{c\to \infty} \frac{1}{2\pi}\int_{-c}^c \frac{\exp^{-\compi ua}-\exp^{\compi ub}}{\compi u}\varphi_X(u)\,\mathrm{d}u$;
+\textit{characteristic function:} if $F_X$ continuous at $a,b\in \mathbb{R}:$ $F_X(b)-F_X(a)=\lim_{c\to \infty} \frac{1}{2\pi}\int_{-c}^c \frac{\mathrm{e}^{-\compi ua}-\mathrm{e}^{\compi ub}}{\compi u}\varphi_X(u)\,\mathrm{d}u$;
 
-if $\varphi_X$ integrable: $f_X(x) = \frac{1}{2\pi}\int_{-\infty}^\infty \exp^{-\compi ux}\varphi_X(x)\,\mathrm{d}u$
+if $\varphi_X$ integrable: $f_X(x) = \frac{1}{2\pi}\int_{-\infty}^\infty \mathrm{e}^{-\compi ux}\varphi_X(u)\,\mathrm{d}u$
 
 
 
@@ -742,11 +742,11 @@ if $\varphi_X$ integrable: $f_X(x) = \frac{1}{2\pi}\int_{-\infty}^\infty \exp^{-
 
 $\nu\ll \mu$ iff: $\forall \epsilon>0 \,\,\exists\, \delta>0 \text{ s.t. } \mu(F)<\delta \Rightarrow \nu(F)<\epsilon\,\,\,\forall F{\in}\mathcal{F}$
 
-\textbf{Radon-Nikodym:} $\nu,\mu$ $\sigma$-finite, $\nu\ll \mu$: $\exists$ m'able function $\geq 0$ $h:\Omega\to \mathbb{R}$ s.t.\ $\nu(F){=}\int_F h\,\mathrm{d}\mu \,\,\,\forall F{\in}\mathcal{F}$, $h$ is unique up to $\mu$-null sets
+\textbf{Radon-Nikodym:} $\nu,\mu$ $\sigma$-finite, $\nu\ll \mu$: $\exists$ m'able function $h\geq 0$ $h:\Omega\to \mathbb{R}$ s.t.\ $\nu(F){=}\int_F h\,\mathrm{d}\mu \,\,\,\forall F{\in}\mathcal{F}$, $h$ is unique up to $\mu$-null sets
 
 \textit{Radon-Nikodym derivative:} $\frac{\mathrm{d}\nu}{\mathrm{d}\mu}=h$ with $\lambda\ll\mu$, $\nu\ll \mu$ implying $\phi=\lambda{+}\nu \Rightarrow  \frac{\mathrm{d}\phi}{\mathrm{d}\mu}=\frac{\mathrm{d}\lambda}{\mathrm{d}\mu}+\frac{\mathrm{d}\nu}{\mathrm{d}\mu}$ a.s.\ and $\lambda\ll\nu\Rightarrow \frac{\mathrm{d}\lambda}{\mathrm{d}\mu}=\frac{\mathrm{d}\lambda}{\mathrm{d}\nu}\frac{\mathrm{d}\nu}{\mathrm{d}\mu}$ a.s. 
 
-\textbf{mutual singularity ($\boldsymbol{\mu \!\perp\! \nu}$):} concentrated on disjoint  $A_i{\in}\Omega$
+\textbf{mutual singularity ($\boldsymbol{\mu \!\perp\! \nu}$):} concentrated on disjoint  $A_i{\subset}\Omega$
 
 \textit{$\lambda$ concentrated on $E{\in}\mathcal{F}$:}  $\lambda(F)=\lambda(E\cap F) \,\,\, \forall F{\in}\mathcal{F}$
 
@@ -754,7 +754,7 @@ $\nu\ll \mu$ iff: $\forall \epsilon>0 \,\,\exists\, \delta>0 \text{ s.t. } \mu(F
 
 $\lambda(E)=\int_E h \,\mathrm{d}\mu + \lambda_s(E)$ ``linear combination'': $\mu$ acting as ``basis''
 
-\textbf{Lebesgue-Stieltjes measure:} distribution function $F$ has only jump discontinuities \& is right continuous, i.e.\ $F(x{+})=F(x)$
+\textbf{Lebesgue-Stieltjes measure:} distribution function $F$ has only jump discontinuities \& is right continuous, i.e.\ $F(x^{+})=F(x)$
 
 \textit{$F$-outer measure $m_F^*$:} $m^*$ using $l_F$ on intervals, restricted to 
 
@@ -779,7 +779,7 @@ $\nu$ bounded signed measure and $F(x)=\nu((-\infty,x])$ then: $F$ diff'able wit
 \textbf{Hahn-Jordan decomposition:} $\nu$ bounded signed measure then disjoint $A\cup B=\Omega$ with $\nu^{+(-)}(F)=\nu(B(A)\cap F) \,\,\forall F{\in}\mathcal{F}$,
  if $\nu=\lambda_1-\lambda_2$ then $\lambda_1\geq \nu^+$, $\lambda_2\geq \nu^-$
  
-\textbf{integrals of signed measures:} $\int_F f \,\mathrm{d}\mu = \int_F f \,\mathrm{d}\mu^+ - \int_F f \,\mathrm{d}\mu^-$ (whenever this ist not $\pm(\infty-\infty)$)
+\textbf{integrals of signed measures:} $\int_F f \,\mathrm{d}\mu = \int_F f \,\mathrm{d}\mu^+ - \int_F f \,\mathrm{d}\mu^-$ (whenever this is not $\pm(\infty-\infty)$)
 
 \textbf{Probability} Radon-Nikodym means $\exists$ cond.\ exp.\ for $X\in \mathcal{L}^1(P)$
 
@@ -811,41 +811,93 @@ a martingale is only predictable if a.\ s.\ constant, processes can be decompose
 
 \textbf{convergence $f_n{\to} f$:} (1)$\Rightarrow$(2)$\Rightarrow$(3);  finite measures: (1)$\Rightarrow$(4) 
 
-(1) \textit{uniformly on $E$:} $\forall \epsilon{>}0\,\exists N{=}N(\epsilon)$ s.t.\ $\forall n\geq N$ $\|f_n - f\|_{\infty}= \sup_{x\in E}(|f_n(x)-f(x)|) < \epsilon$ 
+(1) \textit{uniformly on $E$:} $\forall \epsilon{>}0\,\exists N{=}N(\epsilon)$ s.t.\ $\forall n\geq N$ 
 
-(2) \textit{pointwise on $E$:} $\forall x\in E: \forall \epsilon{>}0\,\exists N{=}N(\epsilon,x)$ s.t. $ \forall n\geq N$  $|f_n(x)-f(x)|<\epsilon$
+\hspace{1.7em}$\|f_n - f\|_{\infty}= \sup_{x\in E}(|f_n(x)-f(x)|) < \epsilon$
+
+(2) \textit{pointwise on $E$:} $\forall x\in E: \forall \epsilon{>}0\,\exists N{=}N(\epsilon,x)$ s.t. $ \forall n\geq N$  
+
+\hspace{1.7em}$|f_n(x)-f(x)|<\epsilon$
 
 (3) \textit{a.\ e.\ on $E$:} $\exists F\subset E$ null s.t. $f_n \to f$ pointwise on $E\setminus F$
 
-(4) \textit{in $L^p$-norm ($p^{th}$ mean):} $\|f_n-f\|\to 0$ as $n\to \infty$, i.e.\
+(4) \textit{in $L^p$-norm ($p^{th}$ mean):} $\|f_n-f\|_p\to 0$ as $n\to \infty$, i.e.\
 
-$\forall \epsilon{>}0\,\exists N{=}N(\epsilon)$ s.t.\ $\forall n\geq N:$ $\left(\int_E|f_n-f|^pdm\right)^{1/p} <\epsilon$
+\hspace{1.7em}$\forall \epsilon{>}0\,\exists N{=}N(\epsilon)$ s.t.\ $\forall n\geq N:$ $\left(\int_E|f_n-f|^pdm\right)^{1/p} <\epsilon$
 
 
-(5) \textit{\textbf{convergence in probability:}} sequence $(X_n)\to X$ if $\forall \epsilon{>}0$ $P(|X_n-X|>\epsilon)\overset{n\to\infty}{\to} 0$; (3)$\Rightarrow$(5), (4)$\Rightarrow$(5)
+(5) \textit{\textbf{convergence in probability:}} sequence $(X_n)\to X$ if $\forall \epsilon{>}0$ 
+
+\hspace{1.7em}$P(|X_n-X|>\epsilon)\overset{n\to\infty}{\to} 0$; (3)$\Rightarrow$(5), (4)$\Rightarrow$(5)
 
 \textbf{Chebyshev's Ineq.} r.v.\ $Y{\geq} 0$, $\epsilon{>}0, 0{<}p{<}\infty \Rightarrow$  $P(Y{\geq} \epsilon)\leq \frac{\mathbb{E}(Y^p)}{\epsilon^p}$
 
 it follows r.v.\ $X$ with $\mathbb{E}(X)=m$, variance $\sigma^2$ and $0<a<\infty$ then $P(|X-m|\geq a\sigma)\leq a^{-2}$
 
-\textbf{Weak Law of Large Numbers} $X_i$ independent, $\mathbb{E}(X_i)=m$, $\mathrm{Var}(X_i)\leq K<\infty \Rightarrow \frac{S_n}{n} \to m$ (basis for Monte Carlo method)
+\textbf{Weak Law of Large Numbers} $X_i$ independent, $\mathbb{E}(X_i)=m$, $\mathrm{Var}(X_i)\leq K<\infty \Rightarrow \frac{S_n}{n} \to m$ in probability
 
 \textbf{Borel-Cantelli Lemmas} 
 $\substack{\text{(lower: } \cup\cap \text{)} \\ \text{\normalsize upper limit: }}\lim\!\! \sup\limits_{n\to\infty}\!\! A_n \!=\! \mathop{\cap}\limits_{n=1}^\infty\mathop{\cup}\limits_{m=n}^\infty\! A_m$ 
 
-(1) $\sum_{n=1}^\infty P(A_n)<\infty \Rightarrow P(\lim \sup_{n\to\infty} A_n)=0$
+(a) $\sum_{n=1}^\infty P(A_n)<\infty \Rightarrow P(\lim \sup_{n\to\infty} A_n)=0$
 
-(2) $\sum_{n=1}^\infty P(A_n)=\infty \Rightarrow P(\lim \sup_{n\to\infty} A_n)=1$ (for $A_n$ indep.)
+(b) $\sum_{n=1}^\infty P(A_n)=\infty \Rightarrow P(\lim \sup_{n\to\infty} A_n)=1$ (for $A_n$ indep.)
 
 it follows: $X_n\to X$ in probability $\Rightarrow$ subsequence $\to X$ a.\,s.\
 
-\textbf{Strong Law of Large Numbers}
+\textbf{Strong Law of Large Numbers} $S_n=X_1+...+X_n$; versions:
+
+\textbullet $X_n$ indep., $\mathbb{E}(X_n){=}m$, $\mathbb{E}(X^4_n){<} K \Rightarrow \frac{S_n}{n}{=}\frac{1}{n}\!\sum_{k=1}^n\!X_k\to m$ a.\,s.\
+
+%\textbullet $X_n$ indep., $\mathbb{E}(X_n){=}0$, $\mathbb{E}(X^2_n){<}\infty$ $\Rightarrow$ 
+%$\!P\left(\max\limits_{k{\leq} n}|S_k|\geq\epsilon\right) {\leq} \frac{\mathrm{Var}(S_n)}{\epsilon^2}$
+
+\textbullet $X_n$ indep., $\mathbb{E}(X_n){=}0$, $\sum_{n=1}^\infty\frac{1}{n^2}\mathrm{Var}(X_n)<\infty \Rightarrow \frac{S_n}{n}\to 0$ a.\,s.\ %\vspace{0.5em}
+
+\textbullet $X_n$ i.i.d., $\mathbb{E}(X_1){=}m<\infty$ $\Rightarrow \frac{S_n}{n}\to m$ a.\,s.\ (final form of the law)
+
+(6) \textbf{\textit{weak convergence}} ``weak'' as implied by weakest (5)$\Rightarrow$(6):
+
+\hspace{1.7em}sequence $P_n$ of Borel prob.\ measures on $\mathbb{R}^n$ $\to\!\!P$ weakly  \hfill$\Leftrightarrow$ 
+
+\hspace{1.7em}their CDFs $F_n \to F$ (CDF of $P$) wherever $F$ continuous
+
+%(for r.v.\ $(X_n)$ this means $P_n{=}P_{X_n}$, $P{=}P_X$ and $X_n\to X$ weakly)
+
+\textbf{Skorokhod Representation Theorem} $P_n{\to} P$ weakly $\!\Rightarrow$ 
+$\exists$ r.v.\ $X_n,X$ on $\left([0,1],\mathcal{B},m_{[0,1]}\right)$ s.t.\ $P_n{=}P_{X_n}$, $P{=}P_X$ \& $X_n{\to} X$ a.\,s.\
+
+%it follows: $P_{X_n}\to P_X$ weakly $\Rightarrow \varphi_{X_n}\to\varphi_X$
+
+%\textbf{Helly's Theorem} $F_n$ PDFs $\exists F,k_n$ s.t.\ $F_{k_n}(x) {\to} F(x)$ at cont.\ $x$
+
+\textbf{Prokhorov's Theorem} $P_n{\in}\mathbb{R}^d$ tight $\exists k_n$ s.t.\ $P_{k_n}\to P$ weakly
+
+with \textit{tight}: $\forall\epsilon{>}0\,\exists M$ s.t.\ $P_n(\mathbb{R}_d{\setminus}[-M,M])<\epsilon \,\,\forall n$ (``light tails'')
+
+%$\varphi$ is char.\ function of Borel measure $P$ on $\mathbb{R}$ if $\varphi(t)=\int\mathrm{e}^{\i tx}dP(x)$
+
+%$(P_n)$ tight, subsequence $\to \!P$, $\varphi_n(u){\to}\varphi(u) \Rightarrow P_n{\to} P$ weakly
+
+\textbf{Central Limit Theorem} normalized r.v.\ $T_n=\frac{S_n-\mathbb{E}(S_n)}{\sqrt{\mathrm{Var}(S_n)}}$
+
+$X_n$ indep., $\mathbb{E}(X_n){=}m_n{<}\infty$ \& $\mathrm{Var}(X_n){<}\infty$ then $P_{T_n}\overset{weak}{\to} \mathrm{N}(0,1)$
+
+if $\frac{1}{\mathrm{Var}(S_n)}\sum_{k=1}^n\int_{\{x:|x-m_k|\geq \epsilon\sqrt{\mathrm{Var}(S_n)}\}}(x-m_k)^2\mathrm{d}P_{X_k}\overset{n\to\infty}{\to}0$
+
+
 
 \end{multicols}
 
 
 % functional analysis
+\subsection[Functional Analysis]{Functional Analysis \citep{kreyszig1991introductory}}
 
+\begin{multicols}{2}
+
+yay next book
+
+\end{multicols}
 
 
 
