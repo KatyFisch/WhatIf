@@ -14,6 +14,7 @@
 %\usepackage{wrapfig}
 %\usepackage{tikz}
 \usepackage{amsmath} 
+\usepackage{mathrsfs}
 \usepackage{multicol}
 \usepackage{amsfonts} 
 \usepackage{comment}
@@ -895,7 +896,20 @@ if $\frac{1}{\mathrm{Var}(S_n)}\sum_{k=1}^n\int_{\{x:|x-m_k|\geq \epsilon\sqrt{\
 
 \begin{multicols}{2}
 
-yay next book
+\paragraph{additional notes on Metric Spaces} $(X,d)$
+
+\textbf{discrete metric} $d(x,x)=0$ and $d(x,y)=1$ for $x\neq y$
+
+\textbf{topology} $(X,d)$ is a topological space $(X, \mathscr{T})$, satisfying $\emptyset\in\mathscr{T}, X\in\mathscr{T}$; unions $\in\mathscr{T}$; finite intersections $\in\mathscr{T}$
+
+\textbf{separability} $M\subset X$ is \textit{dense in $X$} if completion $\bar{M}=X$; 
+$X$ is \textit{separable} if $\exists$ countable subset dense in $X$ (e.g.\ $\mathbb{R}$, $\mathbb{C}$, $l^p$ for $p{<}\infty$)
+
+\textbf{completeness} $X$ is complete if every Cauchy sequence converges
+
+\textbf{completion} for every $X=(X,d)$ $\exists$ complete $\hat{X}=(\hat{X}, \hat{d})$ with subspace $W$ dense in $\hat{X}$ and isometric with $X$ (unique up to isometries), where $T:X\to \tilde{X}$ is \textit{isometric} if $d(x,y)=\tilde{d}(Tx, Ty)$ and $X$ is \textit{isometric} with $\tilde{X}$ if $\exists$ bijective isometry $X\to \tilde{X}$
+
+\paragraph{Normed Spaces} (+ complete = Banach)
 
 \end{multicols}
 
