@@ -896,7 +896,7 @@ if $\frac{1}{\mathrm{Var}(S_n)}\sum_{k=1}^n\int_{\{x:|x-m_k|\geq \epsilon\sqrt{\
 
 \begin{multicols}{2}
 
-\paragraph{additional notes on Metric Spaces} $(X,d)$
+\paragraph{Metric Spaces (additional notes on)} $(X,d)$
 
 \textbf{discrete metric} $d(x,x)=0$ and $d(x,y)=1$ for $x\neq y$
 
@@ -909,7 +909,34 @@ $X$ is \textit{separable} if $\exists$ countable subset dense in $X$ (e.g.\ $\ma
 
 \textbf{completion} for every $X=(X,d)$ $\exists$ complete $\hat{X}=(\hat{X}, \hat{d})$ with subspace $W$ dense in $\hat{X}$ and isometric with $X$ (unique up to isometries), where $T:X\to \tilde{X}$ is \textit{isometric} if $d(x,y)=\tilde{d}(Tx, Ty)$ and $X$ is \textit{isometric} with $\tilde{X}$ if $\exists$ bijective isometry $X\to \tilde{X}$
 
-\paragraph{Normed Spaces} (+ complete = Banach)
+\paragraph{Normed Spaces} vector space with metric defined by norm
+
+\textbf{Vector Space} over field $K$: nonempty set of \textit{vectors} $x,y...$ with operations \textit{vector addition} (abelian group) and \textit{scalar} (elements of $K$) \textit{vector multiplication} ($\alpha(\beta x){=} (\alpha\beta)x)$; $1x{=}x$, distributive)
+
+\textbf{\textit{linear independence}} $a_1x_1+...+a_mx_m= 0$ only for $a_i=0$
+
+\textbf{\textit{dimensionality}} max number of vectors in independent set, 
+
+for $\dim X=n$, a linearly independent $n$-tuple is called a basis
+
+\textbf{Normed Space} vector space + norm $\|x\|$ (PD, homogeneity, $\Delta$)
+
+if $\exists (e_n)$ in $X$ s.t.\ $\forall x \,\, \|x-(\alpha_1e_1+...+\alpha_ne_n)\|\overset{n\to\infty}{\to} 0$ then $e_n$ is called \textit{Schrauder basis} with $x{=}\sum_{k=1}^\infty\alpha_ke_k$; $\exists (e_n)\Rightarrow X$ separable
+
+
+\textbf{Banach Space} complete (in metric $\|x-y\|$) normed space
+
+a metric induced norm is translation invariant
+
+subspace of Banach space $Y$ is complete iff it is closed in $Y$
+
+\textit{\textbf{completion}} normed space $X$ to Banach space $\hat{X}$ with isometry $A$ s.t.\ $A(X)$  dense in $\hat{X}$ (unique up to isometries)
+
+\textbf{Finite Dimensional Normed Spaces} every finite dimensional subspace $Y$ of a normed space $X$ is complete and closed in $X$;
+
+in a finite dimensional vector space $X$ all norms are equivalent, meaning $\exists a,b>0$ s.t\ $a\|x\|_*\leq \|x\|_.\leq b \|x\|_*$ 
+
+
 
 \end{multicols}
 
