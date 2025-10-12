@@ -921,7 +921,7 @@ for $\dim X=n$, a linearly independent $n$-tuple is called a basis
 
 \textbf{Normed Space} vector space + norm $\|x\|$ (PD, homogeneity, $\Delta$)
 
-if $\exists (e_n)$ in $X$ s.t.\ $\forall x \,\, \|x-(\alpha_1e_1+...+\alpha_ne_n)\|\overset{n\to\infty}{\to} 0$ then $e_n$ is called \textit{Schrauder basis} with $x{=}\sum_{k=1}^\infty\alpha_ke_k$; $\exists (e_n)\Rightarrow X$ separable
+if $\exists (e_n)$ in $X$ s.t.\ $\forall x \,\, \|x-(\alpha_1e_1+...+\alpha_ne_n)\|\overset{n\to\infty}{\to} 0$ then $e_n$ is called \textit{Schauder basis} with $x{=}\sum_{k=1}^\infty\alpha_ke_k$; $\exists (e_n)\Rightarrow X$ separable
 
 
 \textbf{Banach Space} complete (in metric $\|x-y\|$) normed space
@@ -932,9 +932,68 @@ subspace of Banach space $Y$ is complete iff it is closed in $Y$
 
 \textit{\textbf{completion}} normed space $X$ to Banach space $\hat{X}$ with isometry $A$ s.t.\ $A(X)$  dense in $\hat{X}$ (unique up to isometries)
 
-\textbf{Finite Dimensional Normed Spaces} every finite dimensional subspace $Y$ of a normed space $X$ is complete and closed in $X$;
+\textbf{Finite Dimensional Normed Space} every finite dimensional subspace $B$ of a normed space $A$ is complete and closed in $A$;
 
-in a finite dimensional vector space $X$ all norms are equivalent, meaning $\exists a,b>0$ s.t\ $a\|x\|_*\leq \|x\|_.\leq b \|x\|_*$ 
+in a finite dimensional vector space $X$:
+
+\textbullet \ all norms are equivalent: $\exists a,b>0$ s.t\ $a\|x\|_*\leq \|x\|_.\leq b \|x\|_*$ 
+
+\textbullet \ any $M\subset X$ is compact iff $M$ closed and bounded 
+
+\textbf{\textit{Riesz's Lemma}} $Y\subset Z \subset X$ with $Y$ closed $\Rightarrow \forall \,\theta{\in}(0,1)\,\, \exists z{\in} Z$ s.t.\ $\|z\|{=}1$ \& $\|z{-}y\|\geq \theta \,\,\forall\, y{\in} Y$; the lemma shows: closed unit ball $M=\{x|\|x\|\leq 1\}$ compact $\Rightarrow$ $X$ is finite dimensional
+
+\textbf{\textit{continuous mapping}} $T{:}X{\to} Y$ (metric spaces), $M{\subset} X$ compact $\Rightarrow$ $T(M)$ compact \& $T{:}M{\to} \mathbb{R}$ assumes maximum and minimum
+
+\textbf{Linear Operator}  $T:\mathscr{D}(T)\to \mathscr{R}(T)$ (vector spaces over $K$) \& $T(x{+}y)=Tx{+}Ty, T(\alpha x)=\alpha Tx$; $\mathscr{N}(T)$ is null space s.t.\ $Tx{=}0$
+
+\textbullet \ $\mathscr{R}(T), \mathscr{N}(T)$ vector spaces \textbullet \ $\dim\mathscr{D}(T){=}n{<}\infty\Rightarrow \dim\mathscr{R}(T)\leq n$
+
+\textit{inverse:} linear operator $\Leftarrow$ $T^{-1}$ exits  $\Leftrightarrow$ $Tx{=}0$ only at $x{=}0$
+
+$X\overset{T}{\to}Y\overset{S}{\to}Z$ bijective on vector spaces: $(ST)^{-1}=T^{-1}S^{-1}$
+
+\textit{\textbf{bounded linear}} $T:\mathscr{D}(T)\to Y$ ($X, Y$ normed spaces): 
+
+$\exists c\in \mathbb{R}$ s.t.\ $\forall x\in\mathscr{D}(T)$ $\|Tx\|\leq c\|x\|$ $\Rightarrow$ $T$ bounded ($\Leftrightarrow$ $\|T\|$ exists)
+
+\textit{operator norm}$\,\|T\|{=}\sup_{x\in\mathscr{D}(T), x\neq0}\!\!\frac{\|Tx\|}{\|x\|}{=}\sup_{x\in\mathscr{D}(T), \|x\|=1}\!\!\frac{\|Tx\|}{\|x\|} $
+
+in a finite normed space $X$ every linear operator is bounded
+
+$T$ continuous at a single point $\Leftrightarrow$ $T$ continuous $\Leftrightarrow$ $T$ bounded
+
+$\mathscr{N}(T)$ is closed \& $x_n\to x$ implies $Tx_n\to Tx$
+
+\textit{extension} $\tilde{T}: \overline{\mathscr{D}(T)}\to Y$ bounded  with norm $\|\tilde{T}\|=\|T\|$
+
+\textit{\textbf{matrix representation}}  for $\dim X{<}\infty$: 
+linear operator $\overset{~}{=}$ matrix
+
+\textbf{Functional} operator $f:\mathscr{D}(f)\to K$ with $\mathscr{D}(f){\subset} X$ \& $K{=}\mathbb{R}/\mathbb{C}$
+
+\textbullet \ \textit{linear:} $X$ vector space over $K$ \textbullet \ \textit{bounded/continuous:} see above
+
+\textbf{\textit{algebraic dual spaces}} for $X$ vector space: algebraic dual space $X^*$ (values $f(x)$) \& second algebraic dual space $X^{**}$ (values $g(f)$)
+
+\textit{canonical mapping} $X{\to} X^{**}$ is $g(f){=}g_x(f){=}f(x)$ with $x$ fixed
+
+$X$ is \textit{\textbf{isomorphic}} to a subspace of $X^{**}$ (\textit{embeddable}), meaning a bijective function exists which preserves the structure (e.g.\ norm)
+
+\textit{\textbf{dual basis}} $\dim X{=}n\leq \infty$ with basis $E{=}\{e_1,...,e_n\}$ $\Rightarrow$ Kronecker delta $\delta_{jk}{=}f_k(e_j){=}\mathbbm{1}_{j=k}(e_j)$ is basis for $X^*$ and $\dim X^*{=}n$
+
+\textbf{Dual Space}\,$\boldsymbol{X'}$:\,all bounded linear functionals\,on\,normed\,space\hspace{0.1em}$X$
+
+\textbf{\textit{vector space $\boldsymbol{B(X,Y)}$}:} all bounded linear operators $X\to Y$ (normed spaces) $\rightarrow$ normed space with the operator norm; 
+
+$Y$ Banach space $\Rightarrow$ $B(X,Y)$ Banach space
+
+isomorphisms: $(\mathbb{R}^n)'{=}\mathbb{R}^n$; $(l^1)'{=}l^\infty$; $(l^p)'{=}l^q$ with $\frac{1}{q}{+}\frac{1}{p}{=}1$
+
+\paragraph{Inner Product Spaces} inner product
+
+
+
+
 
 
 
