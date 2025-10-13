@@ -989,9 +989,34 @@ $Y$ Banach space $\Rightarrow$ $B(X,Y)$ Banach space
 
 isomorphisms: $(\mathbb{R}^n)'{=}\mathbb{R}^n$; $(l^1)'{=}l^\infty$; $(l^p)'{=}l^q$ with $\frac{1}{q}{+}\frac{1}{p}{=}1$
 
-\paragraph{Inner Product Spaces} inner product
+\paragraph{Inner Product Spaces} $\langle\,,\rangle$ + complete = Hilbert
 
+inner product (PD, sesquilinear, $\overline{\text{symmetric}}$) induces norm $\|x\|=\sqrt{\langle x,x\rangle}$ \& metric $\|x-y\|$;
+\textit{orthogonality} $\perp$: $\langle x,y\rangle=0$
 
+\textit{continuity:} $x_n\to x$ \& $y_n\to y \,\,\Rightarrow\,\, \langle x_n,y_n\rangle\to\langle x,y\rangle$
+
+\textit{completion:} inner product space $X$ to Hilbert space $H$ (unique up to isomorphisms) with isomorphism $A: X\to W$ (dense $W{\subset} H$)
+
+for $Y{\subset} H$: \textbullet\ $Y$ finite $\Rightarrow$ $Y$ complete  $\Leftrightarrow$ $Y$ closed in $H$
+
+\hspace{4.72em}\textbullet\ $H$ separable $\Rightarrow$ $Y$ separable (even for incomplete $H$)
+
+\textbf{Orthogonal Complement} $H{=}Y{\oplus} Y^\perp$ with $Y$ closed subspace
+
+\textit{segment} all $z$ s.t.\ $x,y\in X$ (vector space): $\alpha x{+}(1{-}\alpha)y=z{\in} X$ ($0{\leq}\alpha{\leq}1$); if all $z\in X \forall x,y\in M$ $\Rightarrow$ $M{\subset} X$ is \textit{convex}
+
+\textit{minimizing vector:} convex, complete $M$ subset $X$ inner product space: $\forall \,x{\in} X \,\,\exists \text{ unique }y{\in} M$ s.t.\ $\delta=\inf
+_{\tilde{y}\in M}\|x-\tilde{y}\|=\|x-y\|$
+
+if complete $M$ subspace $Y$ $\Rightarrow$ $z{=}x{-}y$ orthogonal to $Y$
+
+\textit{direct sum:} $X{=}Y{\oplus} Z$ meaning $x{=}y{+}z$ $\forall x\in X$; $M{\subset} M^{\perp\perp}$
+ 
+ 
+\textit{orthogonal projection $P:H\to Y$:} orthogonal complement $Y^\perp$ of closed suspace $Y{\subset} H$ is $\mathscr{N}(P)$; $Y^\perp$ closed vector space; $Y{=} Y^{\perp\perp}$
+
+\textit{dense set:} for any $M\subset H$, $\text{span}(M)$ dense in $H$ iff $M^\perp={0}$
 
 
 
