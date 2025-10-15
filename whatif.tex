@@ -1018,6 +1018,70 @@ if complete $M$ subspace $Y$ $\Rightarrow$ $z{=}x{-}y$ orthogonal to $Y$
 
 \textit{dense set:} for any $M\subset H$, $\text{span}(M)$ dense in $H$ iff $M^\perp={0}$
 
+\textbf{Orthonormal Sets} $M\subset X$ (inner product space) with pairwise orthogonal elements, called orthonormal if normed to 1, e.g. unit vectors in $\mathbb{R}^n$, sequence $(e_n)$ in $l^2$ where $n$th element 1 others 0
+
+for orthonormal $(e_k)$, inner product space $X$: $x=\sum_{k=1}^n \langle x,e_k\rangle e_k$
+
+\textit{Bessel inequality:} $\sum_{k=1}^\infty|\langle x, e_k\rangle |^2\leq \|x\|^2$; \hfill $\langle x, e_k\rangle$ Fourier coef.
+
+\textbf{Fourier Series} \ \ \textit{periodic} $\exists\, p{\geq} 0$ s.t.\  $f(t{+}p)=f(t)$
+
+\textit{trigonometric} $a_0{+}\!\sum_{k=1}^\infty(a_k\!\cos kt{+}b_k\!\sin kt)$ with \textit{Euler functions}
+
+\textbullet $a_0{=}\frac{1}{2\pi}\!\int_0^{2\pi}\!x(t)dt$ \textbullet $a_k{=}\frac{1}{\pi}\!\int_0^{2\pi}\!x(t) \cos kt\,dt$ \textbullet $b_k{=}\frac{1}{\pi}\!\int_0^{2\pi}\!x(t) \sin kt \,dt$
+
+$x{=}\langle x, e_0\rangle e_0 {+} \sum_{k=1}^\infty\left[\langle x,e_k\rangle e_k{+} \langle x, \tilde{e}_k\rangle\tilde{e}_k\right]$ w/ $e_j{=}\frac{\cos kt}{\|\cos kt\|}$ ($\tilde{e_j}$: $\sin$)
+
+%$\tilde{e}_j{=}\frac{\sin kt}{\|\sin kt\|}$
+
+for $(e_k)$ orthonormal in $H$: 
+$\sum_{k=1}^\infty |\alpha_k|$ converges $\Leftrightarrow$ 
+$\sum_{k=1}^\infty \alpha_k e_k$ converges $\Rightarrow$ $x{=}\sum_{k=1}^n \langle x, e_k\rangle e_k$ (this converges in any $H$)
+
+inner product space $X$: at most countable many nonzero $\langle x, e_k\rangle$
+
+\textbf{Total Orthonormal Sets} \textit{total:} span is dense in $X$
+
+\textbf{\textit{total orthonormal set}} $M{\subset} H$  exists $\forall H$, all these sets have the same cardinality:  \textit{Hilbert dimension} ($\dim H{=}\dim \tilde{H} \Leftrightarrow H{=}\tilde{H}$)
+
+$M$ is total iff Bessel equality (=\textit{Parseval relation}) holds
+
+\textbullet\ $H$ contains total orthonormal sequence $\Rightarrow$ $H$ separable 
+
+\textbullet\ $H$ separable $\Rightarrow$ every orthonormal set is countable
+
+\textbf{Riesz's Theorem} 
+every bounded linear functional $f$ on $H$ can be written as $f(x)=\langle x, z \rangle$ with unique $z$ and $\|z\|=\|f\|$
+
+\textbf{\textit{sesquilinear form}} $h:X\times Y\to K=\mathbb{R}/\mathbb{C}$ ($X$, $Y$ vector spaces) linear in the first and conjugate linear in the second argument
+
+\textit{bounded} if $\forall x,y \,\exists\, c{\in}\mathbb{R}$ s.t. $|h(x,y)|\leq c\|x\|\|y\|$  (normed $X$,$Y$)
+
+with norm $\|h\|{=}\sup_{x\in X\setminus 0, y\in Y\setminus 0}\frac{|h(x,y)|)}{\|x\|\|y\|}$
+
+ \textit{\textbf{Riesz representation}} $h{:}H_1{\times} H_2{\to} K$ bounded sesquilinear then $h(x,y){=}\langle Sx,y\rangle$ with unique $S{:}H_1{\to} H_2$ bounded linear, $\|S\|{=}\|h\|$
+
+
+\textbf{Hilbert-Adjoint Operator $T^*$:} $\forall$ bounded linear $T{:}H_1{\to}H_2$
+
+ $\exists$ unique $T^*{:}H_2{\to}H_1$ s.t.\ $\langle Tx,y\rangle{=}\langle x,T^*y\rangle$; $\|T^*\|{=}\|T\|$
+ 
+ for bounded linear $S,T{:}H_1{\to}H_2$: \hspace{1.45em}   
+ \textbullet\ $\langle T^*y,x\rangle=\langle y,Tx\rangle$ 
+ 
+\textbullet\ $(\alpha T)^*=\bar{\alpha}T^*$   \hfill 
+\textbullet\ $(S{+}T)^*=S^*{+}T^*$ \hfill
+\textbullet\ $(ST)^*{=}T^*S^*$ (if $H_1{=}H_2$)  
+ 
+\textbullet\ $(T^*)^*=T$ \hspace{1.2em}
+\textbullet\ $T^*T{=}0\Leftrightarrow T{=}0$ \hspace{1.06em} 
+\textbullet\ $\|T^*T\|=\|TT^*\|=\|T\|^2$ 
+ 
+ for bounded linear $Q: X{\to}Y$: $\,Q{=}0\Leftrightarrow\langle Qx,y\rangle{=}0 \,\,\forall x,y$
+ 
+a bounded linear operator $T{:}H{\to} H$ is \textit{\textbf{self-ajoint}} if $T^*{=}T$, \textit{\textbf{unitary}} if  $T^*{=}T^{-1} $ ($T$ bijective), \& \textit{\textbf{normal}} if $TT^*{=}T^*T$
+
+
 
 
 
