@@ -128,12 +128,12 @@
 
 %-------------------------------------------------------------------------------
 
-% SECTION: PREREQUISITES
+% SECTION: MATHS
 
 %-------------------------------------------------------------------------------
 
 % this is what Introduction to Modern Causal Inference (Schuler, van der Laan) suggests
-\section{Prerequisites}
+\section{Mathematical Background}
 
 % intro to real analysis
 \subsection[Real Analysis]{Real Analysis \citep{abbott2015understanding}}
@@ -1088,6 +1088,28 @@ a bounded linear operator $T{:}H{\to} H$ is \textit{\textbf{self-ajoint}} if $T^
 
 \end{multicols}
 
+
+
+
+% falejandro's book
+\subsection[Modern Causal Inference]{Modern Causal Inference \citep{schuler2024introduction}}
+
+\begin{multicols}{2}
+
+\paragraph{Inference \& Statistics} ask clear questions
+
+\textbf{descriptive} data $\mathbb{P}_n \to$ estimator $\hat{\psi}$ $\to$ estimate $\hat{\psi}(\mathbb{P}_n)$
+
+\textbf{inferential} statistical model (set of possible worlds) + 
+estimand (real world property) $\to$ 
+inference (link estimate to real world \& quantify uncertainty) via the sampling distribution
+
+in an RCT, linear regression coefficient equals the ATE
+
+\paragraph{Causality \& Identification} \
+
+
+\end{multicols}
 
 
 
@@ -2569,7 +2591,42 @@ $\mathbb{E}\left\{\xi(Z;\bar{\pi},\bar{\mu})|A=a\right\}=\theta(a)$, with data $
 \end{multicols}
 
 
+\subsection{Incremental Effects}
 
+\begin{multicols}{2}
+
+\paragraph{Binary Data} based on propensity score \citep{kennedy2019nonparametric}
+
+\begin{itemize}[leftmargin=*, itemsep=0em, topsep=0pt, partopsep=0pt,parsep=0pt]
+\item[$+$] no positivity assumption, no parametric assumptions
+\item[$+$] longitudinal effects in single curve
+\item[$-$] descriptive rather than prescriptive (stochastic)
+\end{itemize}
+
+\textbf{intervention} with conditional distribution where $\delta{\in}(0,\infty)$:
+
+ $q_t(h_t)=\frac{\delta\pi_t(h_t)}{\delta\pi_t(h_t)+1-\pi_t(h_t)}$
+\hfill therefore \hfill
+$\delta=\frac{\text{odds}_q(A_t=1|H_t=h_t)}{\text{odds}_\pi(A_t=1|H_t=h_t)}$
+
+\textbf{identification} requires only consistency \& exchangeability
+$$\mathbb{E}\left(Y^{Q(\delta)}\right){=}\!\sum_{\bar{a}_T\in\mathcal{A}^T}\int_\chi \!\mu(h_t,a_t)\prod_{t=1}^T\frac{a_t\delta\pi_t(h_t)+(1{-}a_t)(1{-}\pi_t(h_t))}{\delta\pi_t(h_t)+1-\pi_t(h_t)}$$
+
+\vspace{-0.5em}
+
+
+\hfill $d\mathbb{P}(x_t|h_{t-1},a_{t-1})$
+
+ \hspace{4.1em} $\overset{T{=}1}{=}\mathbb{E}\left[\frac{\delta\pi(X)\mu(X,1)+(1-\pi(X))\mu(X,0)}{\delta\pi(X)+1-\pi(X)}\right]$
+
+
+\paragraph{Continuous Data} \citep{schindl2024incremental}
+\vspace{20em}
+
+hi
+
+
+\end{multicols}
 
 
 
