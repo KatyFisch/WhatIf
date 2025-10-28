@@ -1104,9 +1104,12 @@ a bounded linear operator $T{:}H{\to} H$ is \textit{\textbf{self-ajoint}} if $T^
 estimand (real world property) $\to$ 
 inference (link estimate to real world \& quantify uncertainty) via the sampling distribution
 
-in an RCT, linear regression coefficient equals the ATE
+in an RCT: linear regression coefficient equals the ATE
 
-\paragraph{Causality \& Identification} \
+\paragraph{Causality \& Identification} link $P$ to causal world $P^*$
+
+\textbf{identification} find $\psi(P)=\psi^*(P^*)$   (= causal estimand)
+$$\underbrace{\hat{\psi}-\psi*}_{\text{total error}}=\underbrace{\hat{\psi}-\psi}_{\text{statistical error}}+\underbrace{\psi-\psi^*}_{\text{causal gap}}$$
 
 
 \end{multicols}
